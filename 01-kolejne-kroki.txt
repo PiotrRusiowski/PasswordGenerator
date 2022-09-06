@@ -1,0 +1,44 @@
+1.  Tworzymy projekt
+>>  npm init -y
+
+2.  Instalujemy webpack
+>>  npm install --save-dev webpack webpack-cli
+
+3.  Dodaj script "build" do package.json
+
+4.  Zainstaluj potrzebne dependencies:
+>>  npm install --save-dev babel-loader @babel/core @babel/preset-env html-webpack-plugin
+>>  npm install --save-dev @babel/register
+
+5.  Utworz plik webpack.config.babel.js
+
+6.  Utworz plik .babelrc
+
+7.  Utworz katalogi src oraz dist z zawartoscia
+
+8.  Na tym etapie mozesz sprobowac zbudowac kod i jezeli bedzie ok nie ma zadnych bledow
+>>  npm run build
+
+9.  Na koniec instalujemy live server
+>>  npm install --save-dev webpack-dev-server
+
+    Dodajemy konfiguracje do webpack.config.babel.js, ktora pozwoli na uruchomienie live servera
+
+10. Dodajemy skrypt do package.json
+    "start": "webpack-dev-server --open",
+
+11. Dodajemy plik tsconfig.json
+>>  tsc --init
+Ustaw w nim es6 oraz rootDir
+oraz outDir.
+Potem wydajesz polecenie:
+>> tsc -w
+I od tej pory pliki ts sa na biezaco kompilowane. Zmiany kompilacji sa zapisywane w plikach js
+w katalogu src a to z kolei powoduje ze do akcji rusza webpack ktory laduje je do dist lub
+serwer developerski sie przeladowuje.
+
+Czyli podsumowujac po powyzszej konfiguracji wydajesz polecenia:
+>> npm start
+>> tsc -w
+I wszystko sie ladnie automatycznie buduje. Tylko piszesz kod w plikach ts
+w katalogu src/ts.

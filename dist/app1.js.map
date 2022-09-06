@@ -1,0 +1,1 @@
+{"version":3,"file":"app1.js","mappings":";;;;;AAAAA,OAAO,CAACC,GAAR,CAAY,OAAZ,E","sources":["webpack://js7-62-ts-11-webpack/./src/app1.js"],"sourcesContent":["console.log('APP 1')\r\n"],"names":["console","log"],"sourceRoot":""}
