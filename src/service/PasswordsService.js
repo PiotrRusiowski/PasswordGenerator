@@ -2,7 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 class PasswordsService {
     passwordGenerator(password) {
-        return password.properties.filter((prop) => Object.values(prop)[0]);
+        const types = password.properties.filter((prop) => Object.values(prop)[0]);
+        console.log(types);
+        return new Array(password.length).fill(types.map((el) => el));
     }
     getLowercase() {
         return String.fromCharCode(this.drawNumber(97, 122));

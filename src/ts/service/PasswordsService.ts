@@ -1,8 +1,12 @@
 import { Password } from "../model/Password";
-
+import { Property } from "../model/Password";
 export default class PasswordsService {
   passwordGenerator(password: Password) {
-    return password.properties.filter((prop) => Object.values(prop)[0]);
+    const types: Property[] = password.properties.filter(
+      (prop) => Object.values(prop)[0]
+    );
+    console.log(types);
+    return new Array(password.length).fill(types.map((el) => el));
   }
 
   private getLowercase() {
