@@ -1,22 +1,20 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class PasswordsService {
-    constructor() {
-        this.numbers = new Set();
-        this.strings = new Set();
+    passwordGenerator(password) {
+        return password.properties.filter((prop) => Object.values(prop)[0]);
     }
-    addCharacters(numbers, strings) {
-        this.numbers = new Set([...this.numbers, ...numbers]);
-        this.strings = new Set([...this.strings, ...strings]);
+    getLowercase() {
+        return String.fromCharCode(this.drawNumber(97, 122));
     }
-    info() {
-        return this.numbers;
+    getSymbol() {
+        return String.fromCharCode(this.drawNumber(33, 47));
     }
-    passwordGenerator(password) { }
-    drawIndex(arr) {
-        const min = 0;
-        const max = arr.length - 1;
+    drawNumber(max, min) {
         return Math.floor(Math.random() * (max - min + 1) + min);
+    }
+    charactersQuantity(properties) {
+        const propertiesQuantity = properties.filter((property) => property).length;
     }
 }
 exports.default = PasswordsService;

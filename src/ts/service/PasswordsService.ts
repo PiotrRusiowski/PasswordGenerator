@@ -1,19 +1,22 @@
-import Password from "../model/Password";
-export default class PasswordsService {
-  private numbers = new Set<number>();
-  private strings = new Set<string>();
-  addCharacters(numbers: number[], strings: string[]): void {
-    this.numbers = new Set([...this.numbers, ...numbers]);
-    this.strings = new Set([...this.strings, ...strings]);
-  }
-  info() {
-    return this.numbers;
-  }
-  passwordGenerator(password: Password) {}
+import { Password } from "../model/Password";
 
-  private drawIndex(arr: number[]) {
-    const min: number = 0;
-    const max: number = arr.length - 1;
+export default class PasswordsService {
+  passwordGenerator(password: Password) {
+    return password.properties.filter((prop) => Object.values(prop)[0]);
+  }
+
+  private getLowercase() {
+    return String.fromCharCode(this.drawNumber(97, 122));
+  }
+  private getSymbol() {
+    return String.fromCharCode(this.drawNumber(33, 47));
+  }
+  private drawNumber(max: number, min: number): number {
     return Math.floor(Math.random() * (max - min + 1) + min);
+  }
+  charactersQuantity(properties: boolean[]) {
+    const propertiesQuantity: number = properties.filter(
+      (property) => property
+    ).length;
   }
 }
