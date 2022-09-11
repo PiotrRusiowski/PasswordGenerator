@@ -1,13 +1,13 @@
 import PasswordsService from "./service/PasswordsService";
-import { Password } from "./model/Password";
+import { Password, Properties } from "./model/Password";
 
 const newPassword: Password = {
   length: 8,
   properties: [
-    { uppercase: true },
-    { lowercase: true },
-    { symbol: true },
-    { number: true },
+    { [Properties.LOWERCASE]: true },
+    { [Properties.NUMBER]: true },
+    { [Properties.SYMBOL]: true },
+    { [Properties.UPPERCASE]: true },
   ],
 };
 const Ps = new PasswordsService();

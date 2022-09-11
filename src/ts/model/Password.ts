@@ -4,9 +4,15 @@ export enum Properties {
   NUMBER = "number",
   SYMBOL = "symbol",
 }
-export interface Property {
+export type PropertiesNames =
+  | Properties.LOWERCASE
+  | Properties.UPPERCASE
+  | Properties.NUMBER
+  | Properties.SYMBOL;
+
+export type Property = {
   [key: string]: boolean;
-}
+};
 export interface charGenerator {
   [key: string]: Function;
 }
