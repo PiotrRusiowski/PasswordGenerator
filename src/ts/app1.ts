@@ -1,6 +1,5 @@
 import PasswordsService from "./service/PasswordsService";
 import { Password, Properties } from "./model/Password";
-
 const newPassword: Password = {
   length: 8,
   properties: [
