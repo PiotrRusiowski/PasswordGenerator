@@ -1,4 +1,4 @@
-import { Types } from "../model/types";
+import { Password } from "../model/types";
 import { Property } from "../model/types";
 import { charGenerator } from "../model/types";
 import { Properties } from "../model/types";
@@ -13,7 +13,7 @@ export default class PasswordsService {
     [Properties.NUMBER]: () => String.fromCharCode(this.drawNumber(48, 57)),
   };
 
-  passwordGenerator(password: Types) {
+  passwordGenerator(password: Password) {
     const { properties, length } = password;
     const types: string[] = properties
       .filter((prop) => Object.values(prop)[0])

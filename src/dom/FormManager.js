@@ -24,6 +24,7 @@ class FormManager {
         this.formElement.appendChild(FormManager.createSubmitButton(this.submitButtonMessage));
         this.formElement.addEventListener("submit", (e) => {
             e.preventDefault();
+            this.submitCallback();
         });
         return this.formElement;
     }
@@ -41,7 +42,6 @@ class FormManager {
             labelElement.setAttribute("for", id);
             labelElement.textContent = id;
             formGroupElement.appendChild(labelElement);
-            inputElement.addEventListener("change", (e) => console.log(e));
             this.formElement.appendChild(formGroupElement);
         });
     }

@@ -37,6 +37,7 @@ export default class FormManager {
     );
     this.formElement.addEventListener("submit", (e) => {
       e.preventDefault();
+      this.submitCallback();
     });
     return this.formElement;
   }
@@ -57,7 +58,6 @@ export default class FormManager {
       labelElement.textContent = id;
       formGroupElement.appendChild(labelElement);
 
-      inputElement.addEventListener("change", (e) => console.log(e));
       this.formElement.appendChild(formGroupElement);
     });
   }

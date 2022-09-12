@@ -1,12 +1,24 @@
 import PasswordsService from "./service/PasswordsService";
-import { Types, Properties, FormProperties } from "./model/types";
+import { Password, Properties, FormProperties, Property } from "./model/types";
 import FormManager from "./dom/FormManager";
 const container = document.querySelector(".container") as HTMLElement;
+const ps = new PasswordsService();
 
+const submit = () => {
+  const checkboxes = [...document.querySelectorAll("input[name=checkbox]")].map(
+    (checkbox) => {
+      const password: Property = {};
+      // @ts-ignore
+      password[checkbox.id] = checkbox.checked as boolean;
+      return password;
+    }
+  );
+  //ps.passwordGenerator({ length: 8, properties: checkboxes });
+};
 const formProperties: FormProperties = {
   id: "form",
   submitButtonMessage: "generate",
-  submitCallback: () => submit,
+  submitCallback: submit,
   formHeaderText: "password generator",
   formFields: [
     {
@@ -25,18 +37,15 @@ const formProperties: FormProperties = {
   ],
 };
 const fm = new FormManager(formProperties);
-const submit = () => console.log("submit");
 
-const newPassword: Types = {
-  length: 8,
-  properties: [
-    { [Properties.LOWERCASE]: true },
-    { [Properties.NUMBER]: true },
-    { [Properties.SYMBOL]: true },
-    { [Properties.UPPERCASE]: true },
-  ],
-};
-const Ps = new PasswordsService();
-Ps.passwordGenerator(newPassword);
+// const newPassword: Types = {
+//   length: 8,
+//   properties: [
+//     { [Properties.LOWERCASE]: true },
+//     { [Properties.NUMBER]: true },
+//     { [Properties.SYMBOL]: true },
+//     { [Properties.UPPERCASE]: true },
+//   ],
+// };
 const form = fm.createForm();
 container.appendChild(form);
