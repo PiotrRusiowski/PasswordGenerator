@@ -1,6 +1,29 @@
 import PasswordsService from "./service/PasswordsService";
-import { Password, Properties } from "./model/Password";
-const newPassword: Password = {
+import { Types, Properties } from "./model/types";
+import FormManager from "./dom/FormManager";
+
+const container = document.querySelector(".container") as HTMLElement;
+const fm = new FormManager(
+  "form",
+  "generate",
+  () => submit,
+  "password generator",
+  [
+    {
+      type: "checkbox",
+      labels: [
+        Properties.SYMBOL,
+        Properties.NUMBER,
+        Properties.LOWERCASE,
+        Properties.UPPERCASE,
+      ],
+    },
+  ]
+);
+
+const submit = () => console.log("submit");
+
+const newPassword: Types = {
   length: 8,
   properties: [
     { [Properties.LOWERCASE]: true },
@@ -11,3 +34,5 @@ const newPassword: Password = {
 };
 const Ps = new PasswordsService();
 Ps.passwordGenerator(newPassword);
+const form = fm.createForm();
+container.appendChild(form);

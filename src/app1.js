@@ -1,23 +1,34 @@
 "use strict";
-import "./css/index.css";
-var __importDefault =
-  (this && this.__importDefault) ||
-  function (mod) {
-    return mod && mod.__esModule ? mod : { default: mod };
-  };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const PasswordsService_1 = __importDefault(
-  require("./service/PasswordsService")
-);
-const Password_1 = require("./model/Password");
+const PasswordsService_1 = __importDefault(require("./service/PasswordsService"));
+const types_1 = require("./model/types");
+const FormManager_1 = __importDefault(require("./dom/FormManager"));
+const container = document.querySelector(".container");
+const fm = new FormManager_1.default("form", "generate", () => submit, "password generator", [
+    {
+        type: "checkbox",
+        labels: [
+            types_1.Properties.SYMBOL,
+            types_1.Properties.NUMBER,
+            types_1.Properties.LOWERCASE,
+            types_1.Properties.UPPERCASE,
+        ],
+    },
+]);
+const submit = () => console.log("submit");
 const newPassword = {
-  length: 8,
-  properties: [
-    { [Password_1.Properties.LOWERCASE]: true },
-    { [Password_1.Properties.NUMBER]: true },
-    { [Password_1.Properties.SYMBOL]: true },
-    { [Password_1.Properties.UPPERCASE]: true },
-  ],
+    length: 8,
+    properties: [
+        { [types_1.Properties.LOWERCASE]: true },
+        { [types_1.Properties.NUMBER]: true },
+        { [types_1.Properties.SYMBOL]: true },
+        { [types_1.Properties.UPPERCASE]: true },
+    ],
 };
 const Ps = new PasswordsService_1.default();
 Ps.passwordGenerator(newPassword);
+const form = fm.createForm();
+container.appendChild(form);

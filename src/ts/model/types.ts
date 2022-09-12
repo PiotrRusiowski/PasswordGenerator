@@ -16,7 +16,18 @@ export type Property = {
 export interface charGenerator {
   [key: string]: Function;
 }
-export interface Password {
+export interface Types {
   length: number;
   properties: Property[];
+}
+interface formField {
+  type: string;
+  labels: PropertiesNames[];
+}
+export interface formProperties {
+  id: string;
+  submitButtonMessage: string;
+  submitCallback: Function;
+  formHeaderText: string;
+  formFields: formField[];
 }

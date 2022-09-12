@@ -3,22 +3,25 @@ export default class FormManager {
   private submitButtonMessage: string;
   private submitCallback: Function;
   private formHeaderText: string;
+  private formFields: any[];
   constructor(
     id: string,
     submitButtonMessage: string,
     submitCallback: Function,
-    formHeaderText: string
+    formHeaderText: string,
+    formFields: any[]
   ) {
     this.id = id;
     this.submitCallback = submitCallback;
     this.submitButtonMessage = submitButtonMessage;
     this.formHeaderText = formHeaderText;
+    this.formFields = formFields;
   }
 
   createForm() {
-    const formElement = document.createElement("form");
+    const formElement: HTMLElement = document.createElement("form");
     formElement.id = this.id;
-    const formHeader = document.createElement("h3");
+    const formHeader: HTMLElement = document.createElement("h3");
     formHeader.className = "form-header";
     formHeader.textContent = this.formHeaderText;
     formElement.appendChild(formHeader);

@@ -1,14 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const Password_1 = require("../model/Password");
+const types_1 = require("../model/types");
 class PasswordsService {
     constructor() {
         this.password = [];
         this.charGenerator = {
-            [Password_1.Properties.LOWERCASE]: () => String.fromCharCode(this.drawNumber(97, 122)),
-            [Password_1.Properties.UPPERCASE]: () => String.fromCharCode(this.drawNumber(65, 90)),
-            [Password_1.Properties.SYMBOL]: () => String.fromCharCode(this.drawNumber(33, 47)),
-            [Password_1.Properties.NUMBER]: () => String.fromCharCode(this.drawNumber(48, 57)),
+            [types_1.Properties.LOWERCASE]: () => String.fromCharCode(this.drawNumber(97, 122)),
+            [types_1.Properties.UPPERCASE]: () => String.fromCharCode(this.drawNumber(65, 90)),
+            [types_1.Properties.SYMBOL]: () => String.fromCharCode(this.drawNumber(33, 47)),
+            [types_1.Properties.NUMBER]: () => String.fromCharCode(this.drawNumber(48, 57)),
         };
     }
     passwordGenerator(password) {

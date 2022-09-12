@@ -1,8 +1,8 @@
-import { Password } from "../model/Password";
-import { Property } from "../model/Password";
-import { charGenerator } from "../model/Password";
-import { Properties } from "../model/Password";
-import { PropertiesNames } from "../model/Password";
+import { Types } from "../model/types";
+import { Property } from "../model/types";
+import { charGenerator } from "../model/types";
+import { Properties } from "../model/types";
+import { PropertiesNames } from "../model/types";
 
 export default class PasswordsService {
   private password: string[] = [];
@@ -13,7 +13,7 @@ export default class PasswordsService {
     [Properties.NUMBER]: () => String.fromCharCode(this.drawNumber(48, 57)),
   };
 
-  passwordGenerator(password: Password) {
+  passwordGenerator(password: Types) {
     const { properties, length } = password;
     const types: string[] = properties
       .filter((prop) => Object.values(prop)[0])
