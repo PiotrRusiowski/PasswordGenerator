@@ -7,6 +7,7 @@ export default class FormManager {
   private submitCallback: Function;
   private readonly formHeaderText: string;
   private formFields: FormField[];
+  private state = {};
   constructor({
     id,
     submitCallback,
@@ -47,6 +48,7 @@ export default class FormManager {
       const inputElement = document.createElement("input");
       inputElement.id = id;
       inputElement.type = type;
+      inputElement.name = type;
       inputElement.className = "form-control";
       formGroupElement.appendChild(inputElement);
 
@@ -55,7 +57,7 @@ export default class FormManager {
       labelElement.textContent = id;
       formGroupElement.appendChild(labelElement);
 
-      inputElement.addEventListener("change", (e) => console.log(e.target));
+      inputElement.addEventListener("change", (e) => console.log(e));
       this.formElement.appendChild(formGroupElement);
     });
   }
@@ -73,4 +75,5 @@ export default class FormManager {
     console.log(buttonElement);
     return buttonElement;
   }
+  private setState() {}
 }
