@@ -13,7 +13,8 @@ const submit = () => {
       return password;
     }
   );
-  //ps.passwordGenerator({ length: 8, properties: checkboxes });
+  ps.passwordGenerator({ length: 8, properties: checkboxes });
+  console.log(ps.getPassword());
 };
 const formProperties: FormProperties = {
   id: "form",
@@ -37,15 +38,5 @@ const formProperties: FormProperties = {
   ],
 };
 const fm = new FormManager(formProperties);
-
-// const newPassword: Types = {
-//   length: 8,
-//   properties: [
-//     { [Properties.LOWERCASE]: true },
-//     { [Properties.NUMBER]: true },
-//     { [Properties.SYMBOL]: true },
-//     { [Properties.UPPERCASE]: true },
-//   ],
-// };
 const form = fm.createForm();
 container.appendChild(form);

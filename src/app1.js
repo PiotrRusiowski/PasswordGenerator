@@ -15,7 +15,8 @@ const submit = () => {
         password[checkbox.id] = checkbox.checked;
         return password;
     });
-    //ps.passwordGenerator({ length: 8, properties: checkboxes });
+    ps.passwordGenerator({ length: 8, properties: checkboxes });
+    console.log(ps.getPassword());
 };
 const formProperties = {
     id: "form",
@@ -39,14 +40,5 @@ const formProperties = {
     ],
 };
 const fm = new FormManager_1.default(formProperties);
-// const newPassword: Types = {
-//   length: 8,
-//   properties: [
-//     { [Properties.LOWERCASE]: true },
-//     { [Properties.NUMBER]: true },
-//     { [Properties.SYMBOL]: true },
-//     { [Properties.UPPERCASE]: true },
-//   ],
-// };
 const form = fm.createForm();
 container.appendChild(form);

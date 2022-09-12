@@ -15,6 +15,7 @@ export default class PasswordsService {
 
   passwordGenerator(password: Password) {
     const { properties, length } = password;
+    this.password = [];
     const types: string[] = properties
       .filter((prop) => Object.values(prop)[0])
       .map((prop: Property) => Object.keys(prop)[0]);
@@ -24,7 +25,7 @@ export default class PasswordsService {
       });
     }
   }
-  private getPassword(): string {
+  getPassword(): string {
     return this.password.join("");
   }
 

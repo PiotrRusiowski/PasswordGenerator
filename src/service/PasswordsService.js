@@ -13,6 +13,7 @@ class PasswordsService {
     }
     passwordGenerator(password) {
         const { properties, length } = password;
+        this.password = [];
         const types = properties
             .filter((prop) => Object.values(prop)[0])
             .map((prop) => Object.keys(prop)[0]);
