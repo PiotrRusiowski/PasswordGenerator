@@ -22,6 +22,10 @@ const formProperties = {
                 types_1.Properties.UPPERCASE,
             ],
         },
+        {
+            type: "text",
+            labels: ["password"],
+        },
     ],
 };
 const fm = new FormManager_1.default(formProperties);

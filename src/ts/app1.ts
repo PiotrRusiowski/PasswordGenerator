@@ -18,11 +18,13 @@ const formProperties: FormProperties = {
         Properties.UPPERCASE,
       ],
     },
+    {
+      type: "text",
+      labels: ["password"],
+    },
   ],
 };
-
 const fm = new FormManager(formProperties);
-
 const submit = () => console.log("submit");
 
 const newPassword: Types = {
