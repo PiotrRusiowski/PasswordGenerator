@@ -1,7 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class FormManager {
-    constructor(id, submitButtonMessage, submitCallback, formHeaderText, formFields) {
+    constructor(formProperties) {
+        const { id, submitCallback, submitButtonMessage, formHeaderText, formFields, } = formProperties;
         this.id = id;
         this.submitCallback = submitCallback;
         this.submitButtonMessage = submitButtonMessage;

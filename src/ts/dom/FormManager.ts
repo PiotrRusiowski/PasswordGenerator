@@ -1,16 +1,19 @@
+import { FormProperties } from "../model/types";
+
 export default class FormManager {
   private id: string;
   private submitButtonMessage: string;
   private submitCallback: Function;
   private formHeaderText: string;
   private formFields: any[];
-  constructor(
-    id: string,
-    submitButtonMessage: string,
-    submitCallback: Function,
-    formHeaderText: string,
-    formFields: any[]
-  ) {
+  constructor(formProperties: FormProperties) {
+    const {
+      id,
+      submitCallback,
+      submitButtonMessage,
+      formHeaderText,
+      formFields,
+    } = formProperties;
     this.id = id;
     this.submitCallback = submitCallback;
     this.submitButtonMessage = submitButtonMessage;

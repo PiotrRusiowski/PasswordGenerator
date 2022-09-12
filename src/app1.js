@@ -7,17 +7,24 @@ const PasswordsService_1 = __importDefault(require("./service/PasswordsService")
 const types_1 = require("./model/types");
 const FormManager_1 = __importDefault(require("./dom/FormManager"));
 const container = document.querySelector(".container");
-const fm = new FormManager_1.default("form", "generate", () => submit, "password generator", [
-    {
-        type: "checkbox",
-        labels: [
-            types_1.Properties.SYMBOL,
-            types_1.Properties.NUMBER,
-            types_1.Properties.LOWERCASE,
-            types_1.Properties.UPPERCASE,
-        ],
-    },
-]);
+const formProperties = {
+    id: "form",
+    submitButtonMessage: "generate",
+    submitCallback: () => submit,
+    formHeaderText: "password generator",
+    formFields: [
+        {
+            type: "checkbox",
+            labels: [
+                types_1.Properties.SYMBOL,
+                types_1.Properties.NUMBER,
+                types_1.Properties.LOWERCASE,
+                types_1.Properties.UPPERCASE,
+            ],
+        },
+    ],
+};
+const fm = new FormManager_1.default(formProperties);
 const submit = () => console.log("submit");
 const newPassword = {
     length: 8,

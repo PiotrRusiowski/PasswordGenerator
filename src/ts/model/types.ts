@@ -20,14 +20,14 @@ export interface Types {
   length: number;
   properties: Property[];
 }
-interface formField {
+interface FormField {
   type: string;
   labels: PropertiesNames[];
 }
-export interface formProperties {
+export interface FormProperties {
   id: string;
   submitButtonMessage: string;
   submitCallback: Function;
   formHeaderText: string;
-  formFields: formField[];
+  formFields: object[];
 }

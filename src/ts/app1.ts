@@ -1,14 +1,14 @@
 import PasswordsService from "./service/PasswordsService";
-import { Types, Properties } from "./model/types";
+import { Types, Properties, FormProperties } from "./model/types";
 import FormManager from "./dom/FormManager";
-
 const container = document.querySelector(".container") as HTMLElement;
-const fm = new FormManager(
-  "form",
-  "generate",
-  () => submit,
-  "password generator",
-  [
+
+const formProperties: FormProperties = {
+  id: "form",
+  submitButtonMessage: "generate",
+  submitCallback: () => submit,
+  formHeaderText: "password generator",
+  formFields: [
     {
       type: "checkbox",
       labels: [
@@ -18,8 +18,10 @@ const fm = new FormManager(
         Properties.UPPERCASE,
       ],
     },
-  ]
-);
+  ],
+};
+
+const fm = new FormManager(formProperties);
 
 const submit = () => console.log("submit");
 
