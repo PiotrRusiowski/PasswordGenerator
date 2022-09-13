@@ -4,7 +4,7 @@ export default class FormManager {
   private readonly id: string;
   private formElement: HTMLElement = this.createFormElement();
   private readonly submitButtonMessage: string;
-  private submitCallback: Function;
+  private readonly submitCallback: Function;
   private readonly formHeaderText: string;
   private formFields: FormField[];
   private state = {};

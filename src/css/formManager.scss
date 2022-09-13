@@ -1,3 +1,13 @@
-h1{
-  color:pink;
+$backGroundColor : #121116;
+$generatorBgColor : #24232B;
+$fontColor:#DDDCE2;
+body{
+  height: 100vh;
+  background-color: $backGroundColor;
+
+  .container{
+    height: 100%;
+    padding: 5% 10%;
+    background-color: $generatorBgColor;
+  }
 }
