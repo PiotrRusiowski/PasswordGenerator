@@ -1,7 +1,7 @@
 import { FormProperties, FormField } from "../model/types";
 
 export default class FormManager {
-  private readonly id: string;
+  id: string;
   private formElement: HTMLElement = this.createFormElement();
   private readonly submitButtonMessage: string;
   private readonly submitCallback: Function;
@@ -23,11 +23,8 @@ export default class FormManager {
   }
   private createFormElement() {
     const formElement: HTMLElement = document.createElement("form");
-    formElement.id = this.id;
-    const formHeader: HTMLElement = document.createElement("h3");
-    formHeader.className = "form-header";
-    formHeader.textContent = this.formHeaderText;
-    formElement.appendChild(formHeader);
+    formElement.id = "form";
+    formElement.className = "passwordGenerator__box";
     return formElement;
   }
   createForm(): HTMLElement {
@@ -42,6 +39,8 @@ export default class FormManager {
     return this.formElement;
   }
   private createInput({ type, labels }: FormField) {
+    console.log(this.id);
+
     return labels.forEach((label) => {
       const id: string = label;
       const formGroupElement = FormManager.createFormGroupElement();
@@ -75,5 +74,4 @@ export default class FormManager {
     console.log(buttonElement);
     return buttonElement;
   }
-  private setState() {}
 }

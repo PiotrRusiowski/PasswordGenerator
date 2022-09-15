@@ -12,11 +12,8 @@ class FormManager {
     }
     createFormElement() {
         const formElement = document.createElement("form");
-        formElement.id = this.id;
-        const formHeader = document.createElement("h3");
-        formHeader.className = "form-header";
-        formHeader.textContent = this.formHeaderText;
-        formElement.appendChild(formHeader);
+        formElement.id = "form";
+        formElement.className = "passwordGenerator__box";
         return formElement;
     }
     createForm() {
@@ -29,6 +26,7 @@ class FormManager {
         return this.formElement;
     }
     createInput({ type, labels }) {
+        console.log(this.id);
         return labels.forEach((label) => {
             const id = label;
             const formGroupElement = FormManager.createFormGroupElement();
@@ -59,6 +57,5 @@ class FormManager {
         console.log(buttonElement);
         return buttonElement;
     }
-    setState() { }
 }
 exports.default = FormManager;

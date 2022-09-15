@@ -1,7 +1,9 @@
 import PasswordsService from "./service/PasswordsService";
 import { Password, Properties, FormProperties, Property } from "./model/types";
 import FormManager from "./dom/FormManager";
-const container = document.querySelector(".container") as HTMLElement;
+const passwordGeneratorElement = document.querySelector(
+  ".passwordGenerator"
+) as HTMLElement;
 const ps = new PasswordsService();
 
 const submit = () => {
@@ -17,11 +19,15 @@ const submit = () => {
   console.log(ps.getPassword());
 };
 const formProperties: FormProperties = {
-  id: "form",
+  id: "dddd",
   submitButtonMessage: "generate",
   submitCallback: submit,
   formHeaderText: "password generator",
   formFields: [
+    {
+      type: "number",
+      labels: ["length"],
+    },
     {
       type: "checkbox",
       labels: [
@@ -31,12 +37,25 @@ const formProperties: FormProperties = {
         Properties.UPPERCASE,
       ],
     },
+  ],
+};
+const headerProperties: FormProperties = {
+  id: "form",
+  submitButtonMessage: "",
+  submitCallback: submit,
+  formHeaderText: "password generator",
+  formFields: [
     {
-      type: "text",
-      labels: ["password"],
+      type: "string",
+      labels: ["Password Generator"],
     },
   ],
 };
+
+const fm2 = new FormManager(headerProperties);
+const formHeaderElement = fm2.createForm();
+passwordGeneratorElement.appendChild(formHeaderElement);
+
 const fm = new FormManager(formProperties);
-const form = fm.createForm();
-container.appendChild(form);
+const formElement = fm.createForm();
+passwordGeneratorElement.appendChild(formElement);

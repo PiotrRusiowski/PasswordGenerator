@@ -7,7 +7,17 @@ body{
 
   .container{
     height: 100%;
-    padding: 5% 10%;
-    background-color: $generatorBgColor;
+    padding: 0 5%;
+    background-color: $backGroundColor;
   }
 }
+.formGenerator{
+  width:100%;
+
+  &__box{
+    padding:5px ;
+
+  }
+}
+
+
