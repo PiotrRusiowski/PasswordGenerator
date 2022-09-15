@@ -1,7 +1,7 @@
 import { FormProperties, FormField } from "../model/types";
 
 export default class FormManager {
-  id: string;
+  className: string;
   private formElement: HTMLElement = this.createFormElement();
   private readonly submitButtonMessage: string;
   private readonly submitCallback: Function;
@@ -9,13 +9,13 @@ export default class FormManager {
   private formFields: FormField[];
   private state = {};
   constructor({
-    id,
+    className,
     submitCallback,
     submitButtonMessage,
     formHeaderText,
     formFields,
   }: FormProperties) {
-    this.id = id;
+    this.className = className;
     this.submitCallback = submitCallback;
     this.submitButtonMessage = submitButtonMessage;
     this.formHeaderText = formHeaderText;
@@ -23,11 +23,10 @@ export default class FormManager {
   }
   private createFormElement() {
     const formElement: HTMLElement = document.createElement("form");
-    formElement.id = "form";
-    formElement.className = "passwordGenerator__box";
     return formElement;
   }
   createForm(): HTMLElement {
+    this.formElement.className = this.className;
     this.formFields.forEach((el) => this.createInput(el));
     this.formElement.appendChild(
       FormManager.createSubmitButton(this.submitButtonMessage)
@@ -39,8 +38,6 @@ export default class FormManager {
     return this.formElement;
   }
   private createInput({ type, labels }: FormField) {
-    console.log(this.id);
-
     return labels.forEach((label) => {
       const id: string = label;
       const formGroupElement = FormManager.createFormGroupElement();
@@ -71,7 +68,6 @@ export default class FormManager {
     buttonElement.className = "btn ";
     buttonElement.setAttribute("type", "submit");
     buttonElement.textContent = formattedMessage;
-    console.log(buttonElement);
     return buttonElement;
   }
 }

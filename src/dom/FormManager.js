@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class FormManager {
-    constructor({ id, submitCallback, submitButtonMessage, formHeaderText, formFields, }) {
+    constructor({ className, submitCallback, submitButtonMessage, formHeaderText, formFields, }) {
         this.formElement = this.createFormElement();
         this.state = {};
-        this.id = id;
+        this.className = className;
         this.submitCallback = submitCallback;
         this.submitButtonMessage = submitButtonMessage;
         this.formHeaderText = formHeaderText;
@@ -12,11 +12,10 @@ class FormManager {
     }
     createFormElement() {
         const formElement = document.createElement("form");
-        formElement.id = "form";
-        formElement.className = "passwordGenerator__box";
         return formElement;
     }
     createForm() {
+        this.formElement.className = this.className;
         this.formFields.forEach((el) => this.createInput(el));
         this.formElement.appendChild(FormManager.createSubmitButton(this.submitButtonMessage));
         this.formElement.addEventListener("submit", (e) => {
@@ -26,7 +25,6 @@ class FormManager {
         return this.formElement;
     }
     createInput({ type, labels }) {
-        console.log(this.id);
         return labels.forEach((label) => {
             const id = label;
             const formGroupElement = FormManager.createFormGroupElement();
@@ -54,7 +52,6 @@ class FormManager {
         buttonElement.className = "btn ";
         buttonElement.setAttribute("type", "submit");
         buttonElement.textContent = formattedMessage;
-        console.log(buttonElement);
         return buttonElement;
     }
 }

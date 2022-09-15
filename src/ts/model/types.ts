@@ -25,7 +25,7 @@ export interface FormField {
   labels: string[];
 }
 export interface FormProperties {
-  id: string;
+  className: string;
   submitButtonMessage: string;
   submitCallback: Function;
   formHeaderText: string;

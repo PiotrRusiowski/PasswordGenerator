@@ -1,23 +1,40 @@
 $backGroundColor : #121116;
 $generatorBgColor : #24232B;
 $fontColor:#DDDCE2;
+
 body{
   height: 100vh;
   background-color: $backGroundColor;
 
   .container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: 100%;
     padding: 0 5%;
     background-color: $backGroundColor;
   }
 }
-.formGenerator{
+.passwordGenerator{
+  font-size: 50px;
+  color: $fontColor;
   width:100%;
 
   &__box{
-    padding:5px ;
+    padding:50px;
+    margin-bottom: 20px;
+    background-color: white;
+    &--header{
+      display: flex;
+      background-color: pink;
 
+      .form-group{
+        display: flex;
+        flex-direction: column-reverse;
+      }
+    }
   }
+
 }
 
 

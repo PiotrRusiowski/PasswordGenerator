@@ -19,7 +19,7 @@ const submit = () => {
   console.log(ps.getPassword());
 };
 const formProperties: FormProperties = {
-  id: "dddd",
+  className: "passwordGenerator__box",
   submitButtonMessage: "generate",
   submitCallback: submit,
   formHeaderText: "password generator",
@@ -40,7 +40,7 @@ const formProperties: FormProperties = {
   ],
 };
 const headerProperties: FormProperties = {
-  id: "form",
+  className: "passwordGenerator__box passwordGenerator__box--header ",
   submitButtonMessage: "",
   submitCallback: submit,
   formHeaderText: "password generator",
