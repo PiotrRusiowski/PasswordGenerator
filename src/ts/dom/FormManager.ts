@@ -5,7 +5,7 @@ export default class FormManager {
   private formElement: HTMLElement = this.createFormElement();
   private readonly submitButtonMessage: string;
   private readonly submitCallback: Function;
-  private readonly formHeaderText: string;
+  private readonly formHeaderText: string = "";
   private formFields: FormField[];
   private state = {};
   constructor({
@@ -26,6 +26,9 @@ export default class FormManager {
     return formElement;
   }
   createForm(): HTMLElement {
+    // const formHeader: HTMLElement = document.createElement("h1");
+    // formHeader.textContent = this.formHeaderText;
+    //this.formElement.appendChild(formHeader);
     this.formElement.className = this.className;
     this.formFields.forEach((el) => this.createInput(el));
     this.formElement.appendChild(

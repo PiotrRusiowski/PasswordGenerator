@@ -26,6 +26,7 @@ export default class PasswordsService {
     }
   }
   getPassword(): string {
+    console.log(this.password.join(""));
     return this.password.join("");
   }
 

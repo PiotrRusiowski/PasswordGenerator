@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 class FormManager {
     constructor({ className, submitCallback, submitButtonMessage, formHeaderText, formFields, }) {
         this.formElement = this.createFormElement();
+        this.formHeaderText = "";
         this.state = {};
         this.className = className;
         this.submitCallback = submitCallback;
@@ -15,6 +16,9 @@ class FormManager {
         return formElement;
     }
     createForm() {
+        // const formHeader: HTMLElement = document.createElement("h1");
+        // formHeader.textContent = this.formHeaderText;
+        //this.formElement.appendChild(formHeader);
         this.formElement.className = this.className;
         this.formFields.forEach((el) => this.createInput(el));
         this.formElement.appendChild(FormManager.createSubmitButton(this.submitButtonMessage));

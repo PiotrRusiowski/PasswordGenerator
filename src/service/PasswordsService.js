@@ -24,6 +24,7 @@ class PasswordsService {
         }
     }
     getPassword() {
+        console.log(this.password.join(""));
         return this.password.join("");
     }
     drawNumber(max, min) {

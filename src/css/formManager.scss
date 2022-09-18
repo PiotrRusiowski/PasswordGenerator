@@ -3,7 +3,6 @@ $generatorBgColor : #24232B;
 $fontColor:#DDDCE2;
 
 body{
-  height: 100vh;
   background-color: $backGroundColor;
 
   .container{
@@ -26,12 +25,9 @@ body{
     background-color: white;
     &--header{
       display: flex;
+      flex-direction: column;
       background-color: pink;
 
-      .form-group{
-        display: flex;
-        flex-direction: column-reverse;
-      }
     }
   }
 

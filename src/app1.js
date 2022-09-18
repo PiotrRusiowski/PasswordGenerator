@@ -11,9 +11,15 @@ const PasswordsService_1 = __importDefault(
 );
 const types_1 = require("./model/types");
 const FormManager_1 = __importDefault(require("./dom/FormManager"));
+const generatorHeader = document.querySelector(
+  ".passwordGenerator__box--header"
+);
 const passwordGeneratorElement = document.querySelector(".passwordGenerator");
 const ps = new PasswordsService_1.default();
 const submit = () => {
+  const lengthInput = document.querySelector("#length");
+  // @ts-ignore
+  lengthInput.addEventListener("input", (e) => console.log(e.target.value));
   const checkboxes = [...document.querySelectorAll("input[name=checkbox]")].map(
     (checkbox) => {
       const password = {};
@@ -23,13 +29,13 @@ const submit = () => {
     }
   );
   ps.passwordGenerator({ length: 8, properties: checkboxes });
-  console.log(ps.getPassword());
+  ps.getPassword();
 };
 const formProperties = {
   className: "passwordGenerator__box",
   submitButtonMessage: "generate",
   submitCallback: submit,
-  formHeaderText: "password generator",
+  formHeaderText: "",
   formFields: [
     {
       type: "number",
@@ -47,20 +53,20 @@ const formProperties = {
   ],
 };
 const headerProperties = {
-  className: "passwordGenerator__box passwordGenerator__box--header ",
-  submitButtonMessage: "",
+  className: "passwordGenerator__box",
+  submitButtonMessage: "add",
   submitCallback: submit,
   formHeaderText: "password generator",
   formFields: [
     {
       type: "string",
-      labels: ["Password Generator"],
+      labels: [""],
     },
   ],
 };
 const fm2 = new FormManager_1.default(headerProperties);
 const formHeaderElement = fm2.createForm();
-passwordGeneratorElement.appendChild(formHeaderElement);
+generatorHeader.appendChild(formHeaderElement);
 const fm = new FormManager_1.default(formProperties);
 const formElement = fm.createForm();
 passwordGeneratorElement.appendChild(formElement);
