@@ -48,7 +48,7 @@ const formProperties: FormProperties = {
   ],
 };
 const headerProperties: FormProperties = {
-  className: "passwordGenerator__box",
+  className: "showPass",
   submitButtonMessage: "add",
   submitCallback: submit,
   formHeaderText: "password generator",
