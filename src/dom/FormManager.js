@@ -31,7 +31,7 @@ class FormManager {
     createInput({ type, labels }) {
         return labels.forEach((label) => {
             const id = label;
-            const formGroupElement = FormManager.createFormGroupElement();
+            const formGroupElement = FormManager.createFormGroupElement(type);
             const inputElement = document.createElement("input");
             inputElement.id = id;
             inputElement.type = type;
@@ -45,9 +45,9 @@ class FormManager {
             this.formElement.appendChild(formGroupElement);
         });
     }
-    static createFormGroupElement() {
+    static createFormGroupElement(type) {
         const formGroupElement = document.createElement("div");
-        formGroupElement.className = "form-group";
+        formGroupElement.className = `form-group form-group--${type}`;
         return formGroupElement;
     }
     static createSubmitButton(message) {

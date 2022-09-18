@@ -32,7 +32,7 @@ const submit = () => {
   ps.getPassword();
 };
 const formProperties = {
-  className: "passwordGenerator__box",
+  className: "passwordGenerator__box passwordGenerator__box--content",
   submitButtonMessage: "generate",
   submitCallback: submit,
   formHeaderText: "",

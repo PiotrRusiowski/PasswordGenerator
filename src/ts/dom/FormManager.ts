@@ -43,7 +43,7 @@ export default class FormManager {
   private createInput({ type, labels }: FormField) {
     return labels.forEach((label) => {
       const id: string = label;
-      const formGroupElement = FormManager.createFormGroupElement();
+      const formGroupElement = FormManager.createFormGroupElement(type);
 
       const inputElement = document.createElement("input");
       inputElement.id = id;
@@ -60,9 +60,9 @@ export default class FormManager {
       this.formElement.appendChild(formGroupElement);
     });
   }
-  private static createFormGroupElement() {
+  private static createFormGroupElement(type: string) {
     const formGroupElement = document.createElement("div");
-    formGroupElement.className = "form-group";
+    formGroupElement.className = `form-group form-group--${type}`;
     return formGroupElement;
   }
   private static createSubmitButton(message: string) {
