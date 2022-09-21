@@ -1,11 +1,10 @@
+@import "./abstracts/mixins";
+
 $backGroundColor : #121116;
 $generatorBgColor : #24232B;
 $fontColor:#DDDCE2;
-//$default-font-size: 1.6rem;
 
 body{
-  background-color: yellow;
-  height: 100vh;
   h1{
     font-size: 1rem;
   }
@@ -22,12 +21,18 @@ body{
       justify-content: center;
       color: $fontColor;
       width:80%;
+      @include respond(tab-port){
+        font-size: 17px;
+      }
       &__box{
         padding:20px;
         margin-bottom: 20px;
         display: flex;
         flex-direction: column;
         background-color: pink;
+        @include respond(tab-port){
+            background-color: black;
+        }
       }
 
     }
