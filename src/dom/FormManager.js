@@ -16,9 +16,6 @@ class FormManager {
         return formElement;
     }
     createForm() {
-        // const formHeader: HTMLElement = document.createElement("h1");
-        // formHeader.textContent = this.formHeaderText;
-        //this.formElement.appendChild(formHeader);
         this.formElement.className = this.className;
         this.formFields.forEach((el) => this.createInput(el));
         this.formElement.appendChild(FormManager.createSubmitButton(this.submitButtonMessage));

@@ -4,65 +4,64 @@ $fontColor:#DDDCE2;
 //$default-font-size: 1.6rem;
 
 body{
-  background-color: $backGroundColor;
-
+  background-color: yellow;
+  height: 100vh;
+  h1{
+    font-size: 1rem;
+  }
   .container{
     display: flex;
-    align-items: center;
     justify-content: center;
     height: 100%;
-    padding: 5%;
-    background-color: $backGroundColor;
-  }
-}
-.passwordGenerator{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: $fontColor;
-  width:100%;
-  height: 100%;
-h1{
-  font-size: 2rem;
-}
-
-
-
-  &__box{
-
     width: 100%;
-    font-size: 3.8rem;
-    padding:50px;
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
-    background-color: pink;
-
-    &--content{
-      .form-group{
-        display: grid;
-        grid-template-columns: 1em auto;
-        gap: 0.5em;
-        accent-color: red;
+    background-color: $backGroundColor;
+    .passwordGenerator{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: $fontColor;
+      width:80%;
+      &__box{
+        padding:20px;
+        margin-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+        background-color: pink;
       }
-    }
 
-  }
-  .showPass{
-    display: flex;
-    .btn{
-      background-color: black;
-      font-size: 2rem;
-      width: 10%;
-      border: none;
-      margin: 0;
     }
   }
 }
 
+.showPass{
+  display: flex;
+  .btn{
+    background-color: black;
+  }
+}
+.form-group{
+  &--string {
+    display: flex;
+  }
+  &--checkbox {
+    display: grid;
+  grid-template-columns: 1em auto;
+  gap: 0.5em;
+  accent-color: red;}
 
+}
+.form-control{width: 100%}
 
-
-
-
+//
+//@media only screen and (min-width:768px){
+//  .container{
+//    background: white;
+//  }
+//  .passwordGenerator{
+//    font-size: 12px;
+//  }
+//}
+//
+//
+//
