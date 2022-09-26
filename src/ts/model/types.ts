@@ -16,6 +16,9 @@ export type Property = {
 export interface charGenerator {
   [key: string]: Function;
 }
+export interface State {
+  [key: string]: string;
+}
 export interface Password {
   length: number;
   properties: Property[];

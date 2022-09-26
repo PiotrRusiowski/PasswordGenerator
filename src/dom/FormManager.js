@@ -3,7 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 class FormManager {
     constructor({ className, submitCallback, submitButtonMessage, formHeaderText, formFields, }) {
         this.formElement = this.createFormElement();
-        this.formHeaderText = "";
         this.state = {};
         this.className = className;
         this.submitCallback = submitCallback;
@@ -11,19 +10,23 @@ class FormManager {
         this.formHeaderText = formHeaderText;
         this.formFields = formFields;
     }
-    createFormElement() {
-        const formElement = document.createElement("form");
-        return formElement;
-    }
     createForm() {
         this.formElement.className = this.className;
         this.formFields.forEach((el) => this.createInput(el));
         this.formElement.appendChild(FormManager.createSubmitButton(this.submitButtonMessage));
         this.formElement.addEventListener("submit", (e) => {
             e.preventDefault();
-            this.submitCallback();
+            console.log(this.state);
+            this.submitCallback(this.state);
         });
         return this.formElement;
+    }
+    showPassword(password) {
+        document.querySelector(".");
+    }
+    createFormElement() {
+        const formElement = document.createElement("form");
+        return formElement;
     }
     createInput({ type, labels }) {
         return labels.forEach((label) => {
@@ -35,6 +38,14 @@ class FormManager {
             inputElement.name = type;
             inputElement.className = "form-control";
             formGroupElement.appendChild(inputElement);
+            if (label === "length") {
+                inputElement.setAttribute("min", "5");
+                inputElement.setAttribute("max", "20");
+                inputElement.addEventListener("input", (e) => {
+                    // @ts-ignore
+                    this.setState(label, e.target.value);
+                });
+            }
             const labelElement = document.createElement("label");
             labelElement.setAttribute("for", id);
             labelElement.textContent = id;
@@ -54,6 +65,12 @@ class FormManager {
         buttonElement.setAttribute("type", "submit");
         buttonElement.textContent = formattedMessage;
         return buttonElement;
+    }
+    setState(name, value) {
+        console.log(this.state);
+        const state = {};
+        state[name] = value;
+        this.state = Object.assign(Object.assign({}, this.state), state);
     }
 }
 exports.default = FormManager;
