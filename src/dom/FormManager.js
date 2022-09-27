@@ -21,9 +21,6 @@ class FormManager {
         });
         return this.formElement;
     }
-    showPassword(password) {
-        document.querySelector(".");
-    }
     createFormElement() {
         const formElement = document.createElement("form");
         return formElement;
@@ -38,14 +35,20 @@ class FormManager {
             inputElement.name = type;
             inputElement.className = "form-control";
             formGroupElement.appendChild(inputElement);
-            if (label === "length") {
+            if (type === "range") {
                 inputElement.setAttribute("min", "5");
                 inputElement.setAttribute("max", "20");
-                inputElement.addEventListener("input", (e) => {
-                    // @ts-ignore
-                    this.setState(label, e.target.value);
-                });
             }
+            inputElement.addEventListener("input", (e) => {
+                switch (type) {
+                    case "range":
+                        // @ts-ignore
+                        return this.setState(label, e.target.value);
+                    case "checkbox":
+                        // @ts-ignore
+                        return this.setState(label, e.target.checked);
+                }
+            });
             const labelElement = document.createElement("label");
             labelElement.setAttribute("for", id);
             labelElement.textContent = id;
@@ -71,6 +74,10 @@ class FormManager {
         const state = {};
         state[name] = value;
         this.state = Object.assign(Object.assign({}, this.state), state);
+    }
+    static showPassword(password, inputId) {
+        const input = document.querySelector(`#${inputId}`);
+        input.value = password;
     }
 }
 exports.default = FormManager;

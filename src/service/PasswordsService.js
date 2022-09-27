@@ -11,12 +11,12 @@ class PasswordsService {
             [types_1.Properties.NUMBER]: () => String.fromCharCode(this.drawNumber(48, 57)),
         };
     }
-    passwordGenerator(password) {
-        const { properties, length } = password;
+    passwordGenerator({ properties, length }) {
         this.password = [];
-        const types = properties
-            .filter((prop) => Object.values(prop)[0])
-            .map((prop) => Object.keys(prop)[0]);
+        const types = Object.entries(properties)
+            .filter((el) => el[1])
+            .map((el) => el[0]);
+        console.log(types);
         for (let i = 0; i < length; i += types.length) {
             types.forEach((type) => {
                 this.password = [...this.password, this.charGenerator[type]()];
@@ -24,7 +24,6 @@ class PasswordsService {
         }
     }
     getPassword() {
-        console.log(this.password.join(""));
         return this.password.join("");
     }
     drawNumber(max, min) {

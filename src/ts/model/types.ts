@@ -13,18 +13,19 @@ export type PropertiesNames =
 export type Property = {
   [key: string]: boolean;
 };
+export interface State {
+  [key: string]: string | boolean;
+}
 export interface charGenerator {
   [key: string]: Function;
 }
-export interface State {
-  [key: string]: string;
-}
 export interface Password {
   length: number;
-  properties: Property[];
+  properties: State;
 }
 export interface FormField {
   type: string;
+  id?: string[];
   labels: string[];
 }
 export interface FormProperties {

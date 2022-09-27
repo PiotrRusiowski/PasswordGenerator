@@ -1,4 +1,5 @@
 import PasswordsService from "./service/PasswordsService";
+import FormManager from "./dom/FormManager";
 import {
   Password,
   Properties,
@@ -6,29 +7,20 @@ import {
   Property,
   State,
 } from "./model/types";
-import FormManager from "./dom/FormManager";
+
 const generatorHeader = document.querySelector(
   ".passwordGenerator__box--header"
 ) as HTMLElement;
 const passwordGeneratorElement = document.querySelector(
   ".passwordGenerator"
 ) as HTMLElement;
+
 const ps = new PasswordsService();
 
-const submit = (state: State) => {
+const submit = ({ length, ...prop }: State) => {
   const lengthInput = document.querySelector("#length") as HTMLElement;
-  const length = Number(state.length);
-  console.log(state);
-  const checkboxes = [...document.querySelectorAll("input[name=checkbox]")].map(
-    (checkbox) => {
-      const password: Property = {};
-      // @ts-ignore
-      password[checkbox.id] = checkbox.checked as boolean;
-      return password;
-    }
-  );
-  ps.passwordGenerator({ length: length, properties: checkboxes });
-  ps.getPassword();
+  ps.passwordGenerator({ length: +length, properties: prop });
+  FormManager.showPassword(ps.getPassword(), "string");
 };
 const formProperties: FormProperties = {
   className: "passwordGenerator__box passwordGenerator__box--content",
@@ -59,7 +51,7 @@ const headerProperties: FormProperties = {
   formFields: [
     {
       type: "string",
-      labels: [""],
+      labels: ["string"],
     },
   ],
 };
