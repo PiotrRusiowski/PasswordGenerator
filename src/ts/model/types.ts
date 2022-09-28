@@ -4,14 +4,9 @@ export enum Properties {
   NUMBER = "number",
   SYMBOL = "symbol",
 }
-export type PropertiesNames =
-  | Properties.LOWERCASE
-  | Properties.UPPERCASE
-  | Properties.NUMBER
-  | Properties.SYMBOL;
 
 export type Property = {
-  [key: string]: boolean;
+  [key: string]: boolean | string;
 };
 export interface State {
   [key: string]: string | boolean;
@@ -26,6 +21,8 @@ export interface Password {
 export interface FormField {
   type: string;
   id?: string[];
+  className?: string[];
+  attributes?: [string, string][];
   labels: string[];
 }
 export interface FormProperties {

@@ -35,6 +35,10 @@ const formProperties = {
         {
             type: "range",
             labels: ["length"],
+            attributes: [
+                ["min", "5"],
+                ["max", "20"],
+            ],
         },
         {
             type: "checkbox",

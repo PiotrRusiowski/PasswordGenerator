@@ -1,12 +1,6 @@
 import PasswordsService from "./service/PasswordsService";
 import FormManager from "./dom/FormManager";
-import {
-  Password,
-  Properties,
-  FormProperties,
-  Property,
-  State,
-} from "./model/types";
+import { Properties, FormProperties, State } from "./model/types";
 
 const generatorHeader = document.querySelector(
   ".passwordGenerator__box--header"
@@ -19,6 +13,7 @@ const ps = new PasswordsService();
 
 const submit = ({ length, ...prop }: State) => {
   const lengthInput = document.querySelector("#length") as HTMLElement;
+
   ps.passwordGenerator({ length: +length, properties: prop });
   FormManager.showPassword(ps.getPassword(), "string");
 };
@@ -31,6 +26,10 @@ const formProperties: FormProperties = {
     {
       type: "range",
       labels: ["length"],
+      attributes: [
+        ["min", "5"],
+        ["max", "20"],
+      ],
     },
     {
       type: "checkbox",

@@ -25,7 +25,7 @@ class FormManager {
         const formElement = document.createElement("form");
         return formElement;
     }
-    createInput({ type, labels }) {
+    createInput({ type, labels, attributes }) {
         return labels.forEach((label) => {
             const id = label;
             const formGroupElement = FormManager.createFormGroupElement(type);
@@ -35,13 +35,20 @@ class FormManager {
             inputElement.name = type;
             inputElement.className = "form-control";
             formGroupElement.appendChild(inputElement);
-            if (type === "range") {
-                inputElement.setAttribute("min", "5");
-                inputElement.setAttribute("max", "20");
+            if (attributes) {
+                attributes.forEach(([name, value]) => {
+                    inputElement.setAttribute(name, value);
+                });
             }
+            const labelElement = document.createElement("label");
+            labelElement.setAttribute("for", id);
+            labelElement.textContent = id;
+            formGroupElement.appendChild(labelElement);
             inputElement.addEventListener("input", (e) => {
                 switch (type) {
                     case "range":
+                        // @ts-ignore
+                        this.showLengthValue(labelElement, e.target.value);
                         // @ts-ignore
                         return this.setState(label, e.target.value);
                     case "checkbox":
@@ -49,12 +56,11 @@ class FormManager {
                         return this.setState(label, e.target.checked);
                 }
             });
-            const labelElement = document.createElement("label");
-            labelElement.setAttribute("for", id);
-            labelElement.textContent = id;
-            formGroupElement.appendChild(labelElement);
             this.formElement.appendChild(formGroupElement);
         });
+    }
+    showLengthValue(labelElement, value) {
+        labelElement.textContent = value;
     }
     static createFormGroupElement(type) {
         const formGroupElement = document.createElement("div");

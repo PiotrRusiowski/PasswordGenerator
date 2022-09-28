@@ -2,7 +2,6 @@ import { Password } from "../model/types";
 import { Property } from "../model/types";
 import { charGenerator } from "../model/types";
 import { Properties } from "../model/types";
-import { PropertiesNames } from "../model/types";
 
 export default class PasswordsService {
   private password: string[] = [];
