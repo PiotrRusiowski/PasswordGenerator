@@ -24,6 +24,7 @@ export interface FormField {
   className?: string[];
   attributes?: [string, string][];
   labels: string[];
+  initialValue?: string;
 }
 export interface FormProperties {
   className: string;

@@ -3,7 +3,7 @@ import { FormProperties, FormField, State } from "../model/types";
 export default class FormManager {
   className;
   private formElement: HTMLElement = this.createFormElement();
-  private state: State = {};
+  private state: State = { length: "5" };
   private readonly formHeaderText;
   private readonly submitButtonMessage;
   private readonly submitCallback;
@@ -40,7 +40,7 @@ export default class FormManager {
     const formElement: HTMLElement = document.createElement("form");
     return formElement;
   }
-  private createInput({ type, labels, attributes }: FormField) {
+  private createInput({ type, labels, attributes, initialValue }: FormField) {
     return labels.forEach((label: string) => {
       const id = label;
       const formGroupElement = FormManager.createFormGroupElement(type);
@@ -50,6 +50,7 @@ export default class FormManager {
       inputElement.type = type;
       inputElement.name = type;
       inputElement.className = "form-control";
+
       formGroupElement.appendChild(inputElement);
       if (attributes) {
         attributes.forEach(([name, value]) => {
@@ -61,25 +62,25 @@ export default class FormManager {
       labelElement.setAttribute("for", id);
       labelElement.textContent = id;
       formGroupElement.appendChild(labelElement);
-      inputElement.addEventListener("input", (e) => {
+      if (initialValue) {
+        labelElement.textContent = initialValue;
+        inputElement.value = initialValue;
+      }
+      inputElement.addEventListener("input", (event) => {
+        const target = event.target as HTMLInputElement;
+        ///////if(target)????
         switch (type) {
           case "range":
-            // @ts-ignore
-
-            this.showLengthValue(labelElement, e.target.value);
-            // @ts-ignore
-            return this.setState(label, e.target.value);
+            inputElement.value = target.value;
+            labelElement.textContent = target.value;
+            return this.setState(label, target.value);
           case "checkbox":
-            // @ts-ignore
-            return this.setState(label, e.target.checked);
+            return this.setState(label, target.checked);
         }
       });
 
       this.formElement.appendChild(formGroupElement);
     });
-  }
-  private showLengthValue(labelElement: HTMLLabelElement, value: string) {
-    labelElement.textContent = value;
   }
 
   private static createFormGroupElement(type: string) {
@@ -95,7 +96,7 @@ export default class FormManager {
     buttonElement.textContent = formattedMessage;
     return buttonElement;
   }
-  private setState(name: string, value: string) {
+  private setState(name: string, value: string | boolean) {
     console.log(this.state);
     const state: State = {};
     state[name] = value;

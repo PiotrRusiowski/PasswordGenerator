@@ -30,6 +30,7 @@ const formProperties: FormProperties = {
         ["min", "5"],
         ["max", "20"],
       ],
+      initialValue: "5",
     },
     {
       type: "checkbox",
@@ -49,6 +50,7 @@ const headerProperties: FormProperties = {
   formHeaderText: "password generator",
   formFields: [
     {
+      id: ["password"],
       type: "string",
       labels: ["string"],
     },
