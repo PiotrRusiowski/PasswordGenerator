@@ -29,7 +29,7 @@ body{
         margin-bottom: 20px;
         display: flex;
         flex-direction: column;
-        background-color: pink;
+        background-color: $generatorBgColor;
         @include respond(tab-port){
             background-color: black;
         }

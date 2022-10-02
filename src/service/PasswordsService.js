@@ -16,11 +16,25 @@ class PasswordsService {
         const types = Object.entries(properties)
             .filter((el) => el[1])
             .map((el) => el[0]);
-        console.log(types);
         for (let i = 0; i < length; i += types.length) {
             types.forEach((type) => {
                 this.password = [...this.password, this.charGenerator[type]()];
             });
+        }
+        return {
+            password: this.password.join(""),
+            strength: this.passwordStrength({ properties, length }),
+        };
+    }
+    passwordStrength({ properties, length }) {
+        if (length >= 4 && length <= 6) {
+            return types_1.PassStrength.WEAK;
+        }
+        if (length > 6 && length <= 12) {
+            return types_1.PassStrength.MEDIUM;
+        }
+        if (length > 12) {
+            return types_1.PassStrength.STRENGTH;
         }
     }
     getPassword() {

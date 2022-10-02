@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 class FormManager {
     constructor({ className, submitCallback, submitButtonMessage, formHeaderText, formFields, }) {
         this.formElement = this.createFormElement();
-        this.state = { length: "5" };
+        this.state = {};
         this.className = className;
         this.submitCallback = submitCallback;
         this.submitButtonMessage = submitButtonMessage;
@@ -16,7 +16,6 @@ class FormManager {
         this.formElement.appendChild(FormManager.createSubmitButton(this.submitButtonMessage));
         this.formElement.addEventListener("submit", (e) => {
             e.preventDefault();
-            console.log(this.state);
             this.submitCallback(this.state);
         });
         return this.formElement;
@@ -86,5 +85,6 @@ class FormManager {
         const input = document.querySelector(`#${inputId}`);
         input.value = password;
     }
+    static createDOMElement() { }
 }
 exports.default = FormManager;

@@ -1,24 +1,40 @@
-import { Password } from "../model/types";
-import { Property } from "../model/types";
-import { charGenerator } from "../model/types";
-import { Properties } from "../model/types";
+import {
+  charGenerator,
+  PassStrength,
+  PasswordProperties,
+  Properties,
+  Password,
+} from "../model/types";
 
 export default class PasswordsService {
   private password: string[] = [];
 
-  passwordGenerator({ properties, length }: Password) {
+  passwordGenerator({ properties, length }: PasswordProperties): Password {
     this.password = [];
     const types: string[] = Object.entries(properties)
       .filter((el) => el[1])
       .map((el) => el[0]);
-    console.log(types);
     for (let i = 0; i < length; i += types.length) {
       types.forEach((type: string) => {
         this.password = [...this.password, this.charGenerator[type]()];
       });
     }
+    return {
+      password: this.password.join(""),
+      strength: this.passwordStrength({ properties, length }) as PassStrength,
+    };
   }
-
+  private passwordStrength({ properties, length }: PasswordProperties) {
+    if (length >= 4 && length <= 6) {
+      return PassStrength.WEAK;
+    }
+    if (length > 6 && length <= 12) {
+      return PassStrength.MEDIUM;
+    }
+    if (length > 12) {
+      return PassStrength.STRENGTH;
+    }
+  }
   getPassword() {
     return this.password.join("");
   }

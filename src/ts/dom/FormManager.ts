@@ -3,7 +3,7 @@ import { FormProperties, FormField, State } from "../model/types";
 export default class FormManager {
   className;
   private formElement: HTMLElement = this.createFormElement();
-  private state: State = { length: "5" };
+  private state: State = {};
   private readonly formHeaderText;
   private readonly submitButtonMessage;
   private readonly submitCallback;
@@ -30,7 +30,6 @@ export default class FormManager {
     );
     this.formElement.addEventListener("submit", (e) => {
       e.preventDefault();
-      console.log(this.state);
       this.submitCallback(this.state);
     });
     return this.formElement;
@@ -106,4 +105,5 @@ export default class FormManager {
     const input = document.querySelector(`#${inputId}`) as HTMLInputElement;
     input.value = password;
   }
+  static createDOMElement() {}
 }

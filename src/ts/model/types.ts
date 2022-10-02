@@ -4,19 +4,25 @@ export enum Properties {
   NUMBER = "number",
   SYMBOL = "symbol",
 }
+export enum PassStrength {
+  WEAK = "weak",
+  MEDIUM = "medium",
+  STRENGTH = "strength",
+}
 
-export type Property = {
-  [key: string]: boolean | string;
-};
 export interface State {
   [key: string]: string | boolean;
 }
 export interface charGenerator {
   [key: string]: Function;
 }
-export interface Password {
+export interface PasswordProperties {
   length: number;
   properties: State;
+}
+export interface Password {
+  password: string;
+  strength: PassStrength;
 }
 export interface FormField {
   type: string;
