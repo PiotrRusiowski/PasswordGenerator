@@ -1,5 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const types_1 = require("../model/types");
+const app1_1 = require("../app1");
 class FormManager {
     constructor({ className, submitCallback, submitButtonMessage, formHeaderText, formFields, }) {
         this.formElement = this.createFormElement();
@@ -84,13 +86,16 @@ class FormManager {
         const input = document.querySelector(`#${inputId}`);
         input.value = password;
     }
-    static showPasswordStrength() { }
-    createDOMEement(passStrength) {
-        console.log(this.className);
+    static removePassStrength() {
+        const passElement = document.querySelector("#passStrength");
+        app1_1.passwordGeneratorElement.removeChild(passElement);
+    }
+    static createPassStrength(strength = types_1.PassStrength.WEAK) {
         const domElement = document.createElement("div");
-        domElement.className = "passStrength";
-        domElement.textContent = passStrength;
-        this.formElement.appendChild(domElement);
+        domElement.id = "passStrength";
+        domElement.className = strength;
+        domElement.textContent = strength;
+        app1_1.passwordGeneratorElement.appendChild(domElement);
     }
 }
 exports.default = FormManager;

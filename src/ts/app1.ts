@@ -5,7 +5,7 @@ import { Properties, FormProperties, State } from "./model/types";
 const generatorHeader = document.querySelector(
   ".passwordGenerator__box--header"
 ) as HTMLElement;
-const passwordGeneratorElement = document.querySelector(
+export const passwordGeneratorElement = document.querySelector(
   ".passwordGenerator"
 ) as HTMLElement;
 
@@ -13,12 +13,13 @@ const ps = new PasswordsService();
 
 const submit = ({ length, ...prop }: State) => {
   const lengthInput = document.querySelector("#length") as HTMLElement;
-  console.log(
-    ps.passwordGenerator({ length: Number(length), properties: prop })
-  );
   FormManager.showPassword(
     ps.passwordGenerator({ length: Number(length), properties: prop }),
     "string"
+  );
+  FormManager.removePassStrength();
+  FormManager.createPassStrength(
+    PasswordsService.passwordStrength(Number(length))
   );
 };
 const formProperties: FormProperties = {
@@ -68,3 +69,5 @@ generatorHeader.appendChild(formHeaderElement);
 const fm = new FormManager(formProperties);
 const formElement = fm.createForm();
 passwordGeneratorElement.appendChild(formElement);
+
+FormManager.createPassStrength();

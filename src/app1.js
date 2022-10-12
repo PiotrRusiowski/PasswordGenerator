@@ -14,17 +14,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.passwordGeneratorElement = void 0;
 const PasswordsService_1 = __importDefault(require("./service/PasswordsService"));
 const FormManager_1 = __importDefault(require("./dom/FormManager"));
 const types_1 = require("./model/types");
 const generatorHeader = document.querySelector(".passwordGenerator__box--header");
-const passwordGeneratorElement = document.querySelector(".passwordGenerator");
+exports.passwordGeneratorElement = document.querySelector(".passwordGenerator");
 const ps = new PasswordsService_1.default();
 const submit = (_a) => {
     var { length } = _a, prop = __rest(_a, ["length"]);
     const lengthInput = document.querySelector("#length");
-    console.log(ps.passwordGenerator({ length: Number(length), properties: prop }));
     FormManager_1.default.showPassword(ps.passwordGenerator({ length: Number(length), properties: prop }), "string");
+    FormManager_1.default.removePassStrength();
+    FormManager_1.default.createPassStrength(PasswordsService_1.default.passwordStrength(Number(length)));
 };
 const formProperties = {
     className: "passwordGenerator__box passwordGenerator__box--content",
@@ -70,4 +72,5 @@ const formHeaderElement = fm2.createForm();
 generatorHeader.appendChild(formHeaderElement);
 const fm = new FormManager_1.default(formProperties);
 const formElement = fm.createForm();
-passwordGeneratorElement.appendChild(formElement);
+exports.passwordGeneratorElement.appendChild(formElement);
+FormManager_1.default.createPassStrength();

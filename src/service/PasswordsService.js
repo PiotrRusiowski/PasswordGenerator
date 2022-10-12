@@ -25,7 +25,7 @@ class PasswordsService {
         this.password = generatedPassword.slice(0, length);
         return this.password.join("");
     }
-    passwordStrength({ properties, length }) {
+    static passwordStrength(length) {
         if (length >= 4 && length <= 6) {
             return types_1.PassStrength.WEAK;
         }

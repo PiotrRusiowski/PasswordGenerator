@@ -26,7 +26,7 @@ export default class PasswordsService {
     return this.password.join("");
   }
 
-  private passwordStrength({ properties, length }: PasswordProperties) {
+  static passwordStrength(length: number) {
     if (length >= 4 && length <= 6) {
       return PassStrength.WEAK;
     }
