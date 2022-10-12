@@ -1,9 +1,15 @@
-import { FormProperties, FormField, State } from "../model/types";
+import {
+  FormProperties,
+  FormField,
+  State,
+  Password,
+  PassStrength,
+} from "../model/types";
 
 export default class FormManager {
   className;
   private formElement: HTMLElement = this.createFormElement();
-  private state: State = {};
+  private state: State = { length: "5" };
   private readonly formHeaderText;
   private readonly submitButtonMessage;
   private readonly submitCallback;
@@ -77,7 +83,6 @@ export default class FormManager {
             return this.setState(label, target.checked);
         }
       });
-
       this.formElement.appendChild(formGroupElement);
     });
   }
@@ -96,14 +101,18 @@ export default class FormManager {
     return buttonElement;
   }
   private setState(name: string, value: string | boolean) {
-    console.log(this.state);
     const state: State = {};
     state[name] = value;
     this.state = { ...this.state, ...state };
   }
-  static showPassword(password: string, inputId: string) {
+  static showPassword(password: Password, inputId: string) {
     const input = document.querySelector(`#${inputId}`) as HTMLInputElement;
-    input.value = password;
+    input.value = password.password;
   }
-  static createDOMElement() {}
+  createDOMElement(passStrength: PassStrength) {
+    const domElement = document.createElement("div");
+    domElement.className = "passStrength";
+    domElement.textContent = passStrength;
+    this.formElement.appendChild(domElement);
+  }
 }

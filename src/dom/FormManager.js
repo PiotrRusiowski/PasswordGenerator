@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 class FormManager {
     constructor({ className, submitCallback, submitButtonMessage, formHeaderText, formFields, }) {
         this.formElement = this.createFormElement();
-        this.state = {};
+        this.state = { length: "5" };
         this.className = className;
         this.submitCallback = submitCallback;
         this.submitButtonMessage = submitButtonMessage;
@@ -76,15 +76,19 @@ class FormManager {
         return buttonElement;
     }
     setState(name, value) {
-        console.log(this.state);
         const state = {};
         state[name] = value;
         this.state = Object.assign(Object.assign({}, this.state), state);
     }
     static showPassword(password, inputId) {
         const input = document.querySelector(`#${inputId}`);
-        input.value = password;
+        input.value = password.password;
     }
-    static createDOMElement() { }
+    createDOMElement(passStrength) {
+        const domElement = document.createElement("div");
+        domElement.className = "passStrength";
+        domElement.textContent = passStrength;
+        this.formElement.appendChild(domElement);
+    }
 }
 exports.default = FormManager;
