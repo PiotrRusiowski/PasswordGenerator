@@ -14,6 +14,7 @@ export default class FormManager {
   private readonly submitButtonMessage;
   private readonly submitCallback;
   private formFields;
+
   constructor({
     className,
     submitCallback,
@@ -45,6 +46,7 @@ export default class FormManager {
     const formElement: HTMLElement = document.createElement("form");
     return formElement;
   }
+
   private createInput({ type, labels, attributes, initialValue }: FormField) {
     return labels.forEach((label: string) => {
       const id = label;
@@ -92,6 +94,7 @@ export default class FormManager {
     formGroupElement.className = `form-group form-group--${type}`;
     return formGroupElement;
   }
+
   private static createSubmitButton(message: string) {
     const formattedMessage = message.toUpperCase();
     const buttonElement = document.createElement("button");
@@ -100,16 +103,22 @@ export default class FormManager {
     buttonElement.textContent = formattedMessage;
     return buttonElement;
   }
+
   private setState(name: string, value: string | boolean) {
     const state: State = {};
     state[name] = value;
     this.state = { ...this.state, ...state };
   }
-  static showPassword(password: Password, inputId: string) {
+
+  static showPassword(password: string, inputId: string) {
     const input = document.querySelector(`#${inputId}`) as HTMLInputElement;
-    input.value = password.password;
+    input.value = password;
   }
-  createDOMElement(passStrength: PassStrength) {
+
+  static showPasswordStrength() {}
+
+  createDOMEement(passStrength: PassStrength) {
+    console.log(this.className);
     const domElement = document.createElement("div");
     domElement.className = "passStrength";
     domElement.textContent = passStrength;

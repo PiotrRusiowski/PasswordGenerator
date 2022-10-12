@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-            const PasswordsService_1 = __importDefault(require("./service/PasswordsService"));
+const PasswordsService_1 = __importDefault(require("./service/PasswordsService"));
 const FormManager_1 = __importDefault(require("./dom/FormManager"));
 const types_1 = require("./model/types");
 const generatorHeader = document.querySelector(".passwordGenerator__box--header");
@@ -23,6 +23,7 @@ const ps = new PasswordsService_1.default();
 const submit = (_a) => {
     var { length } = _a, prop = __rest(_a, ["length"]);
     const lengthInput = document.querySelector("#length");
+    console.log(ps.passwordGenerator({ length: Number(length), properties: prop }));
     FormManager_1.default.showPassword(ps.passwordGenerator({ length: Number(length), properties: prop }), "string");
 };
 const formProperties = {

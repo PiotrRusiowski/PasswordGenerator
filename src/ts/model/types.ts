@@ -1,5 +1,3 @@
-const axios = require("axios").default;
-
 export enum Properties {
   UPPERCASE = "uppercase",
   LOWERCASE = "lowercase",

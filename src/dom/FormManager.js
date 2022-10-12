@@ -82,9 +82,11 @@ class FormManager {
     }
     static showPassword(password, inputId) {
         const input = document.querySelector(`#${inputId}`);
-        input.value = password.password;
+        input.value = password;
     }
-    createDOMElement(passStrength) {
+    static showPasswordStrength() { }
+    createDOMEement(passStrength) {
+        console.log(this.className);
         const domElement = document.createElement("div");
         domElement.className = "passStrength";
         domElement.textContent = passStrength;

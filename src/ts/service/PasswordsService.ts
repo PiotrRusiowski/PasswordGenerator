@@ -9,21 +9,23 @@ import {
 export default class PasswordsService {
   private password: string[] = [];
 
-  passwordGenerator({ properties, length }: PasswordProperties): Password {
+  passwordGenerator({ properties, length }: PasswordProperties): string {
     this.password = [];
+    let generatedPassword = [] as string[];
     const types: string[] = Object.entries(properties)
       .filter((el) => el[1])
       .map((el) => el[0]);
+
     for (let i = 0; i < length; i += types.length) {
       types.forEach((type: string) => {
-        this.password = [...this.password, this.charGenerator[type]()];
+        generatedPassword = [...generatedPassword, this.charGenerator[type]()];
       });
     }
-    return {
-      password: this.password.join(""),
-      strength: this.passwordStrength({ properties, length }) as PassStrength,
-    };
+    this.password = generatedPassword.slice(0, length);
+
+    return this.password.join("");
   }
+
   private passwordStrength({ properties, length }: PasswordProperties) {
     if (length >= 4 && length <= 6) {
       return PassStrength.WEAK;
@@ -35,6 +37,7 @@ export default class PasswordsService {
       return PassStrength.STRENGTH;
     }
   }
+
   getPassword() {
     return this.password.join("");
   }
@@ -45,6 +48,7 @@ export default class PasswordsService {
     [Properties.SYMBOL]: () => String.fromCharCode(this.drawNumber(33, 47)),
     [Properties.NUMBER]: () => String.fromCharCode(this.drawNumber(48, 57)),
   };
+
   private drawNumber(max: number, min: number) {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }

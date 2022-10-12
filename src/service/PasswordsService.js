@@ -13,18 +13,17 @@ class PasswordsService {
     }
     passwordGenerator({ properties, length }) {
         this.password = [];
+        let generatedPassword = [];
         const types = Object.entries(properties)
             .filter((el) => el[1])
             .map((el) => el[0]);
         for (let i = 0; i < length; i += types.length) {
             types.forEach((type) => {
-                this.password = [...this.password, this.charGenerator[type]()];
+                generatedPassword = [...generatedPassword, this.charGenerator[type]()];
             });
         }
-        return {
-            password: this.password.join(""),
-            strength: this.passwordStrength({ properties, length }),
-        };
+        this.password = generatedPassword.slice(0, length);
+        return this.password.join("");
     }
     passwordStrength({ properties, length }) {
         if (length >= 4 && length <= 6) {

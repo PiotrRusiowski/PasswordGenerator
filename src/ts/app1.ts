@@ -13,6 +13,9 @@ const ps = new PasswordsService();
 
 const submit = ({ length, ...prop }: State) => {
   const lengthInput = document.querySelector("#length") as HTMLElement;
+  console.log(
+    ps.passwordGenerator({ length: Number(length), properties: prop })
+  );
   FormManager.showPassword(
     ps.passwordGenerator({ length: Number(length), properties: prop }),
     "string"
