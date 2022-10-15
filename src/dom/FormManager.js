@@ -29,7 +29,7 @@ class FormManager {
     createInput({ type, labels, attributes, initialValue }) {
         return labels.forEach((label) => {
             const id = label;
-            const formGroupElement = FormManager.createFormGroupElement(type);
+            const formGroupElement = FormManager.createDivElement(`form-group-element form-group-element--${type}`);
             const inputElement = document.createElement("input");
             inputElement.id = id;
             inputElement.type = type;
@@ -64,10 +64,12 @@ class FormManager {
             this.formElement.appendChild(formGroupElement);
         });
     }
-    static createFormGroupElement(type) {
-        const formGroupElement = document.createElement("div");
-        formGroupElement.className = `form-group form-group--${type}`;
-        return formGroupElement;
+    static createDivElement(className, id = "") {
+        const divElement = document.createElement("div");
+        if (id.length)
+            divElement.id = id;
+        divElement.className = className;
+        return divElement;
     }
     static createSubmitButton(message) {
         const formattedMessage = message.toUpperCase();
@@ -94,9 +96,7 @@ class FormManager {
         elementToRemove && elementToRemove.remove();
     }
     createPassStrength(strength = types_1.PassStrength.WEAK) {
-        const domElement = document.createElement("div");
-        domElement.id = "passStrength";
-        domElement.className = strength;
+        const domElement = FormManager.createDivElement(strength, "passStrength");
         domElement.textContent = strength;
         this.formElement.appendChild(domElement);
     }

@@ -54,7 +54,9 @@ export default class FormManager {
   private createInput({ type, labels, attributes, initialValue }: FormField) {
     return labels.forEach((label: string) => {
       const id = label;
-      const formGroupElement = FormManager.createFormGroupElement(type);
+      const formGroupElement = FormManager.createDivElement(
+        `form-group-element form-group-element--${type}`
+      );
 
       const inputElement: HTMLInputElement = document.createElement("input");
       inputElement.id = id;
@@ -93,10 +95,11 @@ export default class FormManager {
     });
   }
 
-  private static createFormGroupElement(type: string) {
-    const formGroupElement = document.createElement("div");
-    formGroupElement.className = `form-group form-group--${type}`;
-    return formGroupElement;
+  private static createDivElement(className: string, id = "") {
+    const divElement = document.createElement("div");
+    if (id.length) divElement.id = id;
+    divElement.className = className;
+    return divElement;
   }
 
   private static createSubmitButton(message: string) {
@@ -119,7 +122,7 @@ export default class FormManager {
     input.value = password;
   }
 
-  static removeElement(selector: Selector, selectorValue: string) {
+  static removeElement(selector: Selector, selectorValue: string): void {
     let elementToRemove;
     selector === "id"
       ? (elementToRemove = document.getElementById(selectorValue))
@@ -128,9 +131,7 @@ export default class FormManager {
   }
 
   createPassStrength(strength: PassStrength = PassStrength.WEAK): void {
-    const domElement = document.createElement("div");
-    domElement.id = "passStrength";
-    domElement.className = strength;
+    const domElement = FormManager.createDivElement(strength, "passStrength");
     domElement.textContent = strength;
     this.formElement.appendChild(domElement);
   }
