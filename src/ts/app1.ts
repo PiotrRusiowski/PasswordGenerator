@@ -18,7 +18,7 @@ const submit = ({ length, ...prop }: State) => {
     "string"
   );
   FormManager.removeElement("id", "passStrength");
-  fm.createPassStrength(PasswordsService.passwordStrength(Number(length)));
+  fm.reloadForm();
 };
 const formProperties: FormProperties = {
   className: "passwordGenerator__box passwordGenerator__box--content",
@@ -67,4 +67,3 @@ generatorHeader.appendChild(formHeaderElement);
 const fm = new FormManager(formProperties);
 const formElement = fm.createForm();
 passwordGeneratorElement.appendChild(formElement);
-fm.createPassStrength();

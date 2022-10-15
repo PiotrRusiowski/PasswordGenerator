@@ -37,6 +37,9 @@ export default class FormManager {
     this.formElement.className = this.className;
     this.formFields.forEach((el: FormField) => this.createInput(el));
     this.formElement.appendChild(
+      FormManager.createPassStrength(this.state.length as string)
+    );
+    this.formElement.appendChild(
       FormManager.createSubmitButton(this.submitButtonMessage)
     );
     this.formElement.addEventListener("submit", (e) => {
@@ -95,10 +98,10 @@ export default class FormManager {
     });
   }
 
-  private static createDivElement(className: string, id = "") {
+  private static createDivElement(className = "", id = "") {
     const divElement = document.createElement("div");
     if (id.length) divElement.id = id;
-    divElement.className = className;
+    if (className.length) divElement.className = className;
     return divElement;
   }
 
@@ -117,6 +120,17 @@ export default class FormManager {
     this.state = { ...this.state, ...state };
   }
 
+  reloadForm() {
+    const formElement = this.createForm();
+    const oldForm = document.querySelector(".passwordGenerator__box--content");
+    // @ts-ignore
+    passwordGeneratorElement.removeChild(oldForm);
+    console.log(oldForm);
+
+    // FormManager.removeElement("class", "passwordGenerator__box--content");
+    passwordGeneratorElement.appendChild(formElement);
+  }
+
   static showPassword(password: string, inputId: string) {
     const input = document.querySelector(`#${inputId}`) as HTMLInputElement;
     input.value = password;
@@ -124,15 +138,18 @@ export default class FormManager {
 
   static removeElement(selector: Selector, selectorValue: string): void {
     let elementToRemove;
+    console.log(elementToRemove);
     selector === "id"
       ? (elementToRemove = document.getElementById(selectorValue))
       : document.getElementsByClassName(selectorValue);
     elementToRemove && elementToRemove.remove();
   }
 
-  createPassStrength(strength: PassStrength = PassStrength.WEAK): void {
+  static createPassStrength(strength = "weak") {
     const domElement = FormManager.createDivElement(strength, "passStrength");
     domElement.textContent = strength;
-    this.formElement.appendChild(domElement);
+    for (let i = 1; i < 4; i++)
+      domElement.appendChild(FormManager.createDivElement("dupa"));
+    return domElement;
   }
 }

@@ -25,7 +25,7 @@ const submit = (_a) => {
     const lengthInput = document.querySelector("#length");
     FormManager_1.default.showPassword(ps.passwordGenerator({ length: Number(length), properties: prop }), "string");
     FormManager_1.default.removeElement("id", "passStrength");
-    fm.createPassStrength(PasswordsService_1.default.passwordStrength(Number(length)));
+    fm.reloadForm();
 };
 const formProperties = {
     className: "passwordGenerator__box passwordGenerator__box--content",
@@ -72,4 +72,3 @@ generatorHeader.appendChild(formHeaderElement);
 const fm = new FormManager_1.default(formProperties);
 const formElement = fm.createForm();
 passwordGeneratorElement.appendChild(formElement);
-fm.createPassStrength();

@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const types_1 = require("../model/types");
 const passwordGeneratorElement = document.querySelector(".passwordGenerator");
 class FormManager {
     constructor({ className, submitCallback, submitButtonMessage, formHeaderText, formFields, }) {
@@ -15,6 +14,7 @@ class FormManager {
     createForm() {
         this.formElement.className = this.className;
         this.formFields.forEach((el) => this.createInput(el));
+        this.formElement.appendChild(FormManager.createPassStrength(this.state.length));
         this.formElement.appendChild(FormManager.createSubmitButton(this.submitButtonMessage));
         this.formElement.addEventListener("submit", (e) => {
             e.preventDefault();
@@ -64,11 +64,12 @@ class FormManager {
             this.formElement.appendChild(formGroupElement);
         });
     }
-    static createDivElement(className, id = "") {
+    static createDivElement(className = "", id = "") {
         const divElement = document.createElement("div");
         if (id.length)
             divElement.id = id;
-        divElement.className = className;
+        if (className.length)
+            divElement.className = className;
         return divElement;
     }
     static createSubmitButton(message) {
@@ -84,21 +85,33 @@ class FormManager {
         state[name] = value;
         this.state = Object.assign(Object.assign({}, this.state), state);
     }
+    reloadForm() {
+        const formElement = this.createForm();
+        const oldForm = document.querySelector(".passwordGenerator__box--content");
+        // @ts-ignore
+        passwordGeneratorElement.removeChild(oldForm);
+        console.log(oldForm);
+        // FormManager.removeElement("class", "passwordGenerator__box--content");
+        passwordGeneratorElement.appendChild(formElement);
+    }
     static showPassword(password, inputId) {
         const input = document.querySelector(`#${inputId}`);
         input.value = password;
     }
     static removeElement(selector, selectorValue) {
         let elementToRemove;
+        console.log(elementToRemove);
         selector === "id"
             ? (elementToRemove = document.getElementById(selectorValue))
             : document.getElementsByClassName(selectorValue);
         elementToRemove && elementToRemove.remove();
     }
-    createPassStrength(strength = types_1.PassStrength.WEAK) {
+    static createPassStrength(strength = "weak") {
         const domElement = FormManager.createDivElement(strength, "passStrength");
         domElement.textContent = strength;
-        this.formElement.appendChild(domElement);
+        for (let i = 1; i < 4; i++)
+            domElement.appendChild(FormManager.createDivElement("dupa"));
+        return domElement;
     }
 }
 exports.default = FormManager;
