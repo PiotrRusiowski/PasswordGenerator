@@ -1,5 +1,14 @@
-import { FormField, FormProperties, PassStrength, State } from "../model/types";
-import { passwordGeneratorElement } from "../app1";
+import {
+  FormField,
+  FormProperties,
+  PassStrength,
+  State,
+  Selector,
+} from "../model/types";
+
+const passwordGeneratorElement = document.querySelector(
+  ".passwordGenerator"
+) as HTMLElement;
 
 export default class FormManager {
   className;
@@ -110,16 +119,19 @@ export default class FormManager {
     input.value = password;
   }
 
-  static removePassStrength() {
-    const passElement = document.querySelector("#passStrength") as HTMLElement;
-    passwordGeneratorElement.removeChild(passElement);
+  static removeElement(selector: Selector, selectorValue: string) {
+    let elementToRemove;
+    selector === "id"
+      ? (elementToRemove = document.getElementById(selectorValue))
+      : document.getElementsByClassName(selectorValue);
+    elementToRemove && elementToRemove.remove();
   }
 
-  static createPassStrength(strength: PassStrength = PassStrength.WEAK): void {
+  createPassStrength(strength: PassStrength = PassStrength.WEAK): void {
     const domElement = document.createElement("div");
     domElement.id = "passStrength";
     domElement.className = strength;
     domElement.textContent = strength;
-    passwordGeneratorElement.appendChild(domElement);
+    this.formElement.appendChild(domElement);
   }
 }

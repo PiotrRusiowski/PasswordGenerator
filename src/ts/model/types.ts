@@ -45,3 +45,5 @@ export interface FormProperties {
   formHeaderText: string;
   formFields: FormField[];
 }
+
+export type Selector = "id" | "class";

@@ -1,37 +1,41 @@
 @import "./abstracts/mixins";
 
-$backGroundColor : #121116;
-$generatorBgColor : #24232B;
-$fontColor:#DDDCE2;
+$backGroundColor: #121116;
+$generatorBgColor: #24232B;
+$fontColor: #DDDCE2;
 
-body{
-  h1{
+body {
+  h1 {
     font-size: 1rem;
   }
-  .container{
+
+  .container {
     display: flex;
     justify-content: center;
     height: 100%;
     width: 100%;
     background-color: $backGroundColor;
-    .passwordGenerator{
+
+    .passwordGenerator {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       color: $fontColor;
-      width:80%;
-      @include respond(tab-port){
+      width: 80%;
+      @include respond(tab-port) {
         font-size: 17px;
       }
-      &__box{
-        padding:20px;
+
+      &__box {
+        padding: 20px;
         margin-bottom: 20px;
         display: flex;
         flex-direction: column;
+        width: 100%;
         background-color: $generatorBgColor;
-        @include respond(tab-port){
-            background-color: black;
+        @include respond(tab-port) {
+          background-color: black;
         }
       }
 
@@ -39,24 +43,31 @@ body{
   }
 }
 
-.showPass{
+.showPass {
   display: flex;
-  .btn{
+
+  .btn {
     background-color: black;
   }
 }
-.form-group{
+
+.form-group {
   &--string {
     display: flex;
   }
+
   &--checkbox {
     display: grid;
-  grid-template-columns: 1em auto;
-  gap: 0.5em;
-  accent-color: red;}
+    grid-template-columns: 1em auto;
+    gap: 0.5em;
+    accent-color: red;
+  }
 
 }
-.form-control{width: 100%}
+
+.form-control {
+  width: 100%
+}
 
 //
 //@media only screen and (min-width:768px){

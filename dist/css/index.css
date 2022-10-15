@@ -1,0 +1,93 @@
+/*!************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/css/cssReset.css ***!
+  \************************************************************************/
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+padding: 0;
+}
+
+body {
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+}
+
+input, button, textarea, select {
+
+    font: inherit;
+    padding: 0;
+    margin:0;
+    border: none;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: break-word;
+}
+
+#root, #__next {
+    isolation: isolate;
+}
+/*!************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/postcss-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./node_modules/css-modules-typescript-loader/index.js!./src/css/index.css ***!
+  \************************************************************************************************************************************************************************************************************/
+body h1 {
+  font-size: 1rem; }
+
+body .container {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  background-color: #121116; }
+  body .container .passwordGenerator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #DDDCE2;
+    width: 80%; }
+    @media only screen and (min-width: 768px) {
+      body .container .passwordGenerator {
+        font-size: 17px; } }
+    body .container .passwordGenerator__box {
+      padding: 20px;
+      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      background-color: #24232B; }
+      @media only screen and (min-width: 768px) {
+        body .container .passwordGenerator__box {
+          background-color: black; } }
+
+.showPass {
+  display: flex; }
+  .showPass .btn {
+    background-color: black; }
+
+.form-group--string {
+  display: flex; }
+
+.form-group--checkbox {
+  display: grid;
+  grid-template-columns: 1em auto;
+  gap: 0.5em;
+  accent-color: red; }
+
+.form-control {
+  width: 100%; }
+
