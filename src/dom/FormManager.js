@@ -16,7 +16,7 @@ class FormManager {
         this.formElement.className = this.className;
         this.formFields.forEach((el) => this.createInput(el));
         if (this.id === "form")
-            this.formElement.appendChild(FormManager.createPassStrength(this.state.length));
+            this.formElement.appendChild(FormManager.createPassStrength());
         this.formElement.appendChild(FormManager.createSubmitButton(this.submitButtonMessage));
         this.formElement.addEventListener("submit", (e) => {
             e.preventDefault();
@@ -87,33 +87,17 @@ class FormManager {
         state[name] = value;
         this.state = Object.assign(Object.assign({}, this.state), state);
     }
-    reloadForm() {
-        const oldForm = document.querySelector(".passwordGenerator__box--content");
-        console.log(oldForm);
-        console.log(this.DOMElement);
-        //@ts-ignorew
-        this.DOMElement.removeChild(oldForm);
-        const formElement = this.createForm();
-        this.DOMElement.appendChild(formElement);
-    }
     static showPassword(password, inputId) {
         const input = document.querySelector(`#${inputId}`);
         if (input)
             input.value = password;
     }
-    static removeElement(selector, selectorValue) {
-        let elementToRemove;
-        console.log(elementToRemove);
-        selector === "id"
-            ? (elementToRemove = document.getElementById(selectorValue))
-            : document.getElementsByClassName(selectorValue);
-        elementToRemove && elementToRemove.remove();
-    }
     static createPassStrength(strength = "weak") {
-        const domElement = FormManager.createDivElement(strength, "passStrength");
+        const domElement = FormManager.createDivElement(strength, "pass-Strength");
         domElement.textContent = strength;
-        for (let i = 1; i < 4; i++)
-            domElement.appendChild(FormManager.createDivElement("dupa"));
+        new Array(5)
+            .fill("pass-Strength__box")
+            .forEach((className) => domElement.appendChild(FormManager.createDivElement(className)));
         return domElement;
     }
 }

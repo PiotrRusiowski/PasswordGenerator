@@ -3,14 +3,11 @@ import {
   PassStrength,
   PasswordProperties,
   Properties,
-  Password,
 } from "../model/types";
+import Password from "../model/Password";
 
 export default class PasswordsService {
-  private password: string[] = [];
-
-  passwordGenerator({ properties, length }: PasswordProperties): string {
-    this.password = [];
+  passwordGenerator({ properties, length }: PasswordProperties) {
     let generatedPassword = [] as string[];
     const types: string[] = Object.entries(properties)
       .filter((el) => el[1])
@@ -21,12 +18,13 @@ export default class PasswordsService {
         generatedPassword = [...generatedPassword, this.charGenerator[type]()];
       });
     }
-    this.password = generatedPassword.slice(0, length);
-
-    return this.password.join("");
+    return new Password(
+      generatedPassword.slice(0, length),
+      PasswordsService.passwordStrength(length)
+    );
   }
 
-  static passwordStrength(length: number) {
+  private static passwordStrength(length: number) {
     if (length >= 4 && length <= 6) {
       return PassStrength.WEAK;
     }
@@ -35,11 +33,7 @@ export default class PasswordsService {
     }
     if (length > 12) {
       return PassStrength.STRENGTH;
-    }
-  }
-
-  getPassword() {
-    return this.password.join("");
+    } else return PassStrength.WEAK;
   }
 
   private charGenerator: charGenerator = {

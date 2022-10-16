@@ -1,6 +1,6 @@
 import PasswordsService from "./service/PasswordsService";
 import FormManager from "./dom/FormManager";
-import { Properties, FormProperties, State } from "./model/types";
+import { Properties, FormProperties, State, PassStrength } from "./model/types";
 
 const generatorHeader = document.querySelector(
   ".passwordGenerator__box--header"
@@ -10,30 +10,24 @@ const passwordGeneratorElement = document.querySelector(
 ) as HTMLElement;
 
 const ps = new PasswordsService();
-const removeForm = () => {
-  const passGenerator = document.querySelector(
-    ".passwordGenerator__box--content"
-  ) as HTMLElement;
-  passwordGeneratorElement.removeChild(passGenerator);
-};
 
 const submit = ({ length, ...prop }: State) => {
   const lengthInput = document.querySelector("#length") as HTMLElement;
-  FormManager.showPassword(
-    ps.passwordGenerator({ length: Number(length), properties: prop }),
-    "string"
-  );
-  const oldPassStr = document.querySelector("#passStrength");
-  const passStr = FormManager.createPassStrength(
-    PasswordsService.passwordStrength(Number(length))
-  );
-  console.log(oldPassStr);
-  console.log(passStr);
-  // @ts-ignore
-  oldPassStr.replaceWith(passStr);
+  const newPassword = ps.passwordGenerator({
+    length: Number(length),
+    properties: prop,
+  });
+  FormManager.showPassword(newPassword.stringPass, "string");
+  reloadPassStrength(newPassword.passStrength);
 };
+
+const reloadPassStrength = (strength: PassStrength) => {
+  const oldPassStr = document.querySelector("#passStrength");
+  const passStr = FormManager.createPassStrength(strength);
+  oldPassStr && oldPassStr.replaceWith(passStr);
+};
+
 const formProperties: FormProperties = {
-  //formElement:document.createElement("form")
   id: "form",
   DOMElement: passwordGeneratorElement,
   className: "passwordGenerator__box passwordGenerator__box--content",

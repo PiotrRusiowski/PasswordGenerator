@@ -20,23 +20,22 @@ const types_1 = require("./model/types");
 const generatorHeader = document.querySelector(".passwordGenerator__box--header");
 const passwordGeneratorElement = document.querySelector(".passwordGenerator");
 const ps = new PasswordsService_1.default();
-const removeForm = () => {
-    const passGenerator = document.querySelector(".passwordGenerator__box--content");
-    passwordGeneratorElement.removeChild(passGenerator);
-};
 const submit = (_a) => {
     var { length } = _a, prop = __rest(_a, ["length"]);
     const lengthInput = document.querySelector("#length");
-    FormManager_1.default.showPassword(ps.passwordGenerator({ length: Number(length), properties: prop }), "string");
+    const newPassword = ps.passwordGenerator({
+        length: Number(length),
+        properties: prop,
+    });
+    FormManager_1.default.showPassword(newPassword.stringPass, "string");
+    reloadPassStrength(newPassword.passStrength);
+};
+const reloadPassStrength = (strength) => {
     const oldPassStr = document.querySelector("#passStrength");
-    const passStr = FormManager_1.default.createPassStrength(PasswordsService_1.default.passwordStrength(Number(length)));
-    console.log(oldPassStr);
-    console.log(passStr);
-    // @ts-ignore
-    oldPassStr.replaceWith(passStr);
+    const passStr = FormManager_1.default.createPassStrength(strength);
+    oldPassStr && oldPassStr.replaceWith(passStr);
 };
 const formProperties = {
-    //formElement:document.createElement("form")
     id: "form",
     DOMElement: passwordGeneratorElement,
     className: "passwordGenerator__box passwordGenerator__box--content",

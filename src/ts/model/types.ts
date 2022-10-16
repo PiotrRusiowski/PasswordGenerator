@@ -24,11 +24,6 @@ export interface PasswordProperties {
   properties: State;
 }
 
-export interface Password {
-  password: string;
-  strength: PassStrength;
-}
-
 export interface FormField {
   type: string;
   id?: string[];

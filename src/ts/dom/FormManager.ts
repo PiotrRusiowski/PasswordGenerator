@@ -7,8 +7,8 @@ import {
 } from "../model/types";
 
 export default class FormManager {
-  className;
-  private id;
+  private readonly className;
+  private readonly id;
   private formElement: HTMLElement = this.createFormElement();
   private state: State = { length: "5" };
   private readonly formHeaderText;
@@ -39,9 +39,7 @@ export default class FormManager {
     this.formElement.className = this.className;
     this.formFields.forEach((el: FormField) => this.createInput(el));
     if (this.id === "form")
-      this.formElement.appendChild(
-        FormManager.createPassStrength(this.state.length as string)
-      );
+      this.formElement.appendChild(FormManager.createPassStrength());
     this.formElement.appendChild(
       FormManager.createSubmitButton(this.submitButtonMessage)
     );
@@ -123,35 +121,19 @@ export default class FormManager {
     this.state = { ...this.state, ...state };
   }
 
-  reloadForm() {
-    const oldForm = document.querySelector(".passwordGenerator__box--content");
-    console.log(oldForm);
-    console.log(this.DOMElement);
-    //@ts-ignorew
-    this.DOMElement.removeChild(oldForm);
-    const formElement = this.createForm();
-    this.DOMElement.appendChild(formElement);
-  }
-
   static showPassword(password: string, inputId: string) {
     const input = document.querySelector(`#${inputId}`) as HTMLInputElement;
     if (input) input.value = password;
   }
 
-  static removeElement(selector: Selector, selectorValue: string): void {
-    let elementToRemove;
-    console.log(elementToRemove);
-    selector === "id"
-      ? (elementToRemove = document.getElementById(selectorValue))
-      : document.getElementsByClassName(selectorValue);
-    elementToRemove && elementToRemove.remove();
-  }
-
   static createPassStrength(strength = "weak") {
-    const domElement = FormManager.createDivElement(strength, "passStrength");
+    const domElement = FormManager.createDivElement(strength, "pass-Strength");
     domElement.textContent = strength;
-    for (let i = 1; i < 4; i++)
-      domElement.appendChild(FormManager.createDivElement("dupa"));
+    new Array(5)
+      .fill("pass-Strength__box")
+      .forEach((className) =>
+        domElement.appendChild(FormManager.createDivElement(className))
+      );
     return domElement;
   }
 }
