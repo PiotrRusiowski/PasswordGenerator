@@ -22,13 +22,14 @@ const submit = ({ length, ...prop }: State) => {
 };
 
 const reloadPassStrength = (strength: PassStrength) => {
-  const oldPassStr = document.querySelector("#passStrength");
+  console.log(strength);
+  const oldPassStr = document.querySelector("#pass-strength");
   const passStr = FormManager.createPassStrength(strength);
   oldPassStr && oldPassStr.replaceWith(passStr);
 };
 
 const formProperties: FormProperties = {
-  id: "form",
+  id: "pass-form",
   DOMElement: passwordGeneratorElement,
   className: "passwordGenerator__box passwordGenerator__box--content",
   submitButtonMessage: "generate",
@@ -66,7 +67,7 @@ const headerProperties: FormProperties = {
     {
       id: ["password"],
       type: "string",
-      labels: ["string"],
+      labels: [""],
     },
   ],
 };

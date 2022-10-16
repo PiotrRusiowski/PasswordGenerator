@@ -38,7 +38,7 @@ export default class FormManager {
   createForm(): HTMLElement {
     this.formElement.className = this.className;
     this.formFields.forEach((el: FormField) => this.createInput(el));
-    if (this.id === "form")
+    if (this.id === "pass-form")
       this.formElement.appendChild(FormManager.createPassStrength());
     this.formElement.appendChild(
       FormManager.createSubmitButton(this.submitButtonMessage)
@@ -85,7 +85,6 @@ export default class FormManager {
       }
       inputElement.addEventListener("input", (event) => {
         const target = event.target as HTMLInputElement;
-        ///////if(target)????
         switch (type) {
           case "range":
             inputElement.value = target.value;
@@ -127,7 +126,7 @@ export default class FormManager {
   }
 
   static createPassStrength(strength = "weak") {
-    const domElement = FormManager.createDivElement(strength, "pass-Strength");
+    const domElement = FormManager.createDivElement(strength, "pass-strength");
     domElement.textContent = strength;
     new Array(5)
       .fill("pass-Strength__box")
