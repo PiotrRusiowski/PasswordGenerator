@@ -6,26 +6,28 @@ import {
   Selector,
 } from "../model/types";
 
-const passwordGeneratorElement = document.querySelector(
-  ".passwordGenerator"
-) as HTMLElement;
-
 export default class FormManager {
   className;
+  private id;
   private formElement: HTMLElement = this.createFormElement();
   private state: State = { length: "5" };
   private readonly formHeaderText;
   private readonly submitButtonMessage;
   private readonly submitCallback;
   private formFields;
+  private DOMElement;
 
   constructor({
     className,
+    id,
     submitCallback,
     submitButtonMessage,
     formHeaderText,
     formFields,
+    DOMElement,
   }: FormProperties) {
+    this.id = id;
+    this.DOMElement = DOMElement;
     this.className = className;
     this.submitCallback = submitCallback;
     this.submitButtonMessage = submitButtonMessage;
@@ -36,9 +38,10 @@ export default class FormManager {
   createForm(): HTMLElement {
     this.formElement.className = this.className;
     this.formFields.forEach((el: FormField) => this.createInput(el));
-    this.formElement.appendChild(
-      FormManager.createPassStrength(this.state.length as string)
-    );
+    if (this.id === "form")
+      this.formElement.appendChild(
+        FormManager.createPassStrength(this.state.length as string)
+      );
     this.formElement.appendChild(
       FormManager.createSubmitButton(this.submitButtonMessage)
     );
@@ -121,19 +124,18 @@ export default class FormManager {
   }
 
   reloadForm() {
-    const formElement = this.createForm();
     const oldForm = document.querySelector(".passwordGenerator__box--content");
-    // @ts-ignore
-    passwordGeneratorElement.removeChild(oldForm);
     console.log(oldForm);
-
-    // FormManager.removeElement("class", "passwordGenerator__box--content");
-    passwordGeneratorElement.appendChild(formElement);
+    console.log(this.DOMElement);
+    //@ts-ignorew
+    this.DOMElement.removeChild(oldForm);
+    const formElement = this.createForm();
+    this.DOMElement.appendChild(formElement);
   }
 
   static showPassword(password: string, inputId: string) {
     const input = document.querySelector(`#${inputId}`) as HTMLInputElement;
-    input.value = password;
+    if (input) input.value = password;
   }
 
   static removeElement(selector: Selector, selectorValue: string): void {

@@ -10,6 +10,12 @@ const passwordGeneratorElement = document.querySelector(
 ) as HTMLElement;
 
 const ps = new PasswordsService();
+const removeForm = () => {
+  const passGenerator = document.querySelector(
+    ".passwordGenerator__box--content"
+  ) as HTMLElement;
+  passwordGeneratorElement.removeChild(passGenerator);
+};
 
 const submit = ({ length, ...prop }: State) => {
   const lengthInput = document.querySelector("#length") as HTMLElement;
@@ -17,10 +23,19 @@ const submit = ({ length, ...prop }: State) => {
     ps.passwordGenerator({ length: Number(length), properties: prop }),
     "string"
   );
-  FormManager.removeElement("id", "passStrength");
-  fm.reloadForm();
+  const oldPassStr = document.querySelector("#passStrength");
+  const passStr = FormManager.createPassStrength(
+    PasswordsService.passwordStrength(Number(length))
+  );
+  console.log(oldPassStr);
+  console.log(passStr);
+  // @ts-ignore
+  oldPassStr.replaceWith(passStr);
 };
 const formProperties: FormProperties = {
+  //formElement:document.createElement("form")
+  id: "form",
+  DOMElement: passwordGeneratorElement,
   className: "passwordGenerator__box passwordGenerator__box--content",
   submitButtonMessage: "generate",
   submitCallback: submit,
@@ -47,6 +62,8 @@ const formProperties: FormProperties = {
   ],
 };
 const headerProperties: FormProperties = {
+  DOMElement: passwordGeneratorElement,
+  id: "showPass",
   className: "showPass",
   submitButtonMessage: "add",
   submitCallback: submit,

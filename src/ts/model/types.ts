@@ -39,6 +39,9 @@ export interface FormField {
 }
 
 export interface FormProperties {
+  DOMElement: HTMLElement;
+  formElement?: HTMLElement;
+  id: string;
   className: string;
   submitButtonMessage: string;
   submitCallback: Function;
