@@ -21,7 +21,7 @@ class FormManager {
         this.formElement.appendChild(FormManager.createSubmitButton(this.submitButtonMessage));
         this.formElement.addEventListener("submit", (e) => {
             e.preventDefault();
-            this.submitCallback(this.state);
+            this.submitCallback(this.state, e);
         });
         return this.formElement;
     }

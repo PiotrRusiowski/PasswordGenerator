@@ -18,6 +18,21 @@ const submit = ({ length, ...prop }: State) => {
   FormManager.showPassword(newPassword.stringPass, "show-password");
   reloadPassStrength(newPassword.passStrength);
 };
+const copyPassToClipBoard = () => {
+  const textarea = document.createElement("textarea");
+  const input = document.getElementById("show-password") as HTMLInputElement;
+  const password = input.value;
+  if (!password) {
+    alert("please generate a password");
+    return;
+  }
+  textarea.value = password;
+  document.body.appendChild(textarea);
+  textarea.select();
+  document.execCommand("copy");
+  textarea.remove();
+  alert("copy password to a clipboard!");
+};
 
 const reloadPassStrength = (strength: PassStrength) => {
   console.log(strength);
@@ -58,8 +73,8 @@ const headerProperties: FormProperties = {
   DOMElement: passwordGeneratorElement,
   id: "",
   className: "passwordGenerator__box passwordGenerator__box--header",
-  submitButtonMessage: "add",
-  submitCallback: submit,
+  submitButtonMessage: "copy",
+  submitCallback: copyPassToClipBoard,
   formHeaderText: "password generator",
   formFields: [
     {
