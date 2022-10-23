@@ -13,6 +13,7 @@ class FormManager {
         this.formFields = formFields;
     }
     createForm() {
+        this.formElement.id = this.id;
         this.formElement.className = this.className;
         this.formFields.forEach((el) => this.createInput(el));
         if (this.id === "pass-form")
@@ -28,12 +29,13 @@ class FormManager {
         const formElement = document.createElement("form");
         return formElement;
     }
-    createInput({ type, labels, attributes, initialValue }) {
+    createInput({ type, labels, attributes, initialValue, id, }) {
         return labels.forEach((label) => {
-            const id = label;
             const formGroupElement = FormManager.createDivElement(`form-group-element form-group-element--${type}`);
+            let inputId;
+            id ? (inputId = id[0]) : (inputId = label);
             const inputElement = document.createElement("input");
-            inputElement.id = id;
+            inputElement.id = inputId;
             inputElement.type = type;
             inputElement.name = type;
             inputElement.className = "form-control";
@@ -44,8 +46,8 @@ class FormManager {
                 });
             }
             const labelElement = document.createElement("label");
-            labelElement.setAttribute("for", id);
-            labelElement.textContent = id;
+            labelElement.setAttribute("for", inputId);
+            labelElement.textContent = inputId;
             formGroupElement.appendChild(labelElement);
             if (initialValue) {
                 labelElement.textContent = initialValue;

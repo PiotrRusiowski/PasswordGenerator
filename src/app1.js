@@ -27,7 +27,8 @@ const submit = (_a) => {
         length: Number(length),
         properties: prop,
     });
-    FormManager_1.default.showPassword(newPassword.stringPass, "string");
+    console.log(newPassword.stringPass);
+    FormManager_1.default.showPassword(newPassword.stringPass, "show-password");
     reloadPassStrength(newPassword.passStrength);
 };
 const reloadPassStrength = (strength) => {
@@ -66,14 +67,14 @@ const formProperties = {
 };
 const headerProperties = {
     DOMElement: passwordGeneratorElement,
-    id: "showPass",
-    className: "showPass",
+    id: "",
+    className: "passwordGenerator__box passwordGenerator__box--header",
     submitButtonMessage: "add",
     submitCallback: submit,
     formHeaderText: "password generator",
     formFields: [
         {
-            id: ["password"],
+            id: ["show-password"],
             type: "string",
             labels: [""],
         },
@@ -81,7 +82,7 @@ const headerProperties = {
 };
 const fm2 = new FormManager_1.default(headerProperties);
 const formHeaderElement = fm2.createForm();
-generatorHeader.appendChild(formHeaderElement);
+passwordGeneratorElement.appendChild(formHeaderElement);
 const fm = new FormManager_1.default(formProperties);
 const formElement = fm.createForm();
 passwordGeneratorElement.appendChild(formElement);

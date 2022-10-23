@@ -36,6 +36,7 @@ export default class FormManager {
   }
 
   createForm(): HTMLElement {
+    this.formElement.id = this.id;
     this.formElement.className = this.className;
     this.formFields.forEach((el: FormField) => this.createInput(el));
     if (this.id === "pass-form")
@@ -55,15 +56,21 @@ export default class FormManager {
     return formElement;
   }
 
-  private createInput({ type, labels, attributes, initialValue }: FormField) {
+  private createInput({
+    type,
+    labels,
+    attributes,
+    initialValue,
+    id,
+  }: FormField) {
     return labels.forEach((label: string) => {
-      const id = label;
       const formGroupElement = FormManager.createDivElement(
         `form-group-element form-group-element--${type}`
       );
-
+      let inputId;
+      id ? (inputId = id[0]) : (inputId = label);
       const inputElement: HTMLInputElement = document.createElement("input");
-      inputElement.id = id;
+      inputElement.id = inputId;
       inputElement.type = type;
       inputElement.name = type;
       inputElement.className = "form-control";
@@ -76,8 +83,8 @@ export default class FormManager {
       }
 
       const labelElement: HTMLLabelElement = document.createElement("label");
-      labelElement.setAttribute("for", id);
-      labelElement.textContent = id;
+      labelElement.setAttribute("for", inputId);
+      labelElement.textContent = inputId;
       formGroupElement.appendChild(labelElement);
       if (initialValue) {
         labelElement.textContent = initialValue;
