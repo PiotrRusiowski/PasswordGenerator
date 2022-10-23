@@ -18,10 +18,18 @@ export default class PasswordsService {
         generatedPassword = [...generatedPassword, this.charGenerator[type]()];
       });
     }
+
     return new Password(
-      generatedPassword.slice(0, length),
+      PasswordsService.shuffleArray(generatedPassword.slice(0, length)),
       PasswordsService.passwordStrength(length)
     );
+  }
+
+  private static shuffleArray(arr: any[]) {
+    return arr
+      .map((value) => ({ value, sort: Math.random() }))
+      .sort((a, b) => a.sort - b.sort)
+      .map(({ value }) => value);
   }
 
   private static passwordStrength(length: number) {

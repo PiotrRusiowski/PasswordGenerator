@@ -2,9 +2,6 @@ import PasswordsService from "./service/PasswordsService";
 import FormManager from "./dom/FormManager";
 import { Properties, FormProperties, State, PassStrength } from "./model/types";
 
-const generatorHeader = document.querySelector(
-  ".passwordGenerator__box--header"
-) as HTMLElement;
 const passwordGeneratorElement = document.querySelector(
   ".passwordGenerator"
 ) as HTMLElement;

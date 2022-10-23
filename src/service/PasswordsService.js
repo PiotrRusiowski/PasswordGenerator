@@ -24,7 +24,13 @@ class PasswordsService {
                 generatedPassword = [...generatedPassword, this.charGenerator[type]()];
             });
         }
-        return new Password_1.default(generatedPassword.slice(0, length), PasswordsService.passwordStrength(length));
+        return new Password_1.default(PasswordsService.shuffleArray(generatedPassword.slice(0, length)), PasswordsService.passwordStrength(length));
+    }
+    static shuffleArray(arr) {
+        return arr
+            .map((value) => ({ value, sort: Math.random() }))
+            .sort((a, b) => a.sort - b.sort)
+            .map(({ value }) => value);
     }
     static passwordStrength(length) {
         if (length >= 4 && length <= 6) {
