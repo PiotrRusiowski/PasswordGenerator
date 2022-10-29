@@ -1,6 +1,7 @@
 import PasswordsService from "./service/PasswordsService";
-import FormManager from "./dom/FormManager";
+import FormHeader from "./dom/FormHeader";
 import { Properties, FormProperties, State, PassStrength } from "./model/types";
+import FormManager from "./dom/FormManager";
 
 const passwordGeneratorElement = document.querySelector(
   ".passwordGenerator"
@@ -14,7 +15,7 @@ const submit = ({ length, ...prop }: State) => {
     length: Number(length),
     properties: prop,
   });
-  FormManager.showPassword(newPassword.stringPass, "show-password");
+  FormHeader.showPassword(newPassword.stringPass, "show-password");
   reloadPassStrength(newPassword.passStrength);
 };
 const copyPassToClipBoard = () => {
@@ -36,7 +37,7 @@ const copyPassToClipBoard = () => {
 const reloadPassStrength = (strength: PassStrength) => {
   console.log(strength);
   const oldPassStr = document.querySelector("#pass-strength");
-  const passStr = FormManager.createPassStrength(strength);
+  const passStr = FormHeader.createPassStrength(strength);
   oldPassStr && oldPassStr.replaceWith(passStr);
 };
 
@@ -84,7 +85,7 @@ const headerProperties: FormProperties = {
   ],
 };
 
-const fm2 = new FormManager(headerProperties);
+const fm2 = new FormHeader(headerProperties);
 const formHeaderElement = fm2.createForm();
 passwordGeneratorElement.appendChild(formHeaderElement);
 

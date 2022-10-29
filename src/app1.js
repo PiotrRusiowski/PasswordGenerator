@@ -15,8 +15,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const PasswordsService_1 = __importDefault(require("./service/PasswordsService"));
-const FormManager_1 = __importDefault(require("./dom/FormManager"));
+const FormHeader_1 = __importDefault(require("./dom/FormHeader"));
 const types_1 = require("./model/types");
+const FormManager_1 = __importDefault(require("./dom/FormManager"));
 const passwordGeneratorElement = document.querySelector(".passwordGenerator");
 const ps = new PasswordsService_1.default();
 const submit = (_a) => {
@@ -26,7 +27,7 @@ const submit = (_a) => {
         length: Number(length),
         properties: prop,
     });
-    FormManager_1.default.showPassword(newPassword.stringPass, "show-password");
+    FormHeader_1.default.showPassword(newPassword.stringPass, "show-password");
     reloadPassStrength(newPassword.passStrength);
 };
 const copyPassToClipBoard = () => {
@@ -47,7 +48,7 @@ const copyPassToClipBoard = () => {
 const reloadPassStrength = (strength) => {
     console.log(strength);
     const oldPassStr = document.querySelector("#pass-strength");
-    const passStr = FormManager_1.default.createPassStrength(strength);
+    const passStr = FormHeader_1.default.createPassStrength(strength);
     oldPassStr && oldPassStr.replaceWith(passStr);
 };
 const formProperties = {
@@ -93,7 +94,7 @@ const headerProperties = {
         },
     ],
 };
-const fm2 = new FormManager_1.default(headerProperties);
+const fm2 = new FormHeader_1.default(headerProperties);
 const formHeaderElement = fm2.createForm();
 passwordGeneratorElement.appendChild(formHeaderElement);
 const fm = new FormManager_1.default(formProperties);

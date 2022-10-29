@@ -9,7 +9,7 @@ import {
 export default class FormManager {
   private readonly className;
   private readonly id;
-  private formElement: HTMLElement = this.createFormElement();
+  protected formElement: HTMLElement = this.createFormElement();
   private state: State = { length: "5" };
   private readonly formHeaderText;
   private readonly submitButtonMessage;
@@ -39,8 +39,7 @@ export default class FormManager {
     this.formElement.id = this.id;
     this.formElement.className = this.className;
     this.formFields.forEach((el: FormField) => this.createInput(el));
-    if (this.id === "pass-form")
-      this.formElement.appendChild(FormManager.createPassStrength());
+
     this.formElement.appendChild(
       FormManager.createSubmitButton(this.submitButtonMessage)
     );
@@ -51,7 +50,7 @@ export default class FormManager {
     return this.formElement;
   }
 
-  private createFormElement() {
+  createFormElement() {
     const formElement: HTMLElement = document.createElement("form");
     return formElement;
   }
@@ -105,7 +104,7 @@ export default class FormManager {
     });
   }
 
-  private static createDivElement(className = "", id = "") {
+  protected static createDivElement(className = "", id = "") {
     const divElement = document.createElement("div");
     if (id.length) divElement.id = id;
     if (className.length) divElement.className = className;
@@ -125,21 +124,5 @@ export default class FormManager {
     const state: State = {};
     state[name] = value;
     this.state = { ...this.state, ...state };
-  }
-
-  static showPassword(password: string, inputId: string) {
-    const input = document.querySelector(`#${inputId}`) as HTMLInputElement;
-    if (input) input.value = password;
-  }
-
-  static createPassStrength(strength = "weak") {
-    const domElement = FormManager.createDivElement(strength, "pass-strength");
-    domElement.textContent = strength;
-    new Array(5)
-      .fill("pass-Strength__box")
-      .forEach((className) =>
-        domElement.appendChild(FormManager.createDivElement(className))
-      );
-    return domElement;
   }
 }
