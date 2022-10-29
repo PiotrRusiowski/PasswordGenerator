@@ -26,7 +26,6 @@ const submit = (_a) => {
         length: Number(length),
         properties: prop,
     });
-    console.log(newPassword.stringPass);
     FormManager_1.default.showPassword(newPassword.stringPass, "show-password");
     reloadPassStrength(newPassword.passStrength);
 };
