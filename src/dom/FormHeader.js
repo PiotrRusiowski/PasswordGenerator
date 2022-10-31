@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const FormManager_1 = __importDefault(require("./FormManager"));
 class FormHeader extends FormManager_1.default {
-    constructor({ className, id, submitCallback, submitButtonMessage, formHeaderText, formFields, DOMElement, }) {
+    constructor({ className, id, submitCallback, submitButtonMessage, formHeaderText, formFields, DOMElement, initialState, }) {
         super({
             className,
             id,
@@ -14,6 +14,7 @@ class FormHeader extends FormManager_1.default {
             formHeaderText,
             formFields,
             DOMElement,
+            initialState,
         });
     }
     static showPassword(password, inputId) {

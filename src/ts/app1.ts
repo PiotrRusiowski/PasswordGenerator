@@ -2,6 +2,7 @@ import PasswordsService from "./service/PasswordsService";
 import FormHeader from "./dom/FormHeader";
 import { Properties, FormProperties, State, PassStrength } from "./model/types";
 import FormManager from "./dom/FormManager";
+import * as css from "../css/index.css";
 
 const passwordGeneratorElement = document.querySelector(
   ".passwordGenerator"
@@ -48,6 +49,7 @@ const formProperties: FormProperties = {
   submitButtonMessage: "generate",
   submitCallback: submit,
   formHeaderText: "",
+  initialState: { length: "5" },
   formFields: [
     {
       type: "range",
@@ -76,6 +78,7 @@ const headerProperties: FormProperties = {
   submitButtonMessage: "copy",
   submitCallback: copyPassToClipBoard,
   formHeaderText: "password generator",
+  initialState: {},
   formFields: [
     {
       id: ["show-password"],
@@ -92,3 +95,9 @@ passwordGeneratorElement.appendChild(formHeaderElement);
 const fm = new FormManager(formProperties);
 const formElement = fm.createForm();
 passwordGeneratorElement.appendChild(formElement);
+
+const o1 = {
+  if: "ada",
+  const: "mała",
+};
+console.log(Object.keys(o1));

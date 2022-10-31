@@ -58,6 +58,7 @@ const formProperties = {
     submitButtonMessage: "generate",
     submitCallback: submit,
     formHeaderText: "",
+    initialState: { length: "5" },
     formFields: [
         {
             type: "range",
@@ -86,6 +87,7 @@ const headerProperties = {
     submitButtonMessage: "copy",
     submitCallback: copyPassToClipBoard,
     formHeaderText: "password generator",
+    initialState: {},
     formFields: [
         {
             id: ["show-password"],
@@ -100,3 +102,8 @@ passwordGeneratorElement.appendChild(formHeaderElement);
 const fm = new FormManager_1.default(formProperties);
 const formElement = fm.createForm();
 passwordGeneratorElement.appendChild(formElement);
+const o1 = {
+    if: "ada",
+    const: "mała",
+};
+console.log(Object.keys(o1));

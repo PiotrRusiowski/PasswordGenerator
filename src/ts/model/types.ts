@@ -42,6 +42,7 @@ export interface FormProperties {
   submitCallback: Function;
   formHeaderText: string;
   formFields: FormField[];
+  initialState: State;
 }
 
 export type Selector = "id" | "class";

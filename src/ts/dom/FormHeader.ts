@@ -16,6 +16,7 @@ export default class FormHeader extends FormManager {
     formHeaderText,
     formFields,
     DOMElement,
+    initialState,
   }: FormProperties) {
     super({
       className,
@@ -25,6 +26,7 @@ export default class FormHeader extends FormManager {
       formHeaderText,
       formFields,
       DOMElement,
+      initialState,
     });
   }
 

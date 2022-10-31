@@ -7,15 +7,15 @@ import {
 } from "../model/types";
 
 export default class FormManager {
-  private readonly className;
-  private readonly id;
+  private readonly className: string;
+  private readonly id: string;
   protected formElement: HTMLElement = this.createFormElement();
-  private state: State = { length: "5" };
-  private readonly formHeaderText;
-  private readonly submitButtonMessage;
-  private readonly submitCallback;
-  private formFields;
-  private DOMElement;
+  private state: State;
+  private readonly formHeaderText: string;
+  private readonly submitButtonMessage: string;
+  private readonly submitCallback: Function;
+  private formFields: FormField[];
+  private DOMElement: HTMLElement;
 
   constructor({
     className,
@@ -25,6 +25,7 @@ export default class FormManager {
     formHeaderText,
     formFields,
     DOMElement,
+    initialState,
   }: FormProperties) {
     this.id = id;
     this.DOMElement = DOMElement;
@@ -33,6 +34,7 @@ export default class FormManager {
     this.submitButtonMessage = submitButtonMessage;
     this.formHeaderText = formHeaderText;
     this.formFields = formFields;
+    this.state = initialState;
   }
 
   createForm(): HTMLElement {

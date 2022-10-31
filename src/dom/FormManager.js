@@ -1,9 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class FormManager {
-    constructor({ className, id, submitCallback, submitButtonMessage, formHeaderText, formFields, DOMElement, }) {
+    constructor({ className, id, submitCallback, submitButtonMessage, formHeaderText, formFields, DOMElement, initialState, }) {
         this.formElement = this.createFormElement();
-        this.state = { length: "5" };
         this.id = id;
         this.DOMElement = DOMElement;
         this.className = className;
@@ -11,6 +10,7 @@ class FormManager {
         this.submitButtonMessage = submitButtonMessage;
         this.formHeaderText = formHeaderText;
         this.formFields = formFields;
+        this.state = initialState;
     }
     createForm() {
         this.formElement.id = this.id;
