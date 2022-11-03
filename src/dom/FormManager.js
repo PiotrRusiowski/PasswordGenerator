@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 class FormManager {
     constructor({ className, id, submitCallback, submitButtonMessage, formHeaderText, formFields, DOMElement, initialState, }) {
-        this.formElement = this.createFormElement();
         this.id = id;
         this.DOMElement = DOMElement;
         this.className = className;
@@ -67,10 +66,12 @@ class FormManager {
     }
     static createDivElement(className = "", id = "") {
         const divElement = document.createElement("div");
-        if (id.length)
+        if (id.length) {
             divElement.id = id;
-        if (className.length)
+        }
+        if (className.length) {
             divElement.className = className;
+        }
         return divElement;
     }
     static createSubmitButton(message) {

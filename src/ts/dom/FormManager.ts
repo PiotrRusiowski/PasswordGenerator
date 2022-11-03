@@ -9,7 +9,7 @@ import {
 export default class FormManager {
   private readonly className: string;
   private readonly id: string;
-  protected formElement: HTMLElement = this.createFormElement();
+  private readonly formElement!: HTMLElement;
   private state: State;
   private readonly formHeaderText: string;
   private readonly submitButtonMessage: string;
@@ -108,8 +108,12 @@ export default class FormManager {
 
   protected static createDivElement(className = "", id = "") {
     const divElement = document.createElement("div");
-    if (id.length) divElement.id = id;
-    if (className.length) divElement.className = className;
+    if (id.length) {
+      divElement.id = id;
+    }
+    if (className.length) {
+      divElement.className = className;
+    }
     return divElement;
   }
 
