@@ -51,7 +51,7 @@ body {
   }
 }
 
-.form-group {
+.form-group-element {
   &--string {
     display: flex;
   }
@@ -63,9 +63,20 @@ body {
     accent-color: red;
   }
 
+  &--range {
+    color: red;
+
+    label {
+      display: flex;
+    }
+
+    span {
+      margin-left: auto;
+    }
+  }
 }
 
-.form-control {
+.form-input {
   width: 100%
 }
 

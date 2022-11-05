@@ -50,6 +50,7 @@ const formProperties: FormProperties = {
   submitCallback: submit,
   formHeaderText: "",
   initialState: { length: "5" },
+
   formFields: [
     {
       type: "range",
@@ -95,9 +96,3 @@ passwordGeneratorElement.appendChild(formHeaderElement);
 const fm = new FormManager(formProperties);
 const formElement = fm.createForm();
 passwordGeneratorElement.appendChild(formElement);
-
-const o1 = {
-  if: "ada",
-  const: "mała",
-};
-console.log(Object.keys(o1));

@@ -102,8 +102,3 @@ passwordGeneratorElement.appendChild(formHeaderElement);
 const fm = new FormManager_1.default(formProperties);
 const formElement = fm.createForm();
 passwordGeneratorElement.appendChild(formElement);
-const o1 = {
-    if: "ada",
-    const: "mała",
-};
-console.log(Object.keys(o1));

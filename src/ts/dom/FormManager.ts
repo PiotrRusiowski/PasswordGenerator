@@ -5,6 +5,7 @@ import {
   State,
   Selector,
 } from "../model/types";
+import FormHeader from "./FormHeader";
 
 export default class FormManager {
   private readonly className: string;
@@ -26,6 +27,7 @@ export default class FormManager {
     formFields,
     DOMElement,
     initialState,
+    formElement,
   }: FormProperties) {
     this.id = id;
     this.DOMElement = DOMElement;
@@ -35,12 +37,16 @@ export default class FormManager {
     this.formHeaderText = formHeaderText;
     this.formFields = formFields;
     this.state = initialState;
+    this.formElement = this.createFormElement();
   }
 
   createForm(): HTMLElement {
     this.formElement.id = this.id;
     this.formElement.className = this.className;
     this.formFields.forEach((el: FormField) => this.createInput(el));
+    if (this.id === "pass-form") {
+      this.formElement.appendChild(FormHeader.createPassStrength());
+    }
 
     this.formElement.appendChild(
       FormManager.createSubmitButton(this.submitButtonMessage)
@@ -52,9 +58,8 @@ export default class FormManager {
     return this.formElement;
   }
 
-  createFormElement() {
-    const formElement: HTMLElement = document.createElement("form");
-    return formElement;
+  private createFormElement() {
+    return document.createElement("form");
   }
 
   private createInput({
@@ -74,7 +79,7 @@ export default class FormManager {
       inputElement.id = inputId;
       inputElement.type = type;
       inputElement.name = type;
-      inputElement.className = "form-control";
+      inputElement.className = "form-input";
 
       formGroupElement.appendChild(inputElement);
       if (attributes) {
@@ -85,18 +90,19 @@ export default class FormManager {
 
       const labelElement: HTMLLabelElement = document.createElement("label");
       labelElement.setAttribute("for", inputId);
-      labelElement.textContent = inputId;
+      labelElement.textContent = label;
       formGroupElement.appendChild(labelElement);
       if (initialValue) {
-        labelElement.textContent = initialValue;
         inputElement.value = initialValue;
+        labelElement.textContent = "pass length";
+        labelElement.appendChild(this.createSpanElement(initialValue));
       }
       inputElement.addEventListener("input", (event) => {
         const target = event.target as HTMLInputElement;
         switch (type) {
           case "range":
             inputElement.value = target.value;
-            labelElement.textContent = target.value;
+            labelElement.textContent = `pass length ${target.value}`;
             return this.setState(label, target.value);
           case "checkbox":
             return this.setState(label, target.checked);
@@ -115,6 +121,12 @@ export default class FormManager {
       divElement.className = className;
     }
     return divElement;
+  }
+
+  private createSpanElement(text: string): HTMLElement {
+    const spanElement = document.createElement("span");
+    spanElement.textContent = text;
+    return spanElement;
   }
 
   private static createSubmitButton(message: string) {
