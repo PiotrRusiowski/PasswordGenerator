@@ -47,7 +47,6 @@ export default class FormManager {
     if (this.id === "pass-form") {
       this.formElement.appendChild(FormHeader.createPassStrength());
     }
-
     this.formElement.appendChild(
       FormManager.createSubmitButton(this.submitButtonMessage)
     );
@@ -87,16 +86,6 @@ export default class FormManager {
           inputElement.setAttribute(name, value);
         });
       }
-
-      const labelElement: HTMLLabelElement = document.createElement("label");
-      labelElement.setAttribute("for", inputId);
-      labelElement.textContent = label;
-      formGroupElement.appendChild(labelElement);
-      if (initialValue) {
-        inputElement.value = initialValue;
-        labelElement.textContent = "pass length";
-        labelElement.appendChild(this.createSpanElement(initialValue));
-      }
       inputElement.addEventListener("input", (event) => {
         const target = event.target as HTMLInputElement;
         switch (type) {
@@ -108,6 +97,17 @@ export default class FormManager {
             return this.setState(label, target.checked);
         }
       });
+
+      const labelElement: HTMLLabelElement = document.createElement("label");
+      labelElement.setAttribute("for", inputId);
+      labelElement.textContent = label;
+      formGroupElement.appendChild(labelElement);
+      if (initialValue) {
+        inputElement.value = initialValue;
+        labelElement.textContent = "pass length";
+        labelElement.appendChild(this.createSpanElement(initialValue));
+      }
+
       this.formElement.appendChild(formGroupElement);
     });
   }

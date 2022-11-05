@@ -23,10 +23,10 @@ class FormHeader extends FormManager_1.default {
             input.value = password;
     }
     static createPassStrength(strength = "weak") {
-        const domElement = FormHeader.createDivElement(strength, "pass-strength");
+        const domElement = FormHeader.createDivElement(`pass-strength--${strength}`, "pass-strength");
         domElement.textContent = strength;
         new Array(5)
-            .fill("pass-Strength__box")
+            .fill("pass-strength__box")
             .forEach((className) => domElement.appendChild(FormHeader.createDivElement(className)));
         return domElement;
     }

@@ -80,6 +80,12 @@ body {
   width: 100%
 }
 
+.pass-strength div:nth-child(2) {
+  width: 10px;
+  height: 10px;
+  background-color: red;
+}
+
 //
 //@media only screen and (min-width:768px){
 //  .container{

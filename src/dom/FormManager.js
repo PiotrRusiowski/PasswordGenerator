@@ -49,15 +49,6 @@ class FormManager {
                     inputElement.setAttribute(name, value);
                 });
             }
-            const labelElement = document.createElement("label");
-            labelElement.setAttribute("for", inputId);
-            labelElement.textContent = label;
-            formGroupElement.appendChild(labelElement);
-            if (initialValue) {
-                inputElement.value = initialValue;
-                labelElement.textContent = "pass length";
-                labelElement.appendChild(this.createSpanElement(initialValue));
-            }
             inputElement.addEventListener("input", (event) => {
                 const target = event.target;
                 switch (type) {
@@ -69,6 +60,15 @@ class FormManager {
                         return this.setState(label, target.checked);
                 }
             });
+            const labelElement = document.createElement("label");
+            labelElement.setAttribute("for", inputId);
+            labelElement.textContent = label;
+            formGroupElement.appendChild(labelElement);
+            if (initialValue) {
+                inputElement.value = initialValue;
+                labelElement.textContent = "pass length";
+                labelElement.appendChild(this.createSpanElement(initialValue));
+            }
             this.formElement.appendChild(formGroupElement);
         });
     }
