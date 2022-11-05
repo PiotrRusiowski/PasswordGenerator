@@ -36,16 +36,21 @@ export default class FormHeader extends FormManager {
   }
 
   static createPassStrength(strength = "weak") {
-    const domElement = FormHeader.createDivElement(
-      `pass-strength--${strength}`,
+    const passStrength = FormHeader.createDivElement(
+      `pass-strength }`,
       "pass-strength"
     );
-    domElement.textContent = strength;
+    passStrength.textContent = "strength:";
+    const passStrengthBoxes = FormHeader.createDivElement(
+      `pass-strength pass-strength__boxes pass-strength--${strength}`
+    );
+    passStrengthBoxes.textContent = strength;
     new Array(5)
-      .fill("pass-strength__box")
+      .fill("pass-strength pass-strength__box")
       .forEach((className) =>
-        domElement.appendChild(FormHeader.createDivElement(className))
+        passStrengthBoxes.appendChild(FormHeader.createDivElement(className))
       );
-    return domElement;
+    passStrength.appendChild(passStrengthBoxes);
+    return passStrength;
   }
 }

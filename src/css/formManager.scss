@@ -80,10 +80,14 @@ body {
   width: 100%
 }
 
-.pass-strength div:nth-child(2) {
-  width: 10px;
-  height: 10px;
-  background-color: red;
+.pass-strength {
+  display: flex;
+
+  &__box {
+    width: 10px;
+    height: 10px;
+    background-color: red;
+  }
 }
 
 //
