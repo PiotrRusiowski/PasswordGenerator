@@ -123,7 +123,7 @@ export default class FormManager {
     return divElement;
   }
 
-  private createSpanElement(text: string): HTMLElement {
+  protected createSpanElement(text: string): HTMLElement {
     const spanElement = document.createElement("span");
     spanElement.textContent = text;
     return spanElement;
@@ -138,7 +138,7 @@ export default class FormManager {
     return buttonElement;
   }
 
-  private setState(name: string, value: string | boolean) {
+  setState(name: string, value: string | boolean) {
     const state: State = {};
     state[name] = value;
     this.state = { ...this.state, ...state };

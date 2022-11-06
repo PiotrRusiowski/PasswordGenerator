@@ -82,11 +82,40 @@ body {
 
 .pass-strength {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
 
-  &__box {
-    width: 10px;
-    height: 10px;
-    background-color: red;
+  &__boxes {
+    display: flex;
+
+    &__box {
+      height: 10px;
+      width: 10px;
+      background-color: gray;
+
+    }
+
+
+  }
+
+}
+
+.pass-strength__boxes--weak {
+  &:first-child(1) {
+    background-color: yellow;
+  }
+}
+
+.pass-strength__boxes--medium {
+  &:nth-child(1n+3) {
+    background-color: yellow;
+  }
+}
+
+.pass-strength__boxes--strength {
+  &:nth-child(1n+2) {
+    background-color: yellow;
   }
 }
 

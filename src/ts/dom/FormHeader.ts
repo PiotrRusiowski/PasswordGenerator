@@ -35,18 +35,23 @@ export default class FormHeader extends FormManager {
     if (input) input.value = password;
   }
 
-  static createPassStrength(strength = "weak") {
+  static createPassStrength(strength = "") {
     const passStrength = FormHeader.createDivElement(
-      `pass-strength }`,
+      `pass-strength`,
       "pass-strength"
     );
     passStrength.textContent = "strength:";
-    const passStrengthBoxes = FormHeader.createDivElement(
-      `pass-strength pass-strength__boxes pass-strength--${strength}`
-    );
-    passStrengthBoxes.textContent = strength;
+    const passStrengthBoxes = strength.length
+      ? FormHeader.createDivElement(
+          `pass-strength pass-strength__boxes pass-strength__boxes--${strength}`
+        )
+      : FormHeader.createDivElement(`pass-strength pass-strength__boxes`);
+
+    passStrengthBoxes.textContent = strength; /////////////////////////////TUTAJ
     new Array(5)
-      .fill("pass-strength pass-strength__box")
+      .fill(
+        `pass-strength pass-strength__boxes pass-strength__boxes--${strength} pass-strength__boxes__box`
+      )
       .forEach((className) =>
         passStrengthBoxes.appendChild(FormHeader.createDivElement(className))
       );
