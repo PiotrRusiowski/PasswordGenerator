@@ -35,13 +35,12 @@ class FormManager {
     }
     createInput({ type, labels, attributes, initialValue, id, }) {
         return labels.forEach((label) => {
-            const formGroupElement = FormManager.createDivElement(`form-group-element form-group-element--${type}`);
+            const formGroupElement = FormManager.createDivElement(`form-group-element form-group-element--${id}`);
             let inputId;
             id ? (inputId = id[0]) : (inputId = label);
             const inputElement = document.createElement("input");
             inputElement.id = inputId;
             inputElement.type = type;
-            inputElement.name = type;
             inputElement.className = "form-input";
             formGroupElement.appendChild(inputElement);
             if (attributes) {

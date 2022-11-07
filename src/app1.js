@@ -1,5 +1,4 @@
 "use strict";
-import "./css/index.css";
 
 var __rest =
   (this && this.__rest) ||
@@ -106,6 +105,7 @@ const headerProperties = {
       id: ["show-password"],
       type: "string",
       labels: [""],
+      className: ["show-password"],
     },
   ],
 };
@@ -115,3 +115,6 @@ passwordGeneratorElement.appendChild(formHeaderElement);
 const fm = new FormManager_1.default(formProperties);
 const formElement = fm.createForm();
 passwordGeneratorElement.appendChild(formElement);
+const test = "test123";
+const test123 = {[`key${test}`]: 123};
+console.log(test123);

@@ -102,21 +102,22 @@ body {
 }
 
 .pass-strength__boxes--weak {
-  &:first-child(1) {
-    background-color: yellow;
+  &:nth-last-child(1n+4) {
+    background: red;
   }
 }
 
 .pass-strength__boxes--medium {
-  &:nth-child(1n+3) {
-    background-color: yellow;
+  &:nth-last-child(1n+3) {
+    background: red;
   }
 }
 
 .pass-strength__boxes--strength {
-  &:nth-child(1n+2) {
-    background-color: yellow;
+  .pass-strength__boxes__box {
+    background: red;
   }
+
 }
 
 //

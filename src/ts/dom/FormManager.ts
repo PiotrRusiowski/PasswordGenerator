@@ -70,14 +70,13 @@ export default class FormManager {
   }: FormField) {
     return labels.forEach((label: string) => {
       const formGroupElement = FormManager.createDivElement(
-        `form-group-element form-group-element--${type}`
+        `form-group-element form-group-element--${id}`
       );
       let inputId;
       id ? (inputId = id[0]) : (inputId = label);
       const inputElement: HTMLInputElement = document.createElement("input");
       inputElement.id = inputId;
       inputElement.type = type;
-      inputElement.name = type;
       inputElement.className = "form-input";
 
       formGroupElement.appendChild(inputElement);

@@ -48,9 +48,13 @@ export default class FormHeader extends FormManager {
       : FormHeader.createDivElement(`pass-strength pass-strength__boxes`);
 
     passStrengthBoxes.textContent = strength; /////////////////////////////TUTAJ
-    new Array(5)
+    new Array(4)
       .fill(
-        `pass-strength pass-strength__boxes pass-strength__boxes--${strength} pass-strength__boxes__box`
+        strength.length
+          ? `pass-strength pass-strength__boxes pass-strength__boxes--${strength} 
+          pass-strength__boxes__box`
+          : `pass-strength pass-strength__boxes 
+          pass-strength__boxes__box`
       )
       .forEach((className) =>
         passStrengthBoxes.appendChild(FormHeader.createDivElement(className))

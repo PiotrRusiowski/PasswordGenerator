@@ -85,6 +85,7 @@ const headerProperties: FormProperties = {
       id: ["show-password"],
       type: "string",
       labels: [""],
+      className: ["show-password"],
     },
   ],
 };
@@ -96,3 +97,6 @@ passwordGeneratorElement.appendChild(formHeaderElement);
 const fm = new FormManager(formProperties);
 const formElement = fm.createForm();
 passwordGeneratorElement.appendChild(formElement);
+const test = "test123";
+const test123 = { [`key${test}`]: 123 };
+console.log(test123);
