@@ -17,6 +17,7 @@ body {
     width: 100%;
     height: 100vh;
     background-color: $backGroundColor;
+    font-family: Sono;
 
     .passwordGenerator {
       display: flex;
@@ -37,11 +38,9 @@ body {
       }
 
       &__box {
-        padding: 20px;
         margin-bottom: 20px;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
         width: 100%;
         background-color: $generatorBgColor;
         @include respond(tab-port) {
@@ -49,11 +48,18 @@ body {
         }
 
         &--header {
-          height: 20%;
+          height: 10%;
+          flex-direction: row;
+
+          button {
+            flex-grow: 1;
+          }
         }
 
         &--content {
-          flex-grow: 1;
+          justify-content: space-between;
+          padding: 20px;
+          flex-grow: 1
         }
       }
 
@@ -70,10 +76,9 @@ body {
 }
 
 .form-group-element {
+  display: flex;
 
   &--show-password {
-    display: flex;
-    flex-direction: column-reverse;
   }
 
   &--checkbox {
