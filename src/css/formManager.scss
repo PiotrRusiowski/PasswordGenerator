@@ -3,6 +3,7 @@
 $backGroundColor: #121116;
 $generatorBgColor: #24232B;
 $fontColor: #DDDCE2;
+$backGroundColorDarker: #18171F;
 
 body {
   h1 {
@@ -12,19 +13,27 @@ body {
   .container {
     display: flex;
     justify-content: center;
-    height: 100%;
+    align-items: center;
     width: 100%;
+    height: 100vh;
     background-color: $backGroundColor;
 
     .passwordGenerator {
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: center;
       color: $fontColor;
-      width: 80%;
+      height: 95%;
+      width: 70%;
       @include respond(tab-port) {
         font-size: 17px;
+        width: 50%;
+      }
+      @include respond(tab-land) {
+        font-size: 17px;
+        width: 30%;
+        height: 80%;
+
       }
 
       &__box {
@@ -32,10 +41,19 @@ body {
         margin-bottom: 20px;
         display: flex;
         flex-direction: column;
+        justify-content: space-between;
         width: 100%;
         background-color: $generatorBgColor;
         @include respond(tab-port) {
           background-color: black;
+        }
+
+        &--header {
+          height: 20%;
+        }
+
+        &--content {
+          flex-grow: 1;
         }
       }
 
@@ -52,8 +70,10 @@ body {
 }
 
 .form-group-element {
-  &--string {
+
+  &--show-password {
     display: flex;
+    flex-direction: column-reverse;
   }
 
   &--checkbox {
@@ -61,6 +81,7 @@ body {
     grid-template-columns: 1em auto;
     gap: 0.5em;
     accent-color: red;
+
   }
 
   &--range {
@@ -90,13 +111,11 @@ body {
     display: flex;
 
     &__box {
-      height: 10px;
+      height: 30px;
       width: 10px;
       background-color: gray;
 
     }
-
-
   }
 
 }
@@ -121,14 +140,15 @@ body {
 }
 
 //
-//@media only screen and (min-width:768px){
-//  .container{
-//    background: white;
-//  }
-//  .passwordGenerator{
-//    font-size: 12px;
-//  }
-//}
+@media only screen and (min-width: 768px) {
+  .container {
+    background: white;
+  }
+  .passwordGenerator {
+    font-size: 12px;
+  }
+}
+
 //
 //
 //

@@ -1,4 +1,5 @@
 "use strict";
+import "./css/index.css";
 
 var __rest =
   (this && this.__rest) ||
@@ -75,6 +76,7 @@ const formProperties = {
     {
       type: "range",
       labels: ["length"],
+      id: ["pass-length"],
       attributes: [
         ["min", "5"],
         ["max", "20"],
@@ -115,6 +117,3 @@ passwordGeneratorElement.appendChild(formHeaderElement);
 const fm = new FormManager_1.default(formProperties);
 const formElement = fm.createForm();
 passwordGeneratorElement.appendChild(formElement);
-const test = "test123";
-const test123 = {[`key${test}`]: 123};
-console.log(test123);

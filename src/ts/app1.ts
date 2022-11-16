@@ -55,6 +55,7 @@ const formProperties: FormProperties = {
     {
       type: "range",
       labels: ["length"],
+      id: ["pass-length"],
       attributes: [
         ["min", "5"],
         ["max", "20"],
@@ -97,6 +98,3 @@ passwordGeneratorElement.appendChild(formHeaderElement);
 const fm = new FormManager(formProperties);
 const formElement = fm.createForm();
 passwordGeneratorElement.appendChild(formElement);
-const test = "test123";
-const test123 = { [`key${test}`]: 123 };
-console.log(test123);

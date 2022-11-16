@@ -69,9 +69,15 @@ export default class FormManager {
     id,
   }: FormField) {
     return labels.forEach((label: string) => {
-      const formGroupElement = FormManager.createDivElement(
-        `form-group-element form-group-element--${id}`
-      );
+      let formGroupElement;
+      type === "checkbox"
+        ? (formGroupElement = FormManager.createDivElement(
+            `form-group-element form-group-element--${type}`
+          ))
+        : (formGroupElement = FormManager.createDivElement(
+            `form-group-element form-group-element--${id}`
+          ));
+
       let inputId;
       id ? (inputId = id[0]) : (inputId = label);
       const inputElement: HTMLInputElement = document.createElement("input");
