@@ -33,8 +33,7 @@ class FormHeader extends FormManager_1.default {
             .fill(strength.length
             ? `pass-strength pass-strength__boxes pass-strength__boxes--${strength} 
           pass-strength__boxes__box`
-            : `pass-strength pass-strength__boxes 
-          pass-strength__boxes__box`)
+            : `pass-strength pass-strength__box`)
             .forEach((className) => passStrengthBoxes.appendChild(FormHeader.createDivElement(className)));
         passStrength.appendChild(passStrengthBoxes);
         return passStrength;

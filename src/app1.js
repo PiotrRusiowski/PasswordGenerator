@@ -98,7 +98,7 @@ const headerProperties = {
   DOMElement: passwordGeneratorElement,
   id: "",
   className: "passwordGenerator__box passwordGenerator__box--header",
-  submitButtonMessage: "copy",
+  submitButtonMessage: "co",
   submitCallback: copyPassToClipBoard,
   formHeaderText: "password generator",
   initialState: {},

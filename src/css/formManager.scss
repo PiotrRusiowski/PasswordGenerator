@@ -4,7 +4,7 @@ $backGroundColor: #121116;
 $generatorBgColor: #24232B;
 $fontColor: #DDDCE2;
 $backGroundColorDarker: #18171F;
-
+$green: #A5FFAF;
 body {
   h1 {
     font-size: 1rem;
@@ -17,7 +17,7 @@ body {
     width: 100%;
     height: 100vh;
     background-color: $backGroundColor;
-    font-family: Sono;
+    font-family: Roboto;
 
     .passwordGenerator {
       display: flex;
@@ -47,13 +47,11 @@ body {
           background-color: black;
         }
 
-        &--header {
+        &--header { ///do poprawy
           height: 10%;
           flex-direction: row;
 
-          button {
-            flex-grow: 1;
-          }
+
         }
 
         &--content {
@@ -65,42 +63,48 @@ body {
 
     }
   }
+
 }
 
-.showPass {
-  display: flex;
-
-  .btn {
-    background-color: black;
-  }
-}
 
 .form-group-element {
   display: flex;
 
   &--show-password {
+    width: 100%;
+
+    input[type=string] {
+      background-color: #24232B;
+      color: white;
+    }
   }
 
   &--checkbox {
     display: grid;
     grid-template-columns: 1em auto;
     gap: 0.5em;
-    accent-color: red;
+    accent-color: $green;
 
   }
 
-  &--range {
-    color: red;
+  &--pass-length {
+    flex-direction: column-reverse;
 
-    label {
-      display: flex;
+    .form-input {
+      //-webkit-appearance: none;
+      accent-color: $green;
+      //height: 6px;
+      //background-color: black;
+      //border-radius: 5px;
     }
 
-    span {
-      margin-left: auto;
-    }
+    //.form-input::-moz-range-progress {
+    //  background: $green
+    //}
+
   }
 }
+
 
 .form-input {
   width: 100%
@@ -118,7 +122,7 @@ body {
     &__box {
       height: 30px;
       width: 10px;
-      background-color: gray;
+      background-color: gray; ///do porawy
 
     }
   }

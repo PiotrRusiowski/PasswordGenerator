@@ -2,7 +2,6 @@ import PasswordsService from "./service/PasswordsService";
 import FormHeader from "./dom/FormHeader";
 import { Properties, FormProperties, State, PassStrength } from "./model/types";
 import FormManager from "./dom/FormManager";
-import * as css from "../css/index.css";
 
 const passwordGeneratorElement = document.querySelector(
   ".passwordGenerator"
@@ -77,7 +76,7 @@ const headerProperties: FormProperties = {
   DOMElement: passwordGeneratorElement,
   id: "",
   className: "passwordGenerator__box passwordGenerator__box--header",
-  submitButtonMessage: "copy",
+  submitButtonMessage: "co",
   submitCallback: copyPassToClipBoard,
   formHeaderText: "password generator",
   initialState: {},
