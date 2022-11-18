@@ -3,7 +3,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const FormHeader_1 = __importDefault(require("./FormHeader"));
+const FormManagerExtended_1 = __importDefault(require("./FormManagerExtended"));
+const types_1 = require("../model/types");
 class FormManager {
     constructor({ className, id, submitCallback, submitButtonMessage, formHeaderText, formFields, DOMElement, initialState, formElement, }) {
         this.id = id;
@@ -19,9 +20,9 @@ class FormManager {
     createForm() {
         this.formElement.id = this.id;
         this.formElement.className = this.className;
-        this.formFields.forEach((el) => this.createInput(el));
+        this.formFields.forEach((field) => this.createFormField(field));
         if (this.id === "pass-form") {
-            this.formElement.appendChild(FormHeader_1.default.createPassStrength());
+            this.formElement.appendChild(FormManagerExtended_1.default.createPassStrength());
         }
         this.formElement.appendChild(FormManager.createSubmitButton(this.submitButtonMessage));
         this.formElement.addEventListener("submit", (e) => {
@@ -33,46 +34,47 @@ class FormManager {
     createFormElement() {
         return document.createElement("form");
     }
-    createInput({ type, labels, attributes, initialValue, id, }) {
-        return labels.forEach((label) => {
-            let formGroupElement;
-            type === "checkbox"
-                ? (formGroupElement = FormManager.createDivElement(`form-group-element form-group-element--${type}`))
-                : (formGroupElement = FormManager.createDivElement(`form-group-element form-group-element--${id}`));
-            let inputId;
-            id ? (inputId = id[0]) : (inputId = label);
-            const inputElement = document.createElement("input");
-            inputElement.id = inputId;
-            inputElement.type = type;
-            inputElement.className = "form-input";
-            formGroupElement.appendChild(inputElement);
-            if (attributes) {
-                attributes.forEach(([name, value]) => {
-                    inputElement.setAttribute(name, value);
-                });
-            }
-            inputElement.addEventListener("input", (event) => {
-                const target = event.target;
-                switch (type) {
-                    case "range":
-                        inputElement.value = target.value;
-                        labelElement.textContent = `pass length ${target.value}`;
-                        return this.setState(label, target.value);
-                    case "checkbox":
-                        return this.setState(label, target.checked);
-                }
+    createFormField({ wrapperClassName, input }) {
+        const formField = FormManager.createDivElement(wrapperClassName);
+        const inputElement = this.createInput(input, formField);
+        this.formElement.appendChild(formField);
+    }
+    createInput({ id, className, label, attributes, initialValue, type }, domElement) {
+        const inputElement = document.createElement("input");
+        if (id) {
+            inputElement.id = id;
+        }
+        inputElement.type = type;
+        inputElement.className = className;
+        domElement.appendChild(inputElement);
+        if (attributes) {
+            attributes.forEach(([name, value]) => {
+                inputElement.setAttribute(name, value);
             });
-            const labelElement = document.createElement("label");
-            labelElement.setAttribute("for", inputId);
-            labelElement.textContent = label;
-            formGroupElement.appendChild(labelElement);
-            if (initialValue) {
-                inputElement.value = initialValue;
-                labelElement.textContent = "pass length";
-                labelElement.appendChild(this.createSpanElement(initialValue));
+        }
+        inputElement.addEventListener("input", (event) => {
+            const target = event.target;
+            switch (type) {
+                case types_1.InputsTypes.RANGE:
+                    inputElement.value = target.value;
+                    labelElement.textContent = `pass length ${target.value}`;
+                    return this.setState(id, target.value);
+                case types_1.InputsTypes.CHECKBOX:
+                    return this.setState(id, target.checked);
             }
-            this.formElement.appendChild(formGroupElement);
         });
+        const labelElement = document.createElement("label");
+        if (label) {
+            labelElement.setAttribute("for", id);
+            labelElement.textContent = label;
+            domElement.appendChild(labelElement);
+        }
+        if (initialValue) {
+            inputElement.value = initialValue;
+            labelElement.textContent = "pass length";
+            labelElement.appendChild(this.createSpanElement(initialValue));
+        }
+        return inputElement;
     }
     static createDivElement(className = "", id = "") {
         const divElement = document.createElement("div");

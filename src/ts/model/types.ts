@@ -30,17 +30,17 @@ export interface PasswordProperties {
   properties: State;
 }
 
-interface Input {
+export interface Input {
   id: string;
   className: string;
   type: string;
   attributes?: [string, string][];
-  label?: string;
+  label: string;
   initialValue?: string;
 }
 
 export interface FormField {
-  wrapperClassName?: string;
+  wrapperClassName: string;
   input: Input;
 }
 

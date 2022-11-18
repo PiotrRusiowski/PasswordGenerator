@@ -61,7 +61,7 @@ const formProperties: FormProperties = {
       wrapperClassName: `form-group-element form-group-element--${InputsTypes.RANGE}`,
       input: {
         type: InputsTypes.RANGE,
-        id: "length-input",
+        id: "length",
         className: `form-group-element__input-${InputsTypes.RANGE}`,
         attributes: [
           ["min", "5"],
@@ -80,6 +80,33 @@ const formProperties: FormProperties = {
         label: Properties.LOWERCASE,
       },
     },
+    {
+      wrapperClassName: `form-group-element form-group-element--${InputsTypes.CHECKBOX}`,
+      input: {
+        type: InputsTypes.CHECKBOX,
+        id: Properties.UPPERCASE,
+        className: `form-group-element__input-${InputsTypes.CHECKBOX}`,
+        label: Properties.UPPERCASE,
+      },
+    },
+    {
+      wrapperClassName: `form-group-element form-group-element--${InputsTypes.CHECKBOX}`,
+      input: {
+        type: InputsTypes.CHECKBOX,
+        id: Properties.NUMBER,
+        className: `form-group-element__input-${InputsTypes.CHECKBOX}`,
+        label: Properties.NUMBER,
+      },
+    },
+    {
+      wrapperClassName: `form-group-element form-group-element--${InputsTypes.CHECKBOX}`,
+      input: {
+        type: InputsTypes.CHECKBOX,
+        id: Properties.SYMBOL,
+        className: `form-group-element__input-${InputsTypes.CHECKBOX}`,
+        label: Properties.SYMBOL,
+      },
+    },
   ],
 };
 const headerProperties: FormProperties = {
@@ -92,10 +119,13 @@ const headerProperties: FormProperties = {
   initialState: {},
   formFields: [
     {
-      id: ["show-password"],
-      type: "string",
-      labels: [""],
-      className: ["show-password"],
+      wrapperClassName: `form-group-element form-group-element--showPass`,
+      input: {
+        type: InputsTypes.STRING,
+        id: "show-password",
+        className: `form-group-element__input-show-password`,
+        label: "show password",
+      },
     },
   ],
 };

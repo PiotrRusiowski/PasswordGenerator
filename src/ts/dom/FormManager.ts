@@ -4,8 +4,10 @@ import {
   PassStrength,
   State,
   Selector,
+  Input,
 } from "../model/types";
 import FormManagerExtended from "./FormManagerExtended";
+import { InputsTypes } from "../model/types";
 
 export default class FormManager {
   private readonly className: string;
@@ -43,7 +45,7 @@ export default class FormManager {
   createForm(): HTMLElement {
     this.formElement.id = this.id;
     this.formElement.className = this.className;
-    this.formFields.forEach((el: FormField) => this.createInput(el));
+    this.formFields.forEach((field: FormField) => this.createFormField(field));
     if (this.id === "pass-form") {
       this.formElement.appendChild(FormManagerExtended.createPassStrength());
     }
@@ -61,60 +63,54 @@ export default class FormManager {
     return document.createElement("form");
   }
 
-  private createInput({
-    type,
-    labels,
-    attributes,
-    initialValue,
-    id,
-  }: FormField) {
-    return labels.forEach((label: string) => {
-      let formGroupElement;
-      type === "checkbox"
-        ? (formGroupElement = FormManager.createDivElement(
-            `form-group-element form-group-element--${type}`
-          ))
-        : (formGroupElement = FormManager.createDivElement(
-            `form-group-element form-group-element--${id}`
-          ));
+  private createFormField({ wrapperClassName, input }: FormField): void {
+    const formField = FormManager.createDivElement(wrapperClassName);
+    const inputElement = this.createInput(input, formField);
+    this.formElement.appendChild(formField);
+  }
 
-      let inputId;
-      id ? (inputId = id[0]) : (inputId = label);
-      const inputElement: HTMLInputElement = document.createElement("input");
-      inputElement.id = inputId;
-      inputElement.type = type;
-      inputElement.className = "form-input";
+  private createInput(
+    { id, className, label, attributes, initialValue, type }: Input,
+    domElement: HTMLElement
+  ) {
+    const inputElement: HTMLInputElement = document.createElement("input");
+    if (id) {
+      inputElement.id = id;
+    }
+    inputElement.type = type;
+    inputElement.className = className;
 
-      formGroupElement.appendChild(inputElement);
-      if (attributes) {
-        attributes.forEach(([name, value]) => {
-          inputElement.setAttribute(name, value);
-        });
-      }
-      inputElement.addEventListener("input", (event) => {
-        const target = event.target as HTMLInputElement;
-        switch (type) {
-          case "range":
-            inputElement.value = target.value;
-            labelElement.textContent = `pass length ${target.value}`;
-            return this.setState(label, target.value);
-          case "checkbox":
-            return this.setState(label, target.checked);
-        }
+    domElement.appendChild(inputElement);
+    if (attributes) {
+      attributes.forEach(([name, value]) => {
+        inputElement.setAttribute(name, value);
       });
-
-      const labelElement: HTMLLabelElement = document.createElement("label");
-      labelElement.setAttribute("for", inputId);
-      labelElement.textContent = label;
-      formGroupElement.appendChild(labelElement);
-      if (initialValue) {
-        inputElement.value = initialValue;
-        labelElement.textContent = "pass length";
-        labelElement.appendChild(this.createSpanElement(initialValue));
+    }
+    inputElement.addEventListener("input", (event) => {
+      const target = event.target as HTMLInputElement;
+      switch (type) {
+        case InputsTypes.RANGE:
+          inputElement.value = target.value;
+          labelElement.textContent = `pass length ${target.value}`;
+          return this.setState(id, target.value);
+        case InputsTypes.CHECKBOX:
+          return this.setState(id, target.checked);
       }
-
-      this.formElement.appendChild(formGroupElement);
     });
+
+    const labelElement: HTMLLabelElement = document.createElement("label");
+    if (label) {
+      labelElement.setAttribute("for", id);
+      labelElement.textContent = label;
+      domElement.appendChild(labelElement);
+    }
+
+    if (initialValue) {
+      inputElement.value = initialValue;
+      labelElement.textContent = "pass length";
+      labelElement.appendChild(this.createSpanElement(initialValue));
+    }
+    return inputElement;
   }
 
   protected static createDivElement(className = "", id = "") {
