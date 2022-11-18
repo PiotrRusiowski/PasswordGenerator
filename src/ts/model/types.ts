@@ -5,6 +5,12 @@ export enum Properties {
   SYMBOL = "symbol",
 }
 
+export enum InputsTypes {
+  CHECKBOX = "checkbox",
+  STRING = "string",
+  RANGE = "range",
+}
+
 export enum PassStrength {
   WEAK = "weak",
   MEDIUM = "medium",
@@ -24,13 +30,18 @@ export interface PasswordProperties {
   properties: State;
 }
 
-export interface FormField {
+interface Input {
+  id: string;
+  className: string;
   type: string;
-  id?: string[];
-  className?: string[];
   attributes?: [string, string][];
-  labels: string[];
+  label?: string;
   initialValue?: string;
+}
+
+export interface FormField {
+  wrapperClassName?: string;
+  input: Input;
 }
 
 export interface FormProperties {

@@ -1,6 +1,12 @@
 import PasswordsService from "./service/PasswordsService";
-import FormHeader from "./dom/FormHeader";
-import { Properties, FormProperties, State, PassStrength } from "./model/types";
+import FormManagerExtended from "./dom/FormManagerExtended";
+import {
+  FormProperties,
+  InputsTypes,
+  PassStrength,
+  Properties,
+  State,
+} from "./model/types";
 import FormManager from "./dom/FormManager";
 
 const passwordGeneratorElement = document.querySelector(
@@ -15,7 +21,7 @@ const submit = ({ length, ...prop }: State) => {
     length: Number(length),
     properties: prop,
   });
-  FormHeader.showPassword(newPassword.stringPass, "show-password");
+  FormManagerExtended.showPassword(newPassword.stringPass, "show-password");
   reloadPassStrength(newPassword.passStrength);
 };
 const copyPassToClipBoard = () => {
@@ -37,7 +43,7 @@ const copyPassToClipBoard = () => {
 const reloadPassStrength = (strength: PassStrength) => {
   console.log(strength);
   const oldPassStr = document.querySelector("#pass-strength");
-  const passStr = FormHeader.createPassStrength(strength);
+  const passStr = FormManagerExtended.createPassStrength(strength);
   oldPassStr && oldPassStr.replaceWith(passStr);
 };
 
@@ -52,23 +58,27 @@ const formProperties: FormProperties = {
 
   formFields: [
     {
-      type: "range",
-      labels: ["length"],
-      id: ["pass-length"],
-      attributes: [
-        ["min", "5"],
-        ["max", "20"],
-      ],
-      initialValue: "5",
+      wrapperClassName: `form-group-element form-group-element--${InputsTypes.RANGE}`,
+      input: {
+        type: InputsTypes.RANGE,
+        id: "length-input",
+        className: `form-group-element__input-${InputsTypes.RANGE}`,
+        attributes: [
+          ["min", "5"],
+          ["max", "20"],
+        ],
+        initialValue: "5",
+        label: "password length",
+      },
     },
     {
-      type: "checkbox",
-      labels: [
-        Properties.SYMBOL,
-        Properties.NUMBER,
-        Properties.LOWERCASE,
-        Properties.UPPERCASE,
-      ],
+      wrapperClassName: `form-group-element form-group-element--${InputsTypes.CHECKBOX}`,
+      input: {
+        type: InputsTypes.CHECKBOX,
+        id: Properties.LOWERCASE,
+        className: `form-group-element__input-${InputsTypes.CHECKBOX}`,
+        label: Properties.LOWERCASE,
+      },
     },
   ],
 };
@@ -90,7 +100,7 @@ const headerProperties: FormProperties = {
   ],
 };
 
-const fm2 = new FormHeader(headerProperties);
+const fm2 = new FormManagerExtended(headerProperties);
 const formHeaderElement = fm2.createForm();
 passwordGeneratorElement.appendChild(formHeaderElement);
 

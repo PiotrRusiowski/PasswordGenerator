@@ -7,7 +7,7 @@ import {
 } from "../model/types";
 import FormManager from "./FormManager";
 
-export default class FormHeader extends FormManager {
+export default class FormManagerExtended extends FormManager {
   constructor({
     className,
     id,
@@ -36,16 +36,18 @@ export default class FormHeader extends FormManager {
   }
 
   static createPassStrength(strength = "") {
-    const passStrength = FormHeader.createDivElement(
+    const passStrength = FormManagerExtended.createDivElement(
       `pass-strength`,
       "pass-strength"
     );
     passStrength.textContent = "strength:";
     const passStrengthBoxes = strength.length
-      ? FormHeader.createDivElement(
+      ? FormManagerExtended.createDivElement(
           `pass-strength pass-strength__boxes pass-strength__boxes--${strength}`
         )
-      : FormHeader.createDivElement(`pass-strength pass-strength__boxes`);
+      : FormManagerExtended.createDivElement(
+          `pass-strength pass-strength__boxes`
+        );
 
     passStrengthBoxes.textContent = strength; /////////////////////////////TUTAJ
     new Array(4)
@@ -56,7 +58,9 @@ export default class FormHeader extends FormManager {
           : `pass-strength pass-strength__box`
       )
       .forEach((className) =>
-        passStrengthBoxes.appendChild(FormHeader.createDivElement(className))
+        passStrengthBoxes.appendChild(
+          FormManagerExtended.createDivElement(className)
+        )
       );
     passStrength.appendChild(passStrengthBoxes);
     return passStrength;

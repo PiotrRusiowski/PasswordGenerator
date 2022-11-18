@@ -5,7 +5,7 @@ import {
   State,
   Selector,
 } from "../model/types";
-import FormHeader from "./FormHeader";
+import FormManagerExtended from "./FormManagerExtended";
 
 export default class FormManager {
   private readonly className: string;
@@ -45,7 +45,7 @@ export default class FormManager {
     this.formElement.className = this.className;
     this.formFields.forEach((el: FormField) => this.createInput(el));
     if (this.id === "pass-form") {
-      this.formElement.appendChild(FormHeader.createPassStrength());
+      this.formElement.appendChild(FormManagerExtended.createPassStrength());
     }
     this.formElement.appendChild(
       FormManager.createSubmitButton(this.submitButtonMessage)
