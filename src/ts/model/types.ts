@@ -53,6 +53,9 @@ export interface FormProperties {
   submitCallback: Function;
   formHeaderText: string;
   formFields: FormField[];
+}
+
+export interface FormPropertiesExtended extends FormProperties {
   initialState: State;
 }
 

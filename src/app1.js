@@ -119,7 +119,6 @@ const headerProperties = {
     submitButtonMessage: "co",
     submitCallback: copyPassToClipBoard,
     formHeaderText: "password generator",
-    initialState: {},
     formFields: [
         {
             wrapperClassName: `form-group-element form-group-element--showPass`,
@@ -132,7 +131,7 @@ const headerProperties = {
         },
     ],
 };
-const fm2 = new FormManagerExtended_1.default(headerProperties);
+const fm2 = new FormManager_1.default(headerProperties);
 const formHeaderElement = fm2.createForm();
 passwordGeneratorElement.appendChild(formHeaderElement);
 const fm = new FormManager_1.default(formProperties);

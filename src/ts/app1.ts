@@ -2,6 +2,7 @@ import PasswordsService from "./service/PasswordsService";
 import FormManagerExtended from "./dom/FormManagerExtended";
 import {
   FormProperties,
+  FormPropertiesExtended,
   InputsTypes,
   PassStrength,
   Properties,
@@ -47,7 +48,7 @@ const reloadPassStrength = (strength: PassStrength) => {
   oldPassStr && oldPassStr.replaceWith(passStr);
 };
 
-const formProperties: FormProperties = {
+const formProperties: FormPropertiesExtended = {
   id: "pass-form",
   DOMElement: passwordGeneratorElement,
   className: "passwordGenerator__box passwordGenerator__box--content",
@@ -116,7 +117,6 @@ const headerProperties: FormProperties = {
   submitButtonMessage: "co",
   submitCallback: copyPassToClipBoard,
   formHeaderText: "password generator",
-  initialState: {},
   formFields: [
     {
       wrapperClassName: `form-group-element form-group-element--showPass`,
@@ -130,7 +130,7 @@ const headerProperties: FormProperties = {
   ],
 };
 
-const fm2 = new FormManagerExtended(headerProperties);
+const fm2 = new FormManager(headerProperties);
 const formHeaderElement = fm2.createForm();
 passwordGeneratorElement.appendChild(formHeaderElement);
 

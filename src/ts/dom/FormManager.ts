@@ -1,11 +1,4 @@
-import {
-  FormField,
-  FormProperties,
-  PassStrength,
-  State,
-  Selector,
-  Input,
-} from "../model/types";
+import { FormField, FormProperties, State, Input } from "../model/types";
 import FormManagerExtended from "./FormManagerExtended";
 import { InputsTypes } from "../model/types";
 
@@ -13,10 +6,9 @@ export default class FormManager {
   private readonly className: string;
   private readonly id: string;
   private readonly formElement!: HTMLElement;
-  private state: State;
   private readonly formHeaderText: string;
   private readonly submitButtonMessage: string;
-  private readonly submitCallback: Function;
+  protected readonly submitCallback: Function;
   private formFields: FormField[];
   private DOMElement: HTMLElement;
 
@@ -28,7 +20,6 @@ export default class FormManager {
     formHeaderText,
     formFields,
     DOMElement,
-    initialState,
     formElement,
   }: FormProperties) {
     this.id = id;
@@ -38,7 +29,6 @@ export default class FormManager {
     this.submitButtonMessage = submitButtonMessage;
     this.formHeaderText = formHeaderText;
     this.formFields = formFields;
-    this.state = initialState;
     this.formElement = this.createFormElement();
   }
 
@@ -54,7 +44,7 @@ export default class FormManager {
     );
     this.formElement.addEventListener("submit", (e) => {
       e.preventDefault();
-      this.submitCallback(this.state, e);
+      this.submitCallback();
     });
     return this.formElement;
   }
@@ -63,54 +53,38 @@ export default class FormManager {
     return document.createElement("form");
   }
 
-  private createFormField({ wrapperClassName, input }: FormField): void {
+  protected createFormField({ wrapperClassName, input }: FormField): void {
     const formField = FormManager.createDivElement(wrapperClassName);
-    const inputElement = this.createInput(input, formField);
+    const inputElement = this.createInput(input);
+    const labelElement = this.createLabelElement(input.label, input.id);
+    formField.appendChild(labelElement);
+    formField.appendChild(inputElement);
     this.formElement.appendChild(formField);
   }
 
-  private createInput(
-    { id, className, label, attributes, initialValue, type }: Input,
-    domElement: HTMLElement
-  ) {
+  protected createInput({ id, className, attributes, type }: Input) {
     const inputElement: HTMLInputElement = document.createElement("input");
     if (id) {
       inputElement.id = id;
     }
     inputElement.type = type;
     inputElement.className = className;
-
-    domElement.appendChild(inputElement);
     if (attributes) {
       attributes.forEach(([name, value]) => {
         inputElement.setAttribute(name, value);
       });
     }
-    inputElement.addEventListener("input", (event) => {
-      const target = event.target as HTMLInputElement;
-      switch (type) {
-        case InputsTypes.RANGE:
-          inputElement.value = target.value;
-          labelElement.textContent = `pass length ${target.value}`;
-          return this.setState(id, target.value);
-        case InputsTypes.CHECKBOX:
-          return this.setState(id, target.checked);
-      }
-    });
+    return inputElement;
+  }
 
+  protected createLabelElement(label: string, id: string) {
     const labelElement: HTMLLabelElement = document.createElement("label");
     if (label) {
       labelElement.setAttribute("for", id);
       labelElement.textContent = label;
-      domElement.appendChild(labelElement);
     }
 
-    if (initialValue) {
-      inputElement.value = initialValue;
-      labelElement.textContent = "pass length";
-      labelElement.appendChild(this.createSpanElement(initialValue));
-    }
-    return inputElement;
+    return labelElement;
   }
 
   protected static createDivElement(className = "", id = "") {
@@ -124,7 +98,7 @@ export default class FormManager {
     return divElement;
   }
 
-  protected createSpanElement(text: string): HTMLElement {
+  protected static createSpanElement(text: string): HTMLElement {
     const spanElement = document.createElement("span");
     spanElement.textContent = text;
     return spanElement;
@@ -137,11 +111,5 @@ export default class FormManager {
     buttonElement.setAttribute("type", "submit");
     buttonElement.textContent = formattedMessage;
     return buttonElement;
-  }
-
-  setState(name: string, value: string | boolean) {
-    const state: State = {};
-    state[name] = value;
-    this.state = { ...this.state, ...state };
   }
 }

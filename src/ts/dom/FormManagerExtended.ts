@@ -1,13 +1,14 @@
 import {
-  FormField,
-  FormProperties,
-  PassStrength,
   State,
-  Selector,
+  Input,
+  InputsTypes,
+  FormPropertiesExtended,
 } from "../model/types";
 import FormManager from "./FormManager";
 
 export default class FormManagerExtended extends FormManager {
+  private state: State;
+
   constructor({
     className,
     id,
@@ -16,8 +17,9 @@ export default class FormManagerExtended extends FormManager {
     formHeaderText,
     formFields,
     DOMElement,
+    formElement,
     initialState,
-  }: FormProperties) {
+  }: FormPropertiesExtended) {
     super({
       className,
       id,
@@ -26,8 +28,9 @@ export default class FormManagerExtended extends FormManager {
       formHeaderText,
       formFields,
       DOMElement,
-      initialState,
+      formElement,
     });
+    this.state = initialState;
   }
 
   static showPassword(password: string, inputId: string) {
@@ -35,19 +38,62 @@ export default class FormManagerExtended extends FormManager {
     if (input) input.value = password;
   }
 
+  createForm(): HTMLElement {
+    const formElement = super.createForm();
+    formElement.addEventListener("submit", (e) => {
+      e.preventDefault();
+      this.submitCallback(this.state, e);
+    });
+    return formElement;
+  }
+
+  protected createInput({
+    id,
+    className,
+    label,
+    attributes,
+    initialValue,
+    type,
+  }: Input): HTMLInputElement {
+    const inputElement = super.createInput({
+      id,
+      className,
+      label,
+      attributes,
+      initialValue,
+      type,
+    });
+    const labelElement = super.createLabelElement(label, id);
+    if (initialValue) {
+      inputElement.value = initialValue;
+      labelElement.textContent = "pass length";
+      labelElement.appendChild(FormManager.createSpanElement(initialValue));
+    }
+    inputElement.addEventListener("input", (event) => {
+      const target = event.target as HTMLInputElement;
+      switch (type) {
+        case InputsTypes.RANGE:
+          inputElement.value = target.value;
+          labelElement.textContent = `pass length ${target.value}`;
+          return this.setState(id, target.value);
+        case InputsTypes.CHECKBOX:
+          return this.setState(id, target.checked);
+      }
+    });
+    return inputElement;
+  }
+
   static createPassStrength(strength = "") {
-    const passStrength = FormManagerExtended.createDivElement(
+    const passStrength = FormManager.createDivElement(
       `pass-strength`,
       "pass-strength"
     );
     passStrength.textContent = "strength:";
     const passStrengthBoxes = strength.length
-      ? FormManagerExtended.createDivElement(
+      ? FormManager.createDivElement(
           `pass-strength pass-strength__boxes pass-strength__boxes--${strength}`
         )
-      : FormManagerExtended.createDivElement(
-          `pass-strength pass-strength__boxes`
-        );
+      : FormManager.createDivElement(`pass-strength pass-strength__boxes`);
 
     passStrengthBoxes.textContent = strength; /////////////////////////////TUTAJ
     new Array(4)
@@ -64,5 +110,11 @@ export default class FormManagerExtended extends FormManager {
       );
     passStrength.appendChild(passStrengthBoxes);
     return passStrength;
+  }
+
+  private setState(name: string, value: string | boolean) {
+    const state: State = {};
+    state[name] = value;
+    this.state = { ...this.state, ...state };
   }
 }
