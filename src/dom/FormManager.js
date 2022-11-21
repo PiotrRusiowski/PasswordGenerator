@@ -1,9 +1,5 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const FormManagerExtended_1 = __importDefault(require("./FormManagerExtended"));
 class FormManager {
     constructor({ className, id, submitCallback, submitButtonMessage, formHeaderText, formFields, DOMElement, formElement, }) {
         this.id = id;
@@ -19,9 +15,6 @@ class FormManager {
         this.formElement.id = this.id;
         this.formElement.className = this.className;
         this.formFields.forEach((field) => this.createFormField(field));
-        if (this.id === "pass-form") {
-            this.formElement.appendChild(FormManagerExtended_1.default.createPassStrength());
-        }
         this.formElement.appendChild(FormManager.createSubmitButton(this.submitButtonMessage));
         this.formElement.addEventListener("submit", (e) => {
             e.preventDefault();

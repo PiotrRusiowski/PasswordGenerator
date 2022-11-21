@@ -36,9 +36,6 @@ export default class FormManager {
     this.formElement.id = this.id;
     this.formElement.className = this.className;
     this.formFields.forEach((field: FormField) => this.createFormField(field));
-    if (this.id === "pass-form") {
-      this.formElement.appendChild(FormManagerExtended.createPassStrength());
-    }
     this.formElement.appendChild(
       FormManager.createSubmitButton(this.submitButtonMessage)
     );
@@ -83,7 +80,6 @@ export default class FormManager {
       labelElement.setAttribute("for", id);
       labelElement.textContent = label;
     }
-
     return labelElement;
   }
 

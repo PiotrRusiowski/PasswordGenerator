@@ -1,11 +1,10 @@
 import PasswordsService from "./service/PasswordsService";
 import FormManagerExtended from "./dom/FormManagerExtended";
+import { formFieldsGenerator, formFieldsHeader } from "./service/FormFields";
 import {
   FormProperties,
   FormPropertiesExtended,
-  InputsTypes,
   PassStrength,
-  Properties,
   State,
 } from "./model/types";
 import FormManager from "./dom/FormManager";
@@ -56,59 +55,7 @@ const formProperties: FormPropertiesExtended = {
   submitCallback: submit,
   formHeaderText: "",
   initialState: { length: "5" },
-
-  formFields: [
-    {
-      wrapperClassName: `form-group-element form-group-element--${InputsTypes.RANGE}`,
-      input: {
-        type: InputsTypes.RANGE,
-        id: "length",
-        className: `form-group-element__input-${InputsTypes.RANGE}`,
-        attributes: [
-          ["min", "5"],
-          ["max", "20"],
-        ],
-        initialValue: "5",
-        label: "password length",
-      },
-    },
-    {
-      wrapperClassName: `form-group-element form-group-element--${InputsTypes.CHECKBOX}`,
-      input: {
-        type: InputsTypes.CHECKBOX,
-        id: Properties.LOWERCASE,
-        className: `form-group-element__input-${InputsTypes.CHECKBOX}`,
-        label: Properties.LOWERCASE,
-      },
-    },
-    {
-      wrapperClassName: `form-group-element form-group-element--${InputsTypes.CHECKBOX}`,
-      input: {
-        type: InputsTypes.CHECKBOX,
-        id: Properties.UPPERCASE,
-        className: `form-group-element__input-${InputsTypes.CHECKBOX}`,
-        label: Properties.UPPERCASE,
-      },
-    },
-    {
-      wrapperClassName: `form-group-element form-group-element--${InputsTypes.CHECKBOX}`,
-      input: {
-        type: InputsTypes.CHECKBOX,
-        id: Properties.NUMBER,
-        className: `form-group-element__input-${InputsTypes.CHECKBOX}`,
-        label: Properties.NUMBER,
-      },
-    },
-    {
-      wrapperClassName: `form-group-element form-group-element--${InputsTypes.CHECKBOX}`,
-      input: {
-        type: InputsTypes.CHECKBOX,
-        id: Properties.SYMBOL,
-        className: `form-group-element__input-${InputsTypes.CHECKBOX}`,
-        label: Properties.SYMBOL,
-      },
-    },
-  ],
+  formFields: formFieldsGenerator,
 };
 const headerProperties: FormProperties = {
   DOMElement: passwordGeneratorElement,
@@ -117,23 +64,13 @@ const headerProperties: FormProperties = {
   submitButtonMessage: "co",
   submitCallback: copyPassToClipBoard,
   formHeaderText: "password generator",
-  formFields: [
-    {
-      wrapperClassName: `form-group-element form-group-element--showPass`,
-      input: {
-        type: InputsTypes.STRING,
-        id: "show-password",
-        className: `form-group-element__input-show-password`,
-        label: "show password",
-      },
-    },
-  ],
+  formFields: formFieldsHeader,
 };
 
 const fm2 = new FormManager(headerProperties);
 const formHeaderElement = fm2.createForm();
 passwordGeneratorElement.appendChild(formHeaderElement);
 
-const fm = new FormManager(formProperties);
+const fm = new FormManagerExtended(formProperties);
 const formElement = fm.createForm();
 passwordGeneratorElement.appendChild(formElement);

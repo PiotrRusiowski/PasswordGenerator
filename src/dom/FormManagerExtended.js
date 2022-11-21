@@ -26,6 +26,7 @@ class FormManagerExtended extends FormManager_1.default {
     }
     createForm() {
         const formElement = super.createForm();
+        formElement.appendChild(FormManagerExtended.createPassStrength());
         formElement.addEventListener("submit", (e) => {
             e.preventDefault();
             this.submitCallback(this.state, e);
