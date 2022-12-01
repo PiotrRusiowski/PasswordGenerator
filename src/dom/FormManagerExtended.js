@@ -6,11 +6,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const types_1 = require("../model/types");
 const FormManager_1 = __importDefault(require("./FormManager"));
 class FormManagerExtended extends FormManager_1.default {
-    constructor({ className, id, submitCallback, submitButtonMessage, formHeaderText, formFields, DOMElement, formElement, initialState, }) {
+    constructor({ className, id, submitButton, submitButtonMessage, formHeaderText, formFields, DOMElement, formElement, initialState, }) {
         super({
             className,
             id,
-            submitCallback,
+            submitButton,
             submitButtonMessage,
             formHeaderText,
             formFields,
@@ -29,7 +29,7 @@ class FormManagerExtended extends FormManager_1.default {
         formElement.appendChild(FormManagerExtended.createPassStrength());
         formElement.addEventListener("submit", (e) => {
             e.preventDefault();
-            this.submitCallback(this.state, e);
+            this.submitButton.submitCallback(this.state, e);
         });
         return formElement;
     }

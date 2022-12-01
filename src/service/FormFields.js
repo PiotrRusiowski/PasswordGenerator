@@ -56,12 +56,12 @@ exports.formFieldsGenerator = [
 ];
 exports.formFieldsHeader = [
     {
-        wrapperClassName: `form-group-element form-group-element--showPass`,
+        wrapperClassName: `form-group-element form-group-element--show-password`,
         input: {
             type: types_1.InputsTypes.STRING,
             id: "show-password",
             className: `form-group-element__input-show-password`,
-            label: "show password",
+            label: "",
         },
     },
 ];

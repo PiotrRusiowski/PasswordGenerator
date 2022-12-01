@@ -1,6 +1,10 @@
-import { FormField, FormProperties, State, Input } from "../model/types";
-import FormManagerExtended from "./FormManagerExtended";
-import { InputsTypes } from "../model/types";
+import {
+  FormField,
+  FormProperties,
+  State,
+  Input,
+  submitButton,
+} from "../model/types";
 
 export default class FormManager {
   private readonly className: string;
@@ -8,24 +12,23 @@ export default class FormManager {
   private readonly formElement!: HTMLElement;
   private readonly formHeaderText: string;
   private readonly submitButtonMessage: string;
-  protected readonly submitCallback: Function;
+  protected readonly submitButton: submitButton;
   private formFields: FormField[];
   private DOMElement: HTMLElement;
 
   constructor({
     className,
     id,
-    submitCallback,
+    submitButton,
     submitButtonMessage,
     formHeaderText,
     formFields,
     DOMElement,
-    formElement,
   }: FormProperties) {
     this.id = id;
     this.DOMElement = DOMElement;
     this.className = className;
-    this.submitCallback = submitCallback;
+    this.submitButton = submitButton;
     this.submitButtonMessage = submitButtonMessage;
     this.formHeaderText = formHeaderText;
     this.formFields = formFields;
@@ -33,15 +36,19 @@ export default class FormManager {
   }
 
   createForm(): HTMLElement {
+    console.log(this.submitButton);
     this.formElement.id = this.id;
     this.formElement.className = this.className;
     this.formFields.forEach((field: FormField) => this.createFormField(field));
     this.formElement.appendChild(
-      FormManager.createSubmitButton(this.submitButtonMessage)
+      FormManager.createSubmitButton(
+        this.submitButtonMessage,
+        this.submitButton.className
+      )
     );
     this.formElement.addEventListener("submit", (e) => {
       e.preventDefault();
-      this.submitCallback();
+      this.submitButton.submitCallback();
     });
     return this.formElement;
   }
@@ -54,8 +61,9 @@ export default class FormManager {
     const formField = FormManager.createDivElement(wrapperClassName);
     const inputElement = this.createInput(input);
     const labelElement = this.createLabelElement(input.label, input.id);
-    formField.appendChild(labelElement);
     formField.appendChild(inputElement);
+    formField.appendChild(labelElement);
+
     this.formElement.appendChild(formField);
   }
 
@@ -100,10 +108,10 @@ export default class FormManager {
     return spanElement;
   }
 
-  private static createSubmitButton(message: string) {
+  private static createSubmitButton(message: string, className: string) {
     const formattedMessage = message.toUpperCase();
     const buttonElement = document.createElement("button");
-    buttonElement.className = "btn ";
+    buttonElement.className = className;
     buttonElement.setAttribute("type", "submit");
     buttonElement.textContent = formattedMessage;
     return buttonElement;

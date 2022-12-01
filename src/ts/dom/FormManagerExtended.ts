@@ -12,7 +12,7 @@ export default class FormManagerExtended extends FormManager {
   constructor({
     className,
     id,
-    submitCallback,
+    submitButton,
     submitButtonMessage,
     formHeaderText,
     formFields,
@@ -23,7 +23,7 @@ export default class FormManagerExtended extends FormManager {
     super({
       className,
       id,
-      submitCallback,
+      submitButton,
       submitButtonMessage,
       formHeaderText,
       formFields,
@@ -44,7 +44,7 @@ export default class FormManagerExtended extends FormManager {
     formElement.appendChild(FormManagerExtended.createPassStrength());
     formElement.addEventListener("submit", (e) => {
       e.preventDefault();
-      this.submitCallback(this.state, e);
+      this.submitButton.submitCallback(this.state, e);
     });
     return formElement;
   }

@@ -1,24 +1,25 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class FormManager {
-    constructor({ className, id, submitCallback, submitButtonMessage, formHeaderText, formFields, DOMElement, formElement, }) {
+    constructor({ className, id, submitButton, submitButtonMessage, formHeaderText, formFields, DOMElement, }) {
         this.id = id;
         this.DOMElement = DOMElement;
         this.className = className;
-        this.submitCallback = submitCallback;
+        this.submitButton = submitButton;
         this.submitButtonMessage = submitButtonMessage;
         this.formHeaderText = formHeaderText;
         this.formFields = formFields;
         this.formElement = this.createFormElement();
     }
     createForm() {
+        console.log(this.submitButton);
         this.formElement.id = this.id;
         this.formElement.className = this.className;
         this.formFields.forEach((field) => this.createFormField(field));
-        this.formElement.appendChild(FormManager.createSubmitButton(this.submitButtonMessage));
+        this.formElement.appendChild(FormManager.createSubmitButton(this.submitButtonMessage, this.submitButton.className));
         this.formElement.addEventListener("submit", (e) => {
             e.preventDefault();
-            this.submitCallback();
+            this.submitButton.submitCallback();
         });
         return this.formElement;
     }
@@ -29,8 +30,8 @@ class FormManager {
         const formField = FormManager.createDivElement(wrapperClassName);
         const inputElement = this.createInput(input);
         const labelElement = this.createLabelElement(input.label, input.id);
-        formField.appendChild(labelElement);
         formField.appendChild(inputElement);
+        formField.appendChild(labelElement);
         this.formElement.appendChild(formField);
     }
     createInput({ id, className, attributes, type }) {
@@ -70,10 +71,10 @@ class FormManager {
         spanElement.textContent = text;
         return spanElement;
     }
-    static createSubmitButton(message) {
+    static createSubmitButton(message, className) {
         const formattedMessage = message.toUpperCase();
         const buttonElement = document.createElement("button");
-        buttonElement.className = "btn ";
+        buttonElement.className = className;
         buttonElement.setAttribute("type", "submit");
         buttonElement.textContent = formattedMessage;
         return buttonElement;

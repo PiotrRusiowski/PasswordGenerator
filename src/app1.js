@@ -46,17 +46,19 @@ const copyPassToClipBoard = () => {
     alert("copy password to a clipboard!");
 };
 const reloadPassStrength = (strength) => {
-    console.log(strength);
     const oldPassStr = document.querySelector("#pass-strength");
     const passStr = FormManagerExtended_1.default.createPassStrength(strength);
     oldPassStr && oldPassStr.replaceWith(passStr);
 };
 const formProperties = {
-    id: "pass-form",
+    id: "",
     DOMElement: passwordGeneratorElement,
     className: "passwordGenerator__box passwordGenerator__box--content",
     submitButtonMessage: "generate",
-    submitCallback: submit,
+    submitButton: {
+        className: "btn btn--content",
+        submitCallback: submit,
+    },
     formHeaderText: "",
     initialState: { length: "5" },
     formFields: FormFields_1.formFieldsGenerator,
@@ -66,7 +68,10 @@ const headerProperties = {
     id: "",
     className: "passwordGenerator__box passwordGenerator__box--header",
     submitButtonMessage: "co",
-    submitCallback: copyPassToClipBoard,
+    submitButton: {
+        className: "btn btn--header",
+        submitCallback: copyPassToClipBoard,
+    },
     formHeaderText: "password generator",
     formFields: FormFields_1.formFieldsHeader,
 };

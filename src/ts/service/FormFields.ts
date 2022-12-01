@@ -54,12 +54,12 @@ export const formFieldsGenerator: FormField[] = [
 ];
 export const formFieldsHeader: FormField[] = [
   {
-    wrapperClassName: `form-group-element form-group-element--showPass`,
+    wrapperClassName: `form-group-element form-group-element--show-password`,
     input: {
       type: InputsTypes.STRING,
       id: "show-password",
       className: `form-group-element__input-show-password`,
-      label: "show password",
+      label: "",
     },
   },
 ];

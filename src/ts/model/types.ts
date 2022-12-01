@@ -49,10 +49,15 @@ export interface FormProperties {
   formElement?: HTMLElement;
   id: string;
   className: string;
+  submitButton: submitButton;
   submitButtonMessage: string;
-  submitCallback: Function;
   formHeaderText: string;
   formFields: FormField[];
+}
+
+export interface submitButton {
+  className: string;
+  submitCallback: Function;
 }
 
 export interface FormPropertiesExtended extends FormProperties {

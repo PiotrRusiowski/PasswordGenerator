@@ -10,6 +10,12 @@ body {
     font-size: 1rem;
   }
 
+  .title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   .container {
     display: flex;
     justify-content: center;
@@ -38,54 +44,65 @@ body {
       }
 
       &__box {
-        margin-bottom: 20px;
         display: flex;
         flex-direction: column;
         width: 100%;
-        background-color: $generatorBgColor;
-        @include respond(tab-port) {
-          background-color: black;
-        }
 
-        &--header { ///do poprawy
-          height: 10%;
+        &--header {
           flex-direction: row;
-
-
+          height: 10%;
+          margin-bottom: 20px;
         }
 
         &--content {
           justify-content: space-between;
+          flex-grow: 1;
+          margin-bottom: 10px;
           padding: 20px;
-          flex-grow: 1
+        }
+
+        background-color: $generatorBgColor;
+        @include respond(tab-port) {
+          background-color: black;
         }
       }
 
     }
   }
 
+
 }
 
+.btn {
+
+}
 
 .form-group-element {
   display: flex;
 
   &--show-password {
-    width: 100%;
+    flex-grow: 1;
 
     input[type=string] {
+      padding: 20px;
       background-color: #24232B;
       color: white;
     }
-  }
 
-  &--checkbox {
-    display: grid;
-    grid-template-columns: 1em auto;
-    gap: 0.5em;
-    accent-color: $green;
 
   }
+
+  &__input {
+
+    &--checkbox {
+      display: grid;
+      grid-template-columns: 20px auto;
+      gap: 20px;
+      accent-color: $green;
+
+    }
+  }
+
 
   &--pass-length {
     flex-direction: column-reverse;
