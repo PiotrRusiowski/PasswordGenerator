@@ -12,7 +12,6 @@ class FormManager {
         this.formElement = this.createFormElement();
     }
     createForm() {
-        console.log(this.submitButton);
         this.formElement.id = this.id;
         this.formElement.className = this.className;
         this.formFields.forEach((field) => this.createFormField(field));

@@ -44,16 +44,18 @@ class FormManagerExtended extends FormManager_1.default {
         });
         const labelElement = super.createLabelElement(label, id);
         if (initialValue) {
+            console.log(labelElement);
             inputElement.value = initialValue;
             labelElement.textContent = "pass length";
             labelElement.appendChild(FormManager_1.default.createSpanElement(initialValue));
+            inputElement.appendChild(labelElement);
         }
         inputElement.addEventListener("input", (event) => {
             const target = event.target;
             switch (type) {
                 case types_1.InputsTypes.RANGE:
                     inputElement.value = target.value;
-                    labelElement.textContent = `pass length ${target.value}`;
+                    labelElement.textContent = `pass length ${target.value} ${this.state}`;
                     return this.setState(id, target.value);
                 case types_1.InputsTypes.CHECKBOX:
                     return this.setState(id, target.checked);

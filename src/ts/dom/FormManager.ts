@@ -9,11 +9,11 @@ import {
 export default class FormManager {
   private readonly className: string;
   private readonly id: string;
-  private readonly formElement!: HTMLElement;
+  protected readonly formElement!: HTMLElement;
   private readonly formHeaderText: string;
   private readonly submitButtonMessage: string;
   protected readonly submitButton: submitButton;
-  private formFields: FormField[];
+  protected formFields: FormField[];
   private DOMElement: HTMLElement;
 
   constructor({
@@ -36,10 +36,10 @@ export default class FormManager {
   }
 
   createForm(): HTMLElement {
-    console.log(this.submitButton);
     this.formElement.id = this.id;
     this.formElement.className = this.className;
     this.formFields.forEach((field: FormField) => this.createFormField(field));
+
     this.formElement.appendChild(
       FormManager.createSubmitButton(
         this.submitButtonMessage,
@@ -79,6 +79,7 @@ export default class FormManager {
         inputElement.setAttribute(name, value);
       });
     }
+
     return inputElement;
   }
 
