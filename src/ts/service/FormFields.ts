@@ -12,7 +12,7 @@ export const formFieldsGenerator: FormField[] = [
         ["max", "20"],
       ],
       initialValue: "5",
-      label: "",
+      label: "range",
     },
   },
   {

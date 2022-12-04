@@ -14,7 +14,7 @@ exports.formFieldsGenerator = [
                 ["max", "20"],
             ],
             initialValue: "5",
-            label: "",
+            label: "range",
         },
     },
     {

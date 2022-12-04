@@ -53,6 +53,9 @@ class FormManager {
             labelElement.setAttribute("for", id);
             labelElement.textContent = label;
         }
+        if (label === "range") {
+            labelElement.className = "range-label";
+        }
         return labelElement;
     }
     static createDivElement(className = "", id = "") {

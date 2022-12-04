@@ -16,7 +16,6 @@ const passwordGeneratorElement = document.querySelector(
 const ps = new PasswordsService();
 
 const submit = ({ length, ...prop }: State) => {
-  const lengthInput = document.querySelector("#length") as HTMLElement;
   const newPassword = ps.passwordGenerator({
     length: Number(length),
     properties: prop,

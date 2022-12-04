@@ -7,14 +7,14 @@ import {
 } from "../model/types";
 
 export default class FormManager {
-  private readonly className: string;
-  private readonly id: string;
-  protected readonly formElement!: HTMLElement;
-  private readonly formHeaderText: string;
-  private readonly submitButtonMessage: string;
+  protected readonly className: string;
+  protected readonly id: string;
+  protected formElement: HTMLElement;
+  protected readonly formHeaderText: string;
+  protected readonly submitButtonMessage: string;
   protected readonly submitButton: submitButton;
   protected formFields: FormField[];
-  private DOMElement: HTMLElement;
+  protected DOMElement: HTMLElement;
 
   constructor({
     className,
@@ -36,7 +36,6 @@ export default class FormManager {
   }
 
   createForm(): HTMLElement {
-    this.formElement.id = this.id;
     this.formElement.className = this.className;
     this.formFields.forEach((field: FormField) => this.createFormField(field));
 
@@ -46,10 +45,15 @@ export default class FormManager {
         this.submitButton.className
       )
     );
-    this.formElement.addEventListener("submit", (e) => {
-      e.preventDefault();
-      this.submitButton.submitCallback();
-    });
+    if (
+      this.className === "passwordGenerator__box passwordGenerator__box--header"
+    ) {
+      this.formElement.addEventListener("submit", (e) => {
+        e.preventDefault();
+        this.submitButton.submitCallback();
+      });
+    }
+
     return this.formElement;
   }
 
@@ -61,6 +65,7 @@ export default class FormManager {
     const formField = FormManager.createDivElement(wrapperClassName);
     const inputElement = this.createInput(input);
     const labelElement = this.createLabelElement(input.label, input.id);
+
     formField.appendChild(inputElement);
     formField.appendChild(labelElement);
 
@@ -79,7 +84,6 @@ export default class FormManager {
         inputElement.setAttribute(name, value);
       });
     }
-
     return inputElement;
   }
 
@@ -89,6 +93,7 @@ export default class FormManager {
       labelElement.setAttribute("for", id);
       labelElement.textContent = label;
     }
+
     return labelElement;
   }
 
@@ -109,7 +114,7 @@ export default class FormManager {
     return spanElement;
   }
 
-  private static createSubmitButton(message: string, className: string) {
+  protected static createSubmitButton(message: string, className: string) {
     const formattedMessage = message.toUpperCase();
     const buttonElement = document.createElement("button");
     buttonElement.className = className;

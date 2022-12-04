@@ -48,7 +48,6 @@ class FormManagerExtended extends FormManager_1.default {
             inputElement.value = initialValue;
             labelElement.textContent = "pass length";
             labelElement.appendChild(FormManager_1.default.createSpanElement(initialValue));
-            inputElement.appendChild(labelElement);
         }
         inputElement.addEventListener("input", (event) => {
             const target = event.target;

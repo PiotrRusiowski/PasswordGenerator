@@ -3,6 +3,7 @@ import {
   Input,
   InputsTypes,
   FormPropertiesExtended,
+  FormField,
 } from "../model/types";
 import FormManager from "./FormManager";
 
@@ -40,7 +41,6 @@ export default class FormManagerExtended extends FormManager {
 
   createForm(): HTMLElement {
     const formElement = super.createForm();
-
     formElement.appendChild(FormManagerExtended.createPassStrength());
     formElement.addEventListener("submit", (e) => {
       e.preventDefault();
@@ -49,43 +49,31 @@ export default class FormManagerExtended extends FormManager {
     return formElement;
   }
 
-  protected createInput({
-    id,
-    className,
-    label,
-    attributes,
-    initialValue,
-    type,
-  }: Input): HTMLInputElement {
-    const inputElement = super.createInput({
-      id,
-      className,
-      label,
-      attributes,
-      initialValue,
-      type,
-    });
-    const labelElement = super.createLabelElement(label, id);
-
+  protected createFormField({ wrapperClassName, input }: FormField): void {
+    const { type, initialValue, label, id } = input;
+    const formField = FormManager.createDivElement(wrapperClassName);
+    const inputElement = this.createInput(input);
+    const labelElement = this.createLabelElement(label, id);
     if (initialValue) {
-      console.log(labelElement);
       inputElement.value = initialValue;
       labelElement.textContent = "pass length";
       labelElement.appendChild(FormManager.createSpanElement(initialValue));
-      inputElement.appendChild(labelElement);
     }
+    formField.appendChild(inputElement);
+    formField.appendChild(labelElement);
     inputElement.addEventListener("input", (event) => {
       const target = event.target as HTMLInputElement;
       switch (type) {
         case InputsTypes.RANGE:
           inputElement.value = target.value;
-          labelElement.textContent = `pass length ${target.value} ${this.state}`;
+          labelElement.textContent = `pass length ${target.value}`;
           return this.setState(id, target.value);
         case InputsTypes.CHECKBOX:
           return this.setState(id, target.checked);
       }
     });
-    return inputElement;
+
+    this.formElement.appendChild(formField);
   }
 
   static createPassStrength(strength = "") {
@@ -118,6 +106,7 @@ export default class FormManagerExtended extends FormManager {
   }
 
   private setState(name: string, value: string | boolean) {
+    console.log(this.state);
     const state: State = {};
     state[name] = value;
     this.state = { ...this.state, ...state };
