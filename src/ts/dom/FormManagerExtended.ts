@@ -40,13 +40,21 @@ export default class FormManagerExtended extends FormManager {
   }
 
   createForm(): HTMLElement {
-    const formElement = super.createForm();
-    formElement.appendChild(FormManagerExtended.createPassStrength());
-    formElement.addEventListener("submit", (e) => {
+    this.formElement.className = this.className;
+    this.formFields.forEach((field: FormField) => this.createFormField(field));
+    this.formElement.appendChild(FormManagerExtended.createPassStrength());
+    this.formElement.appendChild(
+      FormManager.createSubmitButton(
+        this.submitButtonMessage,
+        this.submitButton.className
+      )
+    );
+
+    this.formElement.addEventListener("submit", (e) => {
       e.preventDefault();
       this.submitButton.submitCallback(this.state, e);
     });
-    return formElement;
+    return this.formElement;
   }
 
   protected createFormField({ wrapperClassName, input }: FormField): void {
@@ -56,8 +64,7 @@ export default class FormManagerExtended extends FormManager {
     const labelElement = this.createLabelElement(label, id);
     if (initialValue) {
       inputElement.value = initialValue;
-      labelElement.textContent = "pass length";
-      labelElement.appendChild(FormManager.createSpanElement(initialValue));
+      FormManagerExtended.createRangeLabel(inputElement.value, labelElement);
     }
     formField.appendChild(inputElement);
     formField.appendChild(labelElement);
@@ -65,8 +72,11 @@ export default class FormManagerExtended extends FormManager {
       const target = event.target as HTMLInputElement;
       switch (type) {
         case InputsTypes.RANGE:
-          inputElement.value = target.value;
-          labelElement.textContent = `pass length ${target.value}`;
+          FormManagerExtended.createRangeLabel(
+            inputElement.value,
+            labelElement
+          );
+
           return this.setState(id, target.value);
         case InputsTypes.CHECKBOX:
           return this.setState(id, target.checked);
@@ -74,6 +84,19 @@ export default class FormManagerExtended extends FormManager {
     });
 
     this.formElement.appendChild(formField);
+  }
+
+  private static createRangeLabel(
+    passLength: string,
+    labelElement: HTMLLabelElement
+  ) {
+    labelElement.textContent = "pass length";
+    labelElement.appendChild(
+      FormManager.createSpanElement(
+        passLength,
+        "form-group-element__pass-length"
+      )
+    );
   }
 
   static createPassStrength(strength = "") {

@@ -5,6 +5,7 @@ import {
   Input,
   submitButton,
 } from "../model/types";
+import FormManagerExtended from "./FormManagerExtended";
 
 export default class FormManager {
   protected readonly className: string;
@@ -38,7 +39,6 @@ export default class FormManager {
   createForm(): HTMLElement {
     this.formElement.className = this.className;
     this.formFields.forEach((field: FormField) => this.createFormField(field));
-
     this.formElement.appendChild(
       FormManager.createSubmitButton(
         this.submitButtonMessage,
@@ -89,10 +89,8 @@ export default class FormManager {
 
   protected createLabelElement(label: string, id: string) {
     const labelElement: HTMLLabelElement = document.createElement("label");
-    if (label) {
-      labelElement.setAttribute("for", id);
-      labelElement.textContent = label;
-    }
+    labelElement.setAttribute("for", id);
+    labelElement.textContent = label;
 
     return labelElement;
   }
@@ -108,9 +106,15 @@ export default class FormManager {
     return divElement;
   }
 
-  protected static createSpanElement(text: string): HTMLElement {
+  protected static createSpanElement(
+    text: string,
+    className = ""
+  ): HTMLElement {
     const spanElement = document.createElement("span");
     spanElement.textContent = text;
+    if (className) {
+      spanElement.className = className;
+    }
     return spanElement;
   }
 

@@ -12,14 +12,15 @@ class FormManager {
         this.formElement = this.createFormElement();
     }
     createForm() {
-        this.formElement.id = this.id;
         this.formElement.className = this.className;
         this.formFields.forEach((field) => this.createFormField(field));
         this.formElement.appendChild(FormManager.createSubmitButton(this.submitButtonMessage, this.submitButton.className));
-        this.formElement.addEventListener("submit", (e) => {
-            e.preventDefault();
-            this.submitButton.submitCallback();
-        });
+        if (this.className === "passwordGenerator__box passwordGenerator__box--header") {
+            this.formElement.addEventListener("submit", (e) => {
+                e.preventDefault();
+                this.submitButton.submitCallback();
+            });
+        }
         return this.formElement;
     }
     createFormElement() {
@@ -49,13 +50,8 @@ class FormManager {
     }
     createLabelElement(label, id) {
         const labelElement = document.createElement("label");
-        if (label) {
-            labelElement.setAttribute("for", id);
-            labelElement.textContent = label;
-        }
-        if (label === "range") {
-            labelElement.className = "range-label";
-        }
+        labelElement.setAttribute("for", id);
+        labelElement.textContent = label;
         return labelElement;
     }
     static createDivElement(className = "", id = "") {
@@ -68,9 +64,12 @@ class FormManager {
         }
         return divElement;
     }
-    static createSpanElement(text) {
+    static createSpanElement(text, className = "") {
         const spanElement = document.createElement("span");
         spanElement.textContent = text;
+        if (className) {
+            spanElement.className = className;
+        }
         return spanElement;
     }
     static createSubmitButton(message, className) {

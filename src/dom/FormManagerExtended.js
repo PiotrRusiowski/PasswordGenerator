@@ -25,42 +25,42 @@ class FormManagerExtended extends FormManager_1.default {
             input.value = password;
     }
     createForm() {
-        const formElement = super.createForm();
-        formElement.appendChild(FormManagerExtended.createPassStrength());
-        formElement.addEventListener("submit", (e) => {
+        this.formElement.className = this.className;
+        this.formFields.forEach((field) => this.createFormField(field));
+        this.formElement.appendChild(FormManagerExtended.createPassStrength());
+        this.formElement.appendChild(FormManager_1.default.createSubmitButton(this.submitButtonMessage, this.submitButton.className));
+        this.formElement.addEventListener("submit", (e) => {
             e.preventDefault();
             this.submitButton.submitCallback(this.state, e);
         });
-        return formElement;
+        return this.formElement;
     }
-    createInput({ id, className, label, attributes, initialValue, type, }) {
-        const inputElement = super.createInput({
-            id,
-            className,
-            label,
-            attributes,
-            initialValue,
-            type,
-        });
-        const labelElement = super.createLabelElement(label, id);
+    createFormField({ wrapperClassName, input }) {
+        const { type, initialValue, label, id } = input;
+        const formField = FormManager_1.default.createDivElement(wrapperClassName);
+        const inputElement = this.createInput(input);
+        const labelElement = this.createLabelElement(label, id);
         if (initialValue) {
-            console.log(labelElement);
             inputElement.value = initialValue;
-            labelElement.textContent = "pass length";
-            labelElement.appendChild(FormManager_1.default.createSpanElement(initialValue));
+            FormManagerExtended.createRangeLabel(inputElement.value, labelElement);
         }
+        formField.appendChild(inputElement);
+        formField.appendChild(labelElement);
         inputElement.addEventListener("input", (event) => {
             const target = event.target;
             switch (type) {
                 case types_1.InputsTypes.RANGE:
-                    inputElement.value = target.value;
-                    labelElement.textContent = `pass length ${target.value} ${this.state}`;
+                    FormManagerExtended.createRangeLabel(inputElement.value, labelElement);
                     return this.setState(id, target.value);
                 case types_1.InputsTypes.CHECKBOX:
                     return this.setState(id, target.checked);
             }
         });
-        return inputElement;
+        this.formElement.appendChild(formField);
+    }
+    static createRangeLabel(passLength, labelElement) {
+        labelElement.textContent = "pass length";
+        labelElement.appendChild(FormManager_1.default.createSpanElement(passLength, "form-group-element__pass-length"));
     }
     static createPassStrength(strength = "") {
         const passStrength = FormManager_1.default.createDivElement(`pass-strength`, "pass-strength");
@@ -79,6 +79,7 @@ class FormManagerExtended extends FormManager_1.default {
         return passStrength;
     }
     setState(name, value) {
+        console.log(this.state);
         const state = {};
         state[name] = value;
         this.state = Object.assign(Object.assign({}, this.state), state);
