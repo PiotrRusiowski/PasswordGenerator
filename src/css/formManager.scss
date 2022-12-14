@@ -6,6 +6,8 @@ $fontColor: #D4D3DB;
 $backGroundColorDarker: #18171F;
 $green: #A5FFAF;
 $titleColor: #595762;
+$marginBotton: 10px;
+$boxYellow: #FACC67;
 body {
   h1 {
     font-size: 1rem;
@@ -49,18 +51,19 @@ body {
         display: flex;
         flex-direction: column;
         width: 100%;
+        padding: 12px;
 
         &--header {
           flex-direction: row;
           height: 10%;
-          margin-bottom: 15px;
+          margin-bottom: $marginBotton;
+
         }
 
         &--content {
-          justify-content: space-between;
+          //justify-content: space-between;
           flex-grow: 1;
-          margin-bottom: 10px;
-          padding: 20px;
+          margin-bottom: $marginBotton;
         }
 
 
@@ -91,18 +94,35 @@ body {
       color: white;
     }
 
+
+  }
+
+  &__pass-length {
+    color: $green;
   }
 
   &--range {
     flex-direction: column-reverse;
+    margin-bottom: $marginBotton;
+
+
+    label {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: $marginBotton;
+      width: 100%;
+
+    }
+
+
   }
 
   &--checkbox {
     display: grid;
-    grid-template-columns: 20px auto;
+    grid-template-columns: 15px auto;
     gap: 20px;
     accent-color: $green;
-
+    margin-bottom: 10px;
   }
 
 
@@ -117,49 +137,66 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
+  margin-bottom: $marginBotton;
+  background-color: $backGroundColorDarker;
+  padding: 10px;
+
+  &__info {
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-between;
+    margin-right: 10px;
+
+  }
 
   &__boxes {
     display: flex;
+    justify-content: space-between;
+    width: 20%;
+  }
 
-    &__box {
-      height: 30px;
-      width: 10px;
-      background-color: gray; ///do porawy
+  &__box {
+    height: 25px;
+    width: 8px;
+    border: 1px solid $fontColor;
 
+    &--weak {
+      &:nth-last-child(1n+4) {
+        background: $boxYellow;
+      }
     }
+
+    &--medium {
+      &:nth-last-child(1n+2) {
+        background: $boxYellow;
+      }
+    }
+
+    &--strength {
+      background: $boxYellow;
+    }
+
   }
 
 }
+
 
 .btn {
   display: flex;
   justify-content: center;
   align-items: center;
 
-  &--header {
+  &--copy {
     background-color: $generatorBgColor;
   }
-}
 
-.pass-strength__boxes--weak {
-  &:nth-last-child(1n+4) {
-    background: red;
+  &--generate {
+    font-weight: bold;
+    background-color: $green;
+    padding: 10px;
   }
 }
 
-.pass-strength__boxes--medium {
-  &:nth-last-child(1n+3) {
-    background: red;
-  }
-}
-
-.pass-strength__boxes--strength {
-  .pass-strength__boxes__box {
-    background: red;
-  }
-
-}
 
 //
 @media only screen and (min-width: 768px) {

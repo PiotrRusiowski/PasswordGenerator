@@ -64,22 +64,22 @@ class FormManagerExtended extends FormManager_1.default {
     }
     static createPassStrength(strength = "") {
         const passStrength = FormManager_1.default.createDivElement(`pass-strength`, "pass-strength");
-        passStrength.textContent = "strength:";
-        const passStrengthBoxes = strength.length
-            ? FormManager_1.default.createDivElement(`pass-strength pass-strength__boxes pass-strength__boxes--${strength}`)
-            : FormManager_1.default.createDivElement(`pass-strength pass-strength__boxes`);
-        passStrengthBoxes.textContent = strength; /////////////////////////////TUTAJ
+        const passStrengthInfo = FormManager_1.default.createDivElement(" pass-strength__info");
+        passStrength.appendChild(passStrengthInfo);
+        const spanStrength = FormManager_1.default.createSpanElement("STRENGTH:", " pass-strength__info--span-1");
+        passStrengthInfo.appendChild(spanStrength);
+        const spanStrengthInfo = FormManager_1.default.createSpanElement(strength.toUpperCase(), " pass-strength__info--span-2");
+        passStrengthInfo.appendChild(spanStrengthInfo);
+        const passStrengthBoxes = FormManager_1.default.createDivElement(`pass-strength__boxes`);
         new Array(4)
             .fill(strength.length
-            ? `pass-strength pass-strength__boxes pass-strength__boxes--${strength} 
-          pass-strength__boxes__box`
-            : `pass-strength pass-strength__box`)
+            ? `pass-strength__box pass-strength__box--${strength}`
+            : `pass-strength__box`)
             .forEach((className) => passStrengthBoxes.appendChild(FormManagerExtended.createDivElement(className)));
         passStrength.appendChild(passStrengthBoxes);
         return passStrength;
     }
     setState(name, value) {
-        console.log(this.state);
         const state = {};
         state[name] = value;
         this.state = Object.assign(Object.assign({}, this.state), state);
