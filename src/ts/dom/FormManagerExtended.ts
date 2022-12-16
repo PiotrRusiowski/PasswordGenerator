@@ -90,7 +90,7 @@ export default class FormManagerExtended extends FormManager {
     passLength: string,
     labelElement: HTMLLabelElement
   ) {
-    labelElement.textContent = "pass length";
+    labelElement.textContent = "Pass Length";
     labelElement.appendChild(
       FormManager.createSpanElement(
         passLength,

@@ -1,8 +1,8 @@
 export enum Properties {
-  UPPERCASE = "uppercase",
-  LOWERCASE = "lowercase",
-  NUMBER = "number",
-  SYMBOL = "symbol",
+  UPPERCASE = "Uppercase",
+  LOWERCASE = "Lowercase",
+  NUMBER = "Number",
+  SYMBOL = "Symbol",
 }
 
 export enum InputsTypes {

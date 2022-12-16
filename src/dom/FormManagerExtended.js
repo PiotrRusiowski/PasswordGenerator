@@ -59,7 +59,7 @@ class FormManagerExtended extends FormManager_1.default {
         this.formElement.appendChild(formField);
     }
     static createRangeLabel(passLength, labelElement) {
-        labelElement.textContent = "pass length";
+        labelElement.textContent = "Pass Length";
         labelElement.appendChild(FormManager_1.default.createSpanElement(passLength, "form-group-element__pass-length"));
     }
     static createPassStrength(strength = "") {

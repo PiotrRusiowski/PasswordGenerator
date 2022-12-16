@@ -6,7 +6,8 @@ $fontColor: #D4D3DB;
 $backGroundColorDarker: #18171F;
 $green: #A5FFAF;
 $titleColor: #595762;
-$marginBotton: 10px;
+$marginBottonBg: 20px;
+$marginBottonSm: 10px;
 $boxYellow: #FACC67;
 body {
   h1 {
@@ -18,6 +19,7 @@ body {
     justify-content: center;
     align-items: center;
     color: #595762;
+    margin-bottom: $marginBottonBg;
   }
 
   .container {
@@ -55,15 +57,14 @@ body {
 
         &--header {
           flex-direction: row;
+          align-items: center;
           height: 10%;
-          margin-bottom: $marginBotton;
+          margin-bottom: $marginBottonSm;
 
         }
 
         &--content {
-          //justify-content: space-between;
-          flex-grow: 1;
-          margin-bottom: $marginBotton;
+          margin-bottom: $marginBottonSm;
         }
 
 
@@ -89,7 +90,6 @@ body {
     input[type=string] {
       font-size: 20px;
       width: 80%;
-      padding: 20px;
       background-color: #24232B;
       color: white;
     }
@@ -103,13 +103,13 @@ body {
 
   &--range {
     flex-direction: column-reverse;
-    margin-bottom: $marginBotton;
+    margin-bottom: $marginBottonBg;
 
 
     label {
       display: flex;
       justify-content: space-between;
-      margin-bottom: $marginBotton;
+      margin-bottom: $marginBottonBg;
       width: 100%;
 
     }
@@ -122,12 +122,12 @@ body {
     grid-template-columns: 15px auto;
     gap: 20px;
     accent-color: $green;
-    margin-bottom: 10px;
+    margin-bottom: $marginBottonSm;
+
   }
 
 
 }
-
 
 .form-input {
   width: 100%
@@ -137,7 +137,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: $marginBotton;
+  margin-top: $marginBottonSm;
+  margin-bottom: $marginBottonBg;
   background-color: $backGroundColorDarker;
   padding: 10px;
 
@@ -146,6 +147,11 @@ body {
     flex-grow: 1;
     justify-content: space-between;
     margin-right: 10px;
+    font-weight: bold;
+
+    &--span-1 {
+      font-weight: lighter;
+    }
 
   }
 
@@ -208,6 +214,3 @@ body {
   }
 }
 
-//
-//
-//

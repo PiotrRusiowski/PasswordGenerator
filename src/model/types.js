@@ -3,10 +3,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.PassStrength = exports.InputsTypes = exports.Properties = void 0;
 var Properties;
 (function (Properties) {
-    Properties["UPPERCASE"] = "uppercase";
-    Properties["LOWERCASE"] = "lowercase";
-    Properties["NUMBER"] = "number";
-    Properties["SYMBOL"] = "symbol";
+    Properties["UPPERCASE"] = "Uppercase";
+    Properties["LOWERCASE"] = "Lowercase";
+    Properties["NUMBER"] = "Number";
+    Properties["SYMBOL"] = "Symbol";
 })(Properties = exports.Properties || (exports.Properties = {}));
 var InputsTypes;
 (function (InputsTypes) {
