@@ -31,7 +31,7 @@ class FormManagerExtended extends FormManager_1.default {
         this.formElement.appendChild(FormManager_1.default.createSubmitButton(this.submitButtonMessage, this.submitButton.className));
         this.formElement.addEventListener("submit", (e) => {
             e.preventDefault();
-            this.submitButton.submitCallback(this.state, e);
+            this.submitButton.submitCallback(this.state);
         });
         return this.formElement;
     }

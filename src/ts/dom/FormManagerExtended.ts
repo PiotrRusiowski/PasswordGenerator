@@ -52,7 +52,7 @@ export default class FormManagerExtended extends FormManager {
 
     this.formElement.addEventListener("submit", (e) => {
       e.preventDefault();
-      this.submitButton.submitCallback(this.state, e);
+      this.submitButton.submitCallback(this.state);
     });
     return this.formElement;
   }

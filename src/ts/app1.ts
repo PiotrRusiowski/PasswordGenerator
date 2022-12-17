@@ -2,6 +2,7 @@ import PasswordsService from "./service/PasswordsService";
 import FormManagerExtended from "./dom/FormManagerExtended";
 import { formFieldsGenerator, formFieldsHeader } from "./service/FormFields";
 import {
+  Properties,
   FormProperties,
   FormPropertiesExtended,
   PassStrength,
@@ -16,12 +17,14 @@ const passwordGeneratorElement = document.querySelector(
 const ps = new PasswordsService();
 
 const submit = ({ length, ...prop }: State) => {
-  const newPassword = ps.passwordGenerator({
-    length: Number(length),
-    properties: prop,
-  });
-  FormManagerExtended.showPassword(newPassword.stringPass, "show-password");
-  reloadPassStrength(newPassword.passStrength);
+  if (Object.values(prop).some((el) => el === true)) {
+    const newPassword = ps.passwordGenerator({
+      length: Number(length),
+      properties: prop,
+    });
+    FormManagerExtended.showPassword(newPassword.stringPass, "show-password");
+    reloadPassStrength(newPassword.passStrength);
+  }
 };
 const copyPassToClipBoard = () => {
   const textarea = document.createElement("textarea");
@@ -55,7 +58,12 @@ const formProperties: FormPropertiesExtended = {
     submitCallback: submit,
   },
   formHeaderText: "",
-  initialState: { length: "5" },
+  initialState: {
+    length: "5",
+    [Properties.UPPERCASE]: true,
+    [Properties.LOWERCASE]: true,
+    [Properties.NUMBER]: true,
+  },
   formFields: formFieldsGenerator,
 };
 const headerProperties: FormProperties = {

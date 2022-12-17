@@ -22,6 +22,7 @@ exports.formFieldsGenerator = [
         input: {
             type: types_1.InputsTypes.CHECKBOX,
             id: types_1.Properties.LOWERCASE,
+            attributes: [["checked", "5"]],
             className: `form-group-element__input-${types_1.InputsTypes.CHECKBOX}`,
             label: `Include ${types_1.Properties.LOWERCASE} Letters`,
         },
@@ -31,6 +32,7 @@ exports.formFieldsGenerator = [
         input: {
             type: types_1.InputsTypes.CHECKBOX,
             id: types_1.Properties.UPPERCASE,
+            attributes: [["checked", "5"]],
             className: `form-group-element__input-${types_1.InputsTypes.CHECKBOX}`,
             label: `Include ${types_1.Properties.UPPERCASE} Letters`,
         },
@@ -40,6 +42,7 @@ exports.formFieldsGenerator = [
         input: {
             type: types_1.InputsTypes.CHECKBOX,
             id: types_1.Properties.NUMBER,
+            attributes: [["checked", "5"]],
             className: `form-group-element__input-${types_1.InputsTypes.CHECKBOX}`,
             label: ` Include ${types_1.Properties.NUMBER}`,
         },

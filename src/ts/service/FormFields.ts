@@ -1,4 +1,4 @@
-import {FormField, InputsTypes, Properties} from "../model/types";
+import { FormField, InputsTypes, Properties } from "../model/types";
 
 export const formFieldsGenerator: FormField[] = [
   {
@@ -17,19 +17,21 @@ export const formFieldsGenerator: FormField[] = [
   },
   {
     wrapperClassName: `form-group-element form-group-element--${InputsTypes.CHECKBOX}`,
+
     input: {
       type: InputsTypes.CHECKBOX,
       id: Properties.LOWERCASE,
+      attributes: [["checked", "5"]],
       className: `form-group-element__input-${InputsTypes.CHECKBOX}`,
       label: `Include ${Properties.LOWERCASE} Letters`,
     },
-
   },
   {
     wrapperClassName: `form-group-element form-group-element--${InputsTypes.CHECKBOX}`,
     input: {
       type: InputsTypes.CHECKBOX,
       id: Properties.UPPERCASE,
+      attributes: [["checked", "5"]],
       className: `form-group-element__input-${InputsTypes.CHECKBOX}`,
       label: `Include ${Properties.UPPERCASE} Letters`,
     },
@@ -39,6 +41,7 @@ export const formFieldsGenerator: FormField[] = [
     input: {
       type: InputsTypes.CHECKBOX,
       id: Properties.NUMBER,
+      attributes: [["checked", "5"]],
       className: `form-group-element__input-${InputsTypes.CHECKBOX}`,
       label: ` Include ${Properties.NUMBER}`,
     },
