@@ -9,6 +9,10 @@ $titleColor: #595762;
 $marginBottonBg: 20px;
 $marginBottonSm: 10px;
 $boxYellow: #FACC67;
+$boxPadding: 12px;
+$boxPaddingTabSize: 18px;
+
+
 body {
   h1 {
     font-size: 1rem;
@@ -41,11 +45,12 @@ body {
       @include respond(tab-port) {
         font-size: 17px;
         width: 50%;
+
       }
       @include respond(tab-land) {
         font-size: 17px;
         width: 30%;
-        height: 80%;
+        height: 95%;
 
       }
 
@@ -53,25 +58,30 @@ body {
         display: flex;
         flex-direction: column;
         width: 100%;
-        padding: 12px;
 
         &--header {
+          padding-left: $boxPadding;
           flex-direction: row;
           align-items: center;
           height: 10%;
           margin-bottom: $marginBottonSm;
+          @include respond(tab-land) {
+            padding-left: $boxPaddingTabSize;
 
+          }
         }
 
         &--content {
+          padding: $boxPadding;
           margin-bottom: $marginBottonSm;
-        }
+          @include respond(tab-land) {
+            padding-left: $boxPaddingTabSize;
 
+          }
+        }
 
         background-color: $generatorBgColor;
-        @include respond(tab-port) {
-          background-color: black;
-        }
+
       }
 
     }
@@ -88,8 +98,8 @@ body {
     flex-grow: 1;
 
     input[type=string] {
+      width: 100%;
       font-size: 20px;
-      width: 80%;
       background-color: #24232B;
       color: white;
     }
@@ -105,16 +115,12 @@ body {
     flex-direction: column-reverse;
     margin-bottom: $marginBottonBg;
 
-
     label {
       display: flex;
       justify-content: space-between;
       margin-bottom: $marginBottonBg;
-      width: 100%;
 
     }
-
-
   }
 
   &--checkbox {
@@ -147,11 +153,6 @@ body {
     flex-grow: 1;
     justify-content: space-between;
     margin-right: 10px;
-    font-weight: bold;
-
-    &--span-1 {
-      font-weight: lighter;
-    }
 
   }
 
@@ -191,12 +192,25 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 
   &--copy {
     background-color: $generatorBgColor;
+    color: $green;
+    height: 100%;
+    //flex-grow: 1;
+    padding: $boxPadding;
+    @include respond(tab-land) {
+      padding-left: $boxPaddingTabSize;
+
+    }
   }
 
   &--generate {
+    .gg-arrow-right {
+      margin-left: 10px;
+    }
+
     font-weight: bold;
     background-color: $green;
     padding: 10px;

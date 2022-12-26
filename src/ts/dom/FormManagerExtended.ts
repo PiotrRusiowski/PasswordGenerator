@@ -43,12 +43,13 @@ export default class FormManagerExtended extends FormManager {
     this.formElement.className = this.className;
     this.formFields.forEach((field: FormField) => this.createFormField(field));
     this.formElement.appendChild(FormManagerExtended.createPassStrength());
-    this.formElement.appendChild(
-      FormManager.createSubmitButton(
-        this.submitButtonMessage,
-        this.submitButton.className
-      )
+    const submitButton = FormManager.createSubmitButton(
+      this.submitButtonMessage,
+      this.submitButton.className
     );
+    submitButton.appendChild(FormManager.createIconElement("gg-arrow-right"));
+
+    this.formElement.appendChild(submitButton);
 
     this.formElement.addEventListener("submit", (e) => {
       e.preventDefault();

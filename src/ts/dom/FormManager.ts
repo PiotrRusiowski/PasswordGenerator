@@ -39,12 +39,12 @@ export default class FormManager {
   createForm(): HTMLElement {
     this.formElement.className = this.className;
     this.formFields.forEach((field: FormField) => this.createFormField(field));
-    this.formElement.appendChild(
-      FormManager.createSubmitButton(
-        this.submitButtonMessage,
-        this.submitButton.className
-      )
+    const submitButton = FormManager.createSubmitButton(
+      this.submitButtonMessage,
+      this.submitButton.className
     );
+    submitButton.appendChild(FormManager.createIconElement("gg-copy"));
+    this.formElement.appendChild(submitButton);
     if (
       this.className === "passwordGenerator__box passwordGenerator__box--header"
     ) {
@@ -118,12 +118,19 @@ export default class FormManager {
     return spanElement;
   }
 
+  protected static createIconElement(icName: string) {
+    const iconElement = document.createElement("i");
+    iconElement.className = icName;
+    return iconElement;
+  }
+
   protected static createSubmitButton(message: string, className: string) {
     const formattedMessage = message.toUpperCase();
     const buttonElement = document.createElement("button");
     buttonElement.className = className;
     buttonElement.setAttribute("type", "submit");
     buttonElement.textContent = formattedMessage;
+
     return buttonElement;
   }
 }

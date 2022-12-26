@@ -52,7 +52,7 @@ const formProperties: FormPropertiesExtended = {
   id: "",
   DOMElement: passwordGeneratorElement,
   className: "passwordGenerator__box passwordGenerator__box--content",
-  submitButtonMessage: "Generate ->",
+  submitButtonMessage: "Generate",
   submitButton: {
     className: "btn btn--generate",
     submitCallback: submit,
@@ -70,7 +70,7 @@ const headerProperties: FormProperties = {
   DOMElement: passwordGeneratorElement,
   id: "",
   className: "passwordGenerator__box passwordGenerator__box--header",
-  submitButtonMessage: "co",
+  submitButtonMessage: "",
   submitButton: {
     className: "btn btn--copy",
     submitCallback: copyPassToClipBoard,
